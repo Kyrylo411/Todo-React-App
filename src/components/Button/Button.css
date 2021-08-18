@@ -1,0 +1,26 @@
+.button {
+  height: 25px;
+  border: none;
+  background-color: inherit;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.button:hover {
+  border: 1px solid rgba(160, 81, 45, 0.116);
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.active {
+  border: 1px solid rgba(160, 81, 45, 0.329);
+  border-radius: 5px;
+}
+
+.active:hover {
+  border: 1px solid rgba(160, 81, 45, 0.329);
+  border-radius: 5px;
+}
+/*# sourceMappingURL=Button.css.map */

@@ -1,12 +1,10 @@
 import React from 'react';
+import Button from './components/Button/Button.jsx';
 
 function App() {
 	return (
 		<div>
-			<h2>Welcome to React App</h2>
-			<h3>Date : {new Date().toDateString()}</h3>
-
-			<h3> Something from me start now!!!! </h3>
+			<Button value="button" />
 		</div>
 	);
 }
