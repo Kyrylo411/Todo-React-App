@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from './components/Button/Button.jsx';
+import TodoListContainer from './components/TodoListContainer/TodoListContainer.jsx';
 
 function App() {
 	return (
 		<div>
-			<Button value="button" />
+			<TodoListContainer />
 		</div>
 	);
 }

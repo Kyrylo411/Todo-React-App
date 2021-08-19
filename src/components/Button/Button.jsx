@@ -1,31 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Button.scss';
 
-class Button extends React.Component {
+class Button extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			className: 'button',
-		};
-		this.handleClick = this.handleClick.bind(this);
 	}
-	handleClick() {
-		this.setState({
-		    className: 'active'
-		})
-		console.log('click'); 
-	}
+
 	render() {
 		return (
-			<div 
-				className={this.state.className} 
-				onClick={this.handleClick}
+			<button
+				className={this.props.active ? 'button active' : 'button'}
+				onClick={this.props.onClick}
+				id={this.props.id}
 			>
 				{this.props.value}
-			</div>
+			</button>
 		);
 	}
 }
 export default Button;
-
-
