@@ -4,6 +4,7 @@
   background-color: inherit;
   border: 1px solid transparent;
   outline: none;
+  color: #777;
 }
 
 .button:hover {

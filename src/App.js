@@ -1,10 +1,10 @@
 import React from 'react';
-import TodoListContainer from './components/TodoListContainer/TodoListContainer.jsx';
+import TodoList from './components/TodoList/TodoList.jsx';
 
 function App() {
 	return (
 		<div>
-			<TodoListContainer />
+			<TodoList />
 		</div>
 	);
 }
