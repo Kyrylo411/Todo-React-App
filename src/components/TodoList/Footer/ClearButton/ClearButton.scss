@@ -1,0 +1,15 @@
+.clearButton {
+	height: 16px;
+	border: none;
+	background-color: inherit;
+	border: 1px solid transparent;
+	outline: none;
+	position: absolute;
+	right: 10px;
+	border-bottom: 1px solid transparent;
+	color: #777;
+}
+.clearButton:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
