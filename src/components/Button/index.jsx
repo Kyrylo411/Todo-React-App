@@ -8,17 +8,19 @@ class Button extends Component {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 	}
-	handleClick(e) {
-		this.props.onClick(e.target.textContent);
-	}
 
+	handleClick() {
+		this.props.onClick();
+	}
 	render() {
-		const btnClass = classNames({
-			button: true,
-			active: this.props.active,
-		});
 		return (
-			<button className={btnClass} onClick={this.handleClick}>
+			<button
+				className={classNames({
+					button: true,
+					active: this.props.active,
+				})}
+				onClick={this.handleClick}
+			>
 				{this.props.value}
 			</button>
 		);

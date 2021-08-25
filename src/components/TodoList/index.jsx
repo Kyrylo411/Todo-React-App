@@ -12,9 +12,7 @@ class TodoList extends Component {
 		this.state = {
 			todoItemList: [],
 			inputValue: '',
-			activeFilter: {
-				filter: 'All',
-			},
+			activeFilter: 'All',
 		};
 		this.changeInputValue = this.changeInputValue.bind(this);
 		this.addListItem = this.addListItem.bind(this);
@@ -27,9 +25,7 @@ class TodoList extends Component {
 	}
 	setActiveFilter(textValue) {
 		this.setState({
-			activeFilter: {
-				filter: textValue,
-			},
+			activeFilter: textValue,
 		});
 	}
 	deleteCompletedItems() {
@@ -98,7 +94,7 @@ class TodoList extends Component {
 						todoItemList={this.state.todoItemList}
 					/>
 					<List
-						activeFilter={this.state.activeFilter.filter}
+						activeFilter={this.state.activeFilter}
 						todoItemList={this.state.todoItemList}
 						changeItemCheck={this.changeItemCheck}
 						deleteItem={this.deleteItem}
@@ -108,7 +104,7 @@ class TodoList extends Component {
 						deleteCompletedItems={this.deleteCompletedItems}
 						todoItemList={this.state.todoItemList}
 						setActiveFilter={this.setActiveFilter}
-						activeFilter={this.state.activeFilter.filter}
+						activeFilter={this.state.activeFilter}
 					/>
 				</div>
 				<UnderLines visible={this.state.todoItemList.length} />

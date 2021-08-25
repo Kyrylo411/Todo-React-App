@@ -1,5 +1,1 @@
-export const buttons = [
-	{ name: 'All', active: true },
-	{ name: 'Active', active: false },
-	{ name: 'Completed', active: false },
-];
+export const buttons = ['All', 'Active', 'Completed'];

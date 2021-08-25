@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { buttons } from '../../../constants';
-import Button from '../../../Button';
+import ButtonWrapper from './ButtonWrapper';
 import './ButtonGroup.scss';
 
 class ButtonGroup extends Component {
@@ -10,11 +10,12 @@ class ButtonGroup extends Component {
 			<div className="buttonGroup">
 				{buttons.map((btn) => {
 					return (
-						<Button
-							value={btn.name}
-							key={btn.name}
-							active={btn.name === this.props.activeFilter}
+						<ButtonWrapper
+							key={btn}
+							item={btn}
 							onClick={this.props.setActiveFilter}
+							active={btn === this.props.activeFilter}
+							activeFilter={this.props.activeFilter}
 						/>
 					);
 				})}
