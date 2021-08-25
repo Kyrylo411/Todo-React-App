@@ -18,10 +18,7 @@ class Button extends Component {
 			active: this.props.active,
 		});
 		return (
-			<button
-				className={btnClass}
-				onClick={(e) => this.props.onClick(e.target.textContent)}
-			>
+			<button className={btnClass} onClick={this.handleClick}>
 				{this.props.value}
 			</button>
 		);
