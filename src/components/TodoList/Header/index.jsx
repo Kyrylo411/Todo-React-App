@@ -9,13 +9,12 @@ class Header extends Component {
 		return (
 			<div className="inputContainer">
 				<ArrowButton
-					toggleAllItems={this.props.toggleAllItems}
-					arrowDark={this.props.arrowDark}
+					onClick={this.props.toggleAllItems}
 					todoItemList={this.props.todoItemList}
 				/>
 				<Input
-					addListItem={this.props.addListItem}
-					changeInputValue={this.props.changeInputValue}
+					onKeyDown={this.props.addListItem}
+					onChange={this.props.changeInputValue}
 					value={this.props.value}
 				/>
 			</div>

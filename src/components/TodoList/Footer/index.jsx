@@ -24,10 +24,10 @@ class Footer extends Component {
 				<p>{this.countItems()}</p>
 				<ButtonGroup
 					setActiveFilter={this.props.setActiveFilter}
-					filters={this.props.filters}
+					activeFilter={this.props.activeFilter}
 				/>
 				<ClearButton
-					deleteCompletedItems={this.props.deleteCompletedItems}
+					onClick={this.props.deleteCompletedItems}
 					todoItemList={this.props.todoItemList}
 				/>
 			</div>

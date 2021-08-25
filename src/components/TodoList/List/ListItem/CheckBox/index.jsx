@@ -12,7 +12,7 @@ class CheckBox extends Component {
 		e.stopPropagation();
 	}
 	handleChange(e) {
-		this.props.changeItemCheck(this.props.id, e.target.checked);
+		this.props.onChange(this.props.id, e.target.checked);
 	}
 
 	render() {

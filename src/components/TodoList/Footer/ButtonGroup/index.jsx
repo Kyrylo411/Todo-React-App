@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { buttons } from '../../../constants';
 import Button from '../../../Button';
 import './ButtonGroup.scss';
 
@@ -7,13 +8,13 @@ class ButtonGroup extends Component {
 	render() {
 		return (
 			<div className="buttonGroup">
-				{this.props.filters.map((btn) => {
+				{buttons.map((btn) => {
 					return (
 						<Button
-							value={btn.filter}
-							key={btn.filter}
-							active={btn.active}
-							setActiveFilter={this.props.setActiveFilter}
+							value={btn.name}
+							key={btn.name}
+							active={btn.name === this.props.activeFilter}
+							onClick={this.props.setActiveFilter}
 						/>
 					);
 				})}

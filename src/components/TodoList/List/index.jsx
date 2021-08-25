@@ -10,14 +10,12 @@ class List extends Component {
 	}
 	setListToRender() {
 		const todoListToRender = this.props.todoItemList.filter((item) => {
-			const activeFilter = this.props.filters.find((filter) => filter.active);
-
 			const filterMap = {
 				Active: !item.done ? item : null,
 				Completed: item.done ? item : null,
 				All: item,
 			};
-			return filterMap[activeFilter.filter];
+			return filterMap[this.props.activeFilter];
 		});
 		return todoListToRender;
 	}
@@ -32,7 +30,7 @@ class List extends Component {
 							changeItemCheck={this.props.changeItemCheck}
 							id={item.id}
 							deleteItem={this.props.deleteItem}
-							changeItemValue={this.props.changeItemValue}
+							onChange={this.props.changeItemValue}
 						/>
 					);
 				})}

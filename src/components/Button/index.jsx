@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import './Button.scss';
+import classNames from 'classnames';
 
 class Button extends Component {
 	constructor(props) {
@@ -7,14 +9,18 @@ class Button extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick(e) {
-		this.props.setActiveFilter(e.target.textContent);
+		this.props.onClick(e.target.textContent);
 	}
 
 	render() {
+		const btnClass = classNames({
+			button: true,
+			active: this.props.active,
+		});
 		return (
 			<button
-				className={this.props.active ? 'button active' : 'button'}
-				onClick={this.handleClick}
+				className={btnClass}
+				onClick={(e) => this.props.onClick(e.target.textContent)}
 			>
 				{this.props.value}
 			</button>

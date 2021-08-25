@@ -9,14 +9,14 @@ class ClearButton extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick() {
-		this.props.deleteCompletedItems();
+		this.props.onClick();
 	}
 	findCheckedItem() {
 		return this.props.todoItemList.some((item) => item.done === true);
 	}
 	render() {
 		return this.findCheckedItem() ? (
-			<button onClick={this.handleClick} className={'clearButton visible'}>
+			<button onClick={this.handleClick} className="clearButton">
 				Clear Completed
 			</button>
 		) : null;

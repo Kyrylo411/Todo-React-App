@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { Component } from 'react';
 import './ArrowButton.scss';
 
@@ -11,18 +12,19 @@ class ArrowButton extends Component {
 		const isAllItemsChecked = this.props.todoItemList.every(
 			(item) => item.done === true,
 		);
-		this.props.toggleAllItems(isAllItemsChecked);
+		this.props.onClick(isAllItemsChecked);
 	}
 
 	render() {
+		const arrowClass = classNames({
+			arrow: true,
+			arrowVisible: this.props.todoItemList.length,
+			arrowDark: this.props.todoItemList.every((item) => item.done === true),
+		});
+
 		return (
 			<div>
-				<div
-					className={
-						this.props.todoItemList.length ? 'arrow arrowVisible' : 'arrow'
-					}
-					onClick={this.handleClick}
-				>
+				<div className={arrowClass} onClick={this.handleClick}>
 					❯
 				</div>
 			</div>

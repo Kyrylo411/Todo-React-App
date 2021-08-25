@@ -8,11 +8,11 @@ class Input extends Component {
 		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 	handleChange(e) {
-		this.props.changeInputValue(e.target.value);
+		this.props.onChange(e.target.value);
 	}
 	handleKeyDown(e) {
 		if (e.key === 'Enter') {
-			this.props.addListItem(e.target.value);
+			this.props.onKeyDown(e.target.value);
 			e.target.value = '';
 		}
 	}
@@ -21,8 +21,8 @@ class Input extends Component {
 			<input
 				className="input"
 				value={this.props.value}
-				onChange={this.handleChange}
 				placeholder="What needs to be done?"
+				onChange={this.handleChange}
 				onKeyDown={this.handleKeyDown}
 			/>
 		);

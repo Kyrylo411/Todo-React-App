@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CheckBox from '../CheckBox';
+import CheckBox from './CheckBox';
 import './ListItem.scss';
 
 class ListItem extends Component {
@@ -22,12 +22,12 @@ class ListItem extends Component {
 		e.stopPropagation();
 	}
 	handleBlur(e) {
-		this.props.changeItemValue(e.target.value, this.props.item.id);
+		this.props.onChange(e.target.value, this.props.item.id);
 		this.setState({ editItem: false });
 	}
 	handleKeyDown(e) {
 		if (e.key === 'Enter') {
-			this.props.changeItemValue(e.target.value, this.props.item.id);
+			this.props.onChange(e.target.value, this.props.item.id);
 			this.setState({ editItem: false });
 		}
 	}
@@ -65,7 +65,7 @@ class ListItem extends Component {
 				) : (
 					<>
 						<CheckBox
-							changeItemCheck={this.props.changeItemCheck}
+							onChange={this.props.changeItemCheck}
 							id={this.props.id}
 							isChecked={this.props.item.done}
 						/>
