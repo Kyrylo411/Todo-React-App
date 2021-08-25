@@ -16,6 +16,7 @@ class Header extends Component {
 					onKeyDown={this.props.addListItem}
 					onChange={this.props.changeInputValue}
 					value={this.props.value}
+					todoItemList={this.props.todoItemList}
 				/>
 			</div>
 		);

@@ -15,7 +15,6 @@ class ButtonGroup extends Component {
 							item={btn}
 							onClick={this.props.setActiveFilter}
 							active={btn === this.props.activeFilter}
-							activeFilter={this.props.activeFilter}
 						/>
 					);
 				})}

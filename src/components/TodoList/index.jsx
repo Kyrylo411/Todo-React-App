@@ -23,6 +23,7 @@ class TodoList extends Component {
 		this.setActiveFilter = this.setActiveFilter.bind(this);
 		this.changeItemValue = this.changeItemValue.bind(this);
 	}
+
 	setActiveFilter(textValue) {
 		this.setState({
 			activeFilter: textValue,
@@ -80,6 +81,16 @@ class TodoList extends Component {
 				}),
 			});
 		}
+	}
+	componentDidMount() {
+		if (localStorage.getItem('todoList')) {
+			this.setState({
+				todoItemList: JSON.parse(localStorage.getItem('todoList')),
+			});
+		}
+	}
+	componentDidUpdate() {
+		localStorage.setItem('todoList', JSON.stringify(this.state.todoItemList));
 	}
 	render() {
 		return (
