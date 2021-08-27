@@ -30,6 +30,11 @@ class TodoList extends Component {
 		});
 	}
 	deleteCompletedItems() {
+		const checkeditems = this.state.todoItemList.filter(
+			(item) => item.done === true,
+		);
+		axios.delete('http://localhost:5000/todo', checkeditems);
+
 		this.setState({
 			todoItemList: this.state.todoItemList.filter(
 				(item) => item.done === false,
