@@ -51,6 +51,8 @@ class TodoList extends Component {
 		});
 	}
 	deleteItem(id) {
+		axios.delete(`http://localhost:5000/todo/${id}`);
+
 		this.setState({
 			todoItemList: this.state.todoItemList.filter((item) => item._id !== id),
 		});
