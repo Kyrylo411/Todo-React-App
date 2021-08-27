@@ -25,10 +25,10 @@ class List extends Component {
 				{this.setListToRender().map((item) => {
 					return (
 						<ListItem
-							key={item.id}
+							key={item._id}
 							item={item}
 							changeItemCheck={this.props.changeItemCheck}
-							id={item.id}
+							id={item._id}
 							deleteItem={this.props.deleteItem}
 							onChange={this.props.changeItemValue}
 						/>

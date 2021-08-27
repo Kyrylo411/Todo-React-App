@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Header from './Header';
 import List from './List';
@@ -23,7 +24,6 @@ class TodoList extends Component {
 		this.setActiveFilter = this.setActiveFilter.bind(this);
 		this.changeItemValue = this.changeItemValue.bind(this);
 	}
-
 	setActiveFilter(textValue) {
 		this.setState({
 			activeFilter: textValue,
@@ -46,13 +46,13 @@ class TodoList extends Component {
 	changeItemCheck(id, isChecked) {
 		this.setState({
 			todoItemList: this.state.todoItemList.map((item) =>
-				item.id === id ? { ...item, done: isChecked } : item,
+				item._id === id ? { ...item, done: isChecked } : item,
 			),
 		});
 	}
 	deleteItem(id) {
 		this.setState({
-			todoItemList: this.state.todoItemList.filter((item) => item.id !== id),
+			todoItemList: this.state.todoItemList.filter((item) => item._id !== id),
 		});
 	}
 	changeInputValue(textValue) {
@@ -65,7 +65,7 @@ class TodoList extends Component {
 					...this.state.todoItemList,
 					{
 						value: inputValue,
-						id: Date.now(),
+						_id: Date.now(),
 						done: false,
 					},
 				],
@@ -83,15 +83,16 @@ class TodoList extends Component {
 		}
 	}
 	componentDidMount() {
-		if (localStorage.getItem('todoList')) {
-			this.setState({
-				todoItemList: JSON.parse(localStorage.getItem('todoList')),
-			});
-		}
+		axios
+			.get('http://localhost:5000/todo')
+			.then((res) =>
+				this.setState({
+					todoItemList: res.data,
+				}),
+			)
+			.catch((e) => console.log(e));
 	}
-	componentDidUpdate() {
-		localStorage.setItem('todoList', JSON.stringify(this.state.todoItemList));
-	}
+
 	render() {
 		return (
 			<>
