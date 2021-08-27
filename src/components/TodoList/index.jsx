@@ -43,6 +43,12 @@ class TodoList extends Component {
 		});
 	}
 	toggleAllItems(isAllItemsChecked) {
+		axios
+			.put('http://localhost:5000/todo')
+			.then((res) => console.log(res.data))
+			.catch((e) => {
+				console.log(e);
+			});
 		this.setState({
 			todoItemList: this.state.todoItemList.map((item) =>
 				isAllItemsChecked ? { ...item, done: false } : { ...item, done: true },
@@ -72,12 +78,12 @@ class TodoList extends Component {
 		this.setState({ inputValue: textValue });
 	}
 	addListItem(inputValue) {
-		axios.post('http://localhost:5000/todo', {
-			value: inputValue,
-			done: false,
-		});
-
 		if (inputValue.trim()) {
+			axios.post('http://localhost:5000/todo', {
+				value: inputValue,
+				done: false,
+			});
+
 			this.setState({
 				todoItemList: [
 					...this.state.todoItemList,
