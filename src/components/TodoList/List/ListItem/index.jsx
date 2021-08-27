@@ -23,12 +23,12 @@ class ListItem extends Component {
 		e.stopPropagation();
 	}
 	handleBlur(e) {
-		this.props.onChange(e.target.value, this.props.item.id);
+		this.props.onChange(e.target.value, this.props.item._id);
 		this.setState({ editItem: false });
 	}
 	handleKeyDown(e) {
 		if (e.key === 'Enter') {
-			this.props.onChange(e.target.value, this.props.item.id);
+			this.props.onChange(e.target.value, this.props.item._id);
 			this.setState({ editItem: false });
 		}
 	}

@@ -15,6 +15,7 @@ class TodoList extends Component {
 			inputValue: '',
 			activeFilter: 'All',
 		};
+
 		this.changeInputValue = this.changeInputValue.bind(this);
 		this.addListItem = this.addListItem.bind(this);
 		this.changeItemCheck = this.changeItemCheck.bind(this);
@@ -91,10 +92,16 @@ class TodoList extends Component {
 		}
 	}
 	changeItemValue(inputValue, id) {
+		axios.put(`http://localhost:5000/todo/${id}`, {
+			_id: id,
+			value: inputValue,
+		});
+
+		console.log(id);
 		if (inputValue.trim()) {
 			this.setState({
 				todoItemList: this.state.todoItemList.map((item) => {
-					return item.id === id ? { ...item, value: inputValue } : item;
+					return item._id === id ? { ...item, value: inputValue } : item;
 				}),
 			});
 		}

@@ -19,6 +19,7 @@ class List extends Component {
 		});
 		return todoListToRender;
 	}
+
 	render() {
 		return (
 			<ul className="todoList">
