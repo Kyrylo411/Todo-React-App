@@ -59,6 +59,11 @@ class TodoList extends Component {
 		this.setState({ inputValue: textValue });
 	}
 	addListItem(inputValue) {
+		axios.post('http://localhost:5000/todo', {
+			value: inputValue,
+			done: false,
+		});
+
 		if (inputValue.trim()) {
 			this.setState({
 				todoItemList: [
