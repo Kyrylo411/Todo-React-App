@@ -92,13 +92,12 @@ class TodoList extends Component {
 		}
 	}
 	changeItemValue(inputValue, id) {
-		axios.put(`http://localhost:5000/todo/${id}`, {
-			_id: id,
-			value: inputValue,
-		});
-
-		console.log(id);
 		if (inputValue.trim()) {
+			axios.put(`http://localhost:5000/todo/${id}`, {
+				_id: id,
+				value: inputValue,
+			});
+
 			this.setState({
 				todoItemList: this.state.todoItemList.map((item) => {
 					return item._id === id ? { ...item, value: inputValue } : item;
