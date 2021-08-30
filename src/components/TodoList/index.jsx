@@ -58,7 +58,7 @@ class TodoList extends Component {
 		});
 	}
 	changeItemCheck(id, isChecked) {
-		axios.put(`http://localhost:5000/todo/${id}`, {
+		axios.put(`http://localhost:5000/todo`, {
 			_id: id,
 			done: isChecked,
 		});
