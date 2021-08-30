@@ -1,27 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Button from '../../../../Button';
 
-class ButtonWrapper extends Component {
-	constructor(props) {
-		super(props);
-		this.handleClick = this.handleClick.bind(this);
-	}
-
-	handleClick() {
-		this.props.onClick(this.props.item);
-	}
-	render() {
-		return (
-			<div>
-				<Button
-					value={this.props.item}
-					active={this.props.active}
-					onClick={this.handleClick}
-				/>
-			</div>
-		);
-	}
+function ButtonWrapper({ item, active, onClick }) {
+	const handleClick = () => {
+		onClick(item);
+	};
+	return (
+		<div>
+			<Button value={item} active={active} onClick={handleClick} />
+		</div>
+	);
 }
 
 export default ButtonWrapper;
