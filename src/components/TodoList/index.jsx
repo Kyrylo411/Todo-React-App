@@ -31,75 +31,85 @@ class TodoList extends Component {
 		});
 	}
 	deleteCompletedItems() {
-		const checkeditems = this.state.todoItemList.filter(
-			(item) => item.done === true,
-		);
-		axios.delete('http://localhost:5000/todo', checkeditems);
-
-		this.setState({
-			todoItemList: this.state.todoItemList.filter(
-				(item) => item.done === false,
-			),
-		});
+		const deleteCompletedItems = async () => {
+			try {
+				const checkeditems = this.state.todoItemList.filter(
+					(item) => item.done === true,
+				);
+				await axios.delete('http://localhost:5000/todo', checkeditems);
+				this.setState({
+					todoItemList: this.state.todoItemList.filter(
+						(item) => item.done === false,
+					),
+				});
+			} catch (e) {
+				console.log(e);
+			}
+		};
+		deleteCompletedItems();
 	}
 	toggleAllItems(isAllItemsChecked) {
-		axios
-			.put(`http://localhost:5000/todo/${isAllItemsChecked}`)
-			.then(() =>
+		const updateAllItemsCheck = async () => {
+			try {
+				await axios.put(`http://localhost:5000/todo/${isAllItemsChecked}`);
 				this.setState({
 					todoItemList: this.state.todoItemList.map((item) =>
 						isAllItemsChecked
 							? { ...item, done: false }
 							: { ...item, done: true },
 					),
-				}),
-			)
-			.catch((e) => {
+				});
+			} catch (e) {
 				console.log(e);
-			});
+			}
+		};
+		updateAllItemsCheck();
 	}
 	changeItemCheck(id, isChecked) {
-		axios
-			.put('http://localhost:5000/todo', {
-				_id: id,
-				done: isChecked,
-			})
-			.then((res) => {
+		const updateItemCheck = async () => {
+			try {
+				const res = await axios.put('http://localhost:5000/todo', {
+					_id: id,
+					done: isChecked,
+				});
 				this.setState({
 					todoItemList: this.state.todoItemList.map((item) =>
 						item._id === res.data._id ? { ...item, done: isChecked } : item,
 					),
 				});
-			})
-			.catch((e) => {
+			} catch (e) {
 				console.log(e);
-			});
+			}
+		};
+		updateItemCheck();
 	}
 	deleteItem(id) {
-		axios
-			.delete(`http://localhost:5000/todo/${id}`)
-			.then(() => {
+		const deleteItem = async () => {
+			try {
+				await axios.delete(`http://localhost:5000/todo/${id}`);
 				this.setState({
 					todoItemList: this.state.todoItemList.filter(
 						(item) => item._id !== id,
 					),
 				});
-			})
-			.catch((e) => {
+			} catch (e) {
 				console.log(e);
-			});
+			}
+		};
+
+		deleteItem();
 	}
 	changeInputValue(textValue) {
 		this.setState({ inputValue: textValue });
 	}
 	addListItem(inputValue) {
-		if (inputValue.trim()) {
-			axios
-				.post('http://localhost:5000/todo', {
-					value: inputValue,
-					done: false,
-				})
-				.then((res) =>
+		const postListItem = async () => {
+			try {
+				if (inputValue.trim()) {
+					const res = await axios.post('http://localhost:5000/todo', {
+						value: inputValue,
+						done: false,
+					});
 					this.setState({
 						todoItemList: [
 							...this.state.todoItemList,
@@ -110,38 +120,48 @@ class TodoList extends Component {
 							},
 						],
 						inputValue: '',
-					}),
-				);
-		}
+					});
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		};
+
+		postListItem();
 	}
 	changeItemValue(inputValue, id) {
-		if (inputValue.trim()) {
-			axios
-				.put('http://localhost:5000/todo', {
-					_id: id,
-					value: inputValue,
-				})
-				.then(() => {
+		const updateInputValue = async () => {
+			try {
+				if (inputValue.trim()) {
+					await axios.put('http://localhost:5000/todo', {
+						_id: id,
+						value: inputValue,
+					});
 					this.setState({
 						todoItemList: this.state.todoItemList.map((item) => {
 							return item._id === id ? { ...item, value: inputValue } : item;
 						}),
 					});
-				})
-				.catch((e) => {
-					console.log(e);
-				});
-		}
+				}
+			} catch (e) {
+				console.log(e);
+			}
+		};
+
+		updateInputValue();
 	}
 	componentDidMount() {
-		axios
-			.get('http://localhost:5000/todo')
-			.then((res) =>
+		const getItemsToRender = async () => {
+			try {
+				const res = await axios.get('http://localhost:5000/todo');
 				this.setState({
 					todoItemList: res.data,
-				}),
-			)
-			.catch((e) => console.log(e));
+				});
+			} catch (e) {
+				console.log(e);
+			}
+		};
+		getItemsToRender();
 	}
 
 	render() {
