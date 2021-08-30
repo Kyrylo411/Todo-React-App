@@ -43,12 +43,14 @@ class TodoList extends Component {
 		});
 	}
 	toggleAllItems(isAllItemsChecked) {
+		console.log('isAllItemsChecked :', isAllItemsChecked);
 		axios
-			.put('http://localhost:5000/todo')
+			.put(`http://localhost:5000/todo/${isAllItemsChecked}`)
 			.then((res) => console.log(res.data))
 			.catch((e) => {
 				console.log(e);
 			});
+
 		this.setState({
 			todoItemList: this.state.todoItemList.map((item) =>
 				isAllItemsChecked ? { ...item, done: false } : { ...item, done: true },
