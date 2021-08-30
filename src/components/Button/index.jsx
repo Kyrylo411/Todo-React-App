@@ -1,29 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './Button.scss';
 import classNames from 'classnames';
 
-class Button extends Component {
-	constructor(props) {
-		super(props);
-		this.handleClick = this.handleClick.bind(this);
-	}
-
-	handleClick() {
-		this.props.onClick();
-	}
-	render() {
-		return (
-			<button
-				className={classNames({
-					button: true,
-					active: this.props.active,
-				})}
-				onClick={this.handleClick}
-			>
-				{this.props.value}
-			</button>
-		);
-	}
+function Button({ value, active, onClick }) {
+	const handleClick = () => {
+		onClick();
+	};
+	return (
+		<button
+			className={classNames({
+				button: true,
+				active: active,
+			})}
+			onClick={handleClick}
+		>
+			{value}
+		</button>
+	);
 }
+
 export default Button;
