@@ -1,31 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+
 import './Input.scss';
 
-class Input extends Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleKeyDown = this.handleKeyDown.bind(this);
-	}
-	handleChange(e) {
-		this.props.onChange(e.target.value);
-	}
-	handleKeyDown(e) {
+function Input({ value, onChange, onKeyDown }) {
+	const handleChange = (e) => {
+		onChange(e.target.value);
+	};
+
+	const handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
-			this.props.onKeyDown(e.target.value);
+			onKeyDown(e.target.value);
 			e.target.value = '';
 		}
-	}
-	render() {
-		return (
-			<input
-				className="input"
-				value={this.props.value}
-				placeholder="What needs to be done?"
-				onChange={this.handleChange}
-				onKeyDown={this.handleKeyDown}
-			/>
-		);
-	}
+	};
+	return (
+		<input
+			className="input"
+			value={value}
+			placeholder="What needs to be done?"
+			onChange={handleChange}
+			onKeyDown={handleKeyDown}
+		/>
+	);
 }
 export default Input;
