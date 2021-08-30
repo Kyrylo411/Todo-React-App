@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 
 import CheckBox from './CheckBox';
 import './ListItem.scss';

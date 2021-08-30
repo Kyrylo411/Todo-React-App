@@ -45,35 +45,49 @@ class TodoList extends Component {
 	toggleAllItems(isAllItemsChecked) {
 		axios
 			.put(`http://localhost:5000/todo/${isAllItemsChecked}`)
-			.then((res) => console.log(res.data))
+			.then(() =>
+				this.setState({
+					todoItemList: this.state.todoItemList.map((item) =>
+						isAllItemsChecked
+							? { ...item, done: false }
+							: { ...item, done: true },
+					),
+				}),
+			)
 			.catch((e) => {
 				console.log(e);
 			});
-
-		this.setState({
-			todoItemList: this.state.todoItemList.map((item) =>
-				isAllItemsChecked ? { ...item, done: false } : { ...item, done: true },
-			),
-		});
 	}
 	changeItemCheck(id, isChecked) {
-		axios.put(`http://localhost:5000/todo`, {
-			_id: id,
-			done: isChecked,
-		});
-
-		this.setState({
-			todoItemList: this.state.todoItemList.map((item) =>
-				item._id === id ? { ...item, done: isChecked } : item,
-			),
-		});
+		axios
+			.put('http://localhost:5000/todo', {
+				_id: id,
+				done: isChecked,
+			})
+			.then((res) => {
+				this.setState({
+					todoItemList: this.state.todoItemList.map((item) =>
+						item._id === res.data._id ? { ...item, done: isChecked } : item,
+					),
+				});
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 	}
 	deleteItem(id) {
-		axios.delete(`http://localhost:5000/todo/${id}`);
-
-		this.setState({
-			todoItemList: this.state.todoItemList.filter((item) => item._id !== id),
-		});
+		axios
+			.delete(`http://localhost:5000/todo/${id}`)
+			.then(() => {
+				this.setState({
+					todoItemList: this.state.todoItemList.filter(
+						(item) => item._id !== id,
+					),
+				});
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 	}
 	changeInputValue(textValue) {
 		this.setState({ inputValue: textValue });
@@ -102,16 +116,21 @@ class TodoList extends Component {
 	}
 	changeItemValue(inputValue, id) {
 		if (inputValue.trim()) {
-			axios.put(`http://localhost:5000/todo/${id}`, {
-				_id: id,
-				value: inputValue,
-			});
-
-			this.setState({
-				todoItemList: this.state.todoItemList.map((item) => {
-					return item._id === id ? { ...item, value: inputValue } : item;
-				}),
-			});
+			axios
+				.put('http://localhost:5000/todo', {
+					_id: id,
+					value: inputValue,
+				})
+				.then(() => {
+					this.setState({
+						todoItemList: this.state.todoItemList.map((item) => {
+							return item._id === id ? { ...item, value: inputValue } : item;
+						}),
+					});
+				})
+				.catch((e) => {
+					console.log(e);
+				});
 		}
 	}
 	componentDidMount() {
