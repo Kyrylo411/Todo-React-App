@@ -1,83 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import CheckBox from './CheckBox';
 import './ListItem.scss';
 
-class ListItem extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			editItem: false,
-			inputValue: this.props.item.value,
-		};
-		this.handleDeleteClick = this.handleDeleteClick.bind(this);
-		this.handleDoubleClick = this.handleDoubleClick.bind(this);
-		this.editTodoInput = this.handleDoubleClick();
-		this.handleKeyDown = this.handleKeyDown.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleBlur = this.handleBlur.bind(this);
-	}
-	handleClick(e) {
+function ListItem({ item, onChange, deleteItem, changeItemCheck, id }) {
+	const [inputValue, setInputValue] = useState(item.value);
+	const [editItem, setEditItem] = useState(false);
+	const handleClick = (e) => {
 		e.stopPropagation();
-	}
-	handleBlur(e) {
-		this.props.onChange(e.target.value, this.props.item._id);
-		this.setState({ editItem: false });
-	}
-	handleKeyDown(e) {
+	};
+	const handleBlur = (e) => {
+		onChange(e.target.value, item._id);
+		setEditItem(false);
+	};
+	const handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
-			this.props.onChange(e.target.value, this.props.item._id);
-			this.setState({ editItem: false });
+			onChange(e.target.value, item._id);
+			setEditItem(false);
 		}
-	}
-	handleInputChange(e) {
-		this.setState({ inputValue: e.target.value });
-	}
-	handleDoubleClick() {
+	};
+	const handleInputChange = (e) => {
+		setInputValue(e.target.value);
+	};
+	const handleDoubleClick = () => {
 		let lastClick = 0;
 		return () => {
 			let isDblClick = false;
 			const d = Date.now();
 			isDblClick = d - lastClick < 400 ? true : false;
 			lastClick = d;
-			this.setState({
-				editItem: isDblClick,
-			});
+			setEditItem(isDblClick);
 		};
-	}
-	handleDeleteClick() {
-		this.props.deleteItem(this.props.id);
-	}
-	render() {
-		return (
-			<li className="todoitem" onClick={this.editTodoInput}>
-				{this.state.editItem ? (
-					<input
-						className="itemInput"
-						autoFocus
-						value={this.state.inputValue}
-						onKeyDown={this.handleKeyDown}
-						onClick={this.handleClick}
-						onChange={this.handleInputChange}
-						onBlur={this.handleBlur}
-					/>
-				) : (
-					<>
-						<CheckBox
-							onChange={this.props.changeItemCheck}
-							id={this.props.id}
-							isChecked={this.props.item.done}
-						/>
-						<p className={this.props.item.done ? 'done' : 'notDone'}>
-							{this.props.item.value}
-						</p>
+	};
+	const editTodoInput = handleDoubleClick();
+	const handleDeleteClick = () => {
+		deleteItem(id);
+	};
 
-						<div onClick={this.handleDeleteClick} className="deleteButton" />
-					</>
-				)}
-			</li>
-		);
-	}
+	return (
+		<li className="todoitem" onClick={editTodoInput}>
+			{editItem ? (
+				<input
+					className="itemInput"
+					autoFocus
+					value={inputValue}
+					onKeyDown={handleKeyDown}
+					onClick={handleClick}
+					onChange={handleInputChange}
+					onBlur={handleBlur}
+				/>
+			) : (
+				<>
+					<CheckBox onChange={changeItemCheck} id={id} isChecked={item.done} />
+					<p className={item.done ? 'done' : 'notDone'}>{item.value}</p>
+
+					<div onClick={handleDeleteClick} className="deleteButton" />
+				</>
+			)}
+		</li>
+	);
 }
+
 export default ListItem;

@@ -1,33 +1,24 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import './CheckBox.scss';
 
-class CheckBox extends Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-	}
-	handleClick(e) {
+function CheckBox({ id, onChange, isChecked }) {
+	const handleClick = (e) => {
 		e.stopPropagation();
-	}
-	handleChange(e) {
-		this.props.onChange(this.props.id, e.target.checked);
-	}
-
-	render() {
-		return (
-			<label className="container">
-				<input
-					onChange={this.handleChange}
-					type="checkBox"
-					checked={this.props.isChecked}
-					onClick={this.handleClick}
-				/>
-				<span className="checkmark" />
-			</label>
-		);
-	}
+	};
+	const handleChange = (e) => {
+		onChange(id, e.target.checked);
+	};
+	return (
+		<label className="container">
+			<input
+				onChange={handleChange}
+				type="checkBox"
+				checked={isChecked}
+				onClick={handleClick}
+			/>
+			<span className="checkmark" />
+		</label>
+	);
 }
 
 export default CheckBox;
