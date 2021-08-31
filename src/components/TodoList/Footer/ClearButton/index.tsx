@@ -1,8 +1,14 @@
 import React from 'react';
+import { ITodoItem } from '../../../../types/types';
 
 import './ClearButton.scss';
 
-function ClearButton({ onClick, todoItemList }) {
+interface ClearButton {
+	onClick:()=>void,
+	todoItemList: ITodoItem[]
+}
+
+function ClearButton({ onClick, todoItemList }:ClearButton) {
 	const handleClick = () => {
 		onClick();
 	};
