@@ -3,13 +3,13 @@ import classNames from 'classnames';
 
 import './Button.scss';
 
-interface ButtonProps {   
+interface ButtonProps {
 	value: string;
 	active: boolean;
-	onClick: ()=>void;
+	onClick: () => void;
 }
 
-const Button = ({ value, active, onClick }: ButtonProps)=> {
+const Button: FC<ButtonProps> = ({ value, active, onClick }) => {
 	const handleClick = () => {
 		onClick();
 	};
@@ -24,6 +24,6 @@ const Button = ({ value, active, onClick }: ButtonProps)=> {
 			{value}
 		</button>
 	);
-}
+};
 
 export default Button;

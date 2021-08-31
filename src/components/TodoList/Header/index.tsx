@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { FC } from 'react';
 import ArrowButton from './ArrowButton';
 import Input from './Input';
 
 import './Header.scss';
+import { ITodoItem } from '../../../interfaces/interfaces';
 
-function Header({
+interface HeaderProps {
+	todoItemList: ITodoItem[];
+	value: string;
+	toggleAllItems: () => void;
+	changeInputValue: () => void;
+	addListItem: () => void;
+}
+
+const Header: FC<HeaderProps> = ({
 	todoItemList,
 	value,
 	toggleAllItems,
 	changeInputValue,
 	addListItem,
-}) {
+}) => {
 	return (
 		<div className="inputContainer">
 			<ArrowButton onClick={toggleAllItems} todoItemList={todoItemList} />
@@ -18,10 +27,9 @@ function Header({
 				onKeyDown={addListItem}
 				onChange={changeInputValue}
 				value={value}
-				todoItemList={todoItemList}
 			/>
 		</div>
 	);
-}
+};
 
 export default Header;

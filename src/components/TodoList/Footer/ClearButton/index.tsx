@@ -1,14 +1,14 @@
-import React from 'react';
-import { ITodoItem } from '../../../../types/types';
+import React, { FC } from 'react';
+import { ITodoItem } from '../../../../interfaces/interfaces';
 
 import './ClearButton.scss';
 
-interface ClearButton {
-	onClick:()=>void,
-	todoItemList: ITodoItem[]
+interface ClearButtonProps {
+	onClick: () => void;
+	todoItemList: ITodoItem[];
 }
 
-function ClearButton({ onClick, todoItemList }:ClearButton) {
+const ClearButton: FC<ClearButtonProps> = ({ onClick, todoItemList }) => {
 	const handleClick = () => {
 		onClick();
 	};
@@ -20,6 +20,6 @@ function ClearButton({ onClick, todoItemList }:ClearButton) {
 			Clear Completed
 		</button>
 	) : null;
-}
+};
 
 export default ClearButton;

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classNames from 'classnames';
 
 import './ArrowButton.scss';
+import { ITodoItem } from '../../../../interfaces/interfaces';
 
-function ArrowButton({ todoItemList, onClick }) {
+interface ArrowButtonProps {
+	todoItemList: ITodoItem[];
+	onClick: (isAllItemsChecked: boolean) => void;
+}
+
+const ArrowButton: FC<ArrowButtonProps> = ({ todoItemList, onClick }) => {
 	const handleClick = () => {
 		const isAllItemsChecked = todoItemList.every((item) => item.done === true);
 		onClick(isAllItemsChecked);
@@ -20,6 +26,6 @@ function ArrowButton({ todoItemList, onClick }) {
 			</div>
 		</div>
 	);
-}
+};
 
 export default ArrowButton;

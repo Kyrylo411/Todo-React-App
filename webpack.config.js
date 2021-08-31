@@ -23,13 +23,6 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.(js|jsx)$/,
-				exclude: /nodeModules/,
-				use: {
-					loader: 'babel-loader',
-				},
-			},
-			{
 				test: /\.(s*)css$/,
 				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},

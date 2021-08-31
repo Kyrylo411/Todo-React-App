@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import ListItem from './ListItem';
 import './List.scss';
+import { FilterMap, ITodoItem } from '../../../interfaces/interfaces';
 
-function List({
+interface ListProps {
+	todoItemList: ITodoItem[];
+	deleteItem: () => void;
+	changeItemValue: () => void;
+	changeItemCheck: () => void;
+	activeFilter: keyof FilterMap;
+}
+
+const List: FC<ListProps> = ({
 	todoItemList,
 	deleteItem,
 	changeItemValue,
 	changeItemCheck,
 	activeFilter,
-}) {
+}) => {
 	const setListToRender = () => {
 		const todoListToRender = todoItemList.filter((item) => {
-			const filterMap = {
+			const filterMap: FilterMap = {
 				Active: !item.done ? item : null,
 				Completed: item.done ? item : null,
 				All: item,
@@ -37,6 +46,6 @@ function List({
 			})}
 		</ul>
 	);
-}
+};
 
 export default List;

@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import ClearButton from './ClearButton';
 import ButtonGroup from './ButtonGroup';
 import './Footer.scss';
+import { ITodoItem } from '../../../interfaces/interfaces';
 
-function Footer({
+interface FooterProps {
+	todoItemList: ITodoItem[];
+	activeFilter: string;
+	setActiveFilter: () => void;
+	deleteCompletedItems: () => void;
+}
+
+const Footer: FC<FooterProps> = ({
 	todoItemList,
 	activeFilter,
 	setActiveFilter,
 	deleteCompletedItems,
-}) {
+}) => {
 	const countItems = () => {
 		const notCheckeditems = todoItemList.filter((item) => item.done === false);
 		return notCheckeditems.length > 1 || notCheckeditems.length === 0
@@ -27,6 +35,6 @@ function Footer({
 			<ClearButton onClick={deleteCompletedItems} todoItemList={todoItemList} />
 		</div>
 	) : null;
-}
+};
 
 export default Footer;

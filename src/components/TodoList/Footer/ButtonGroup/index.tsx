@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import buttons  from '../../../constants';
+import buttons from '../../../constants';
 import ButtonWrapper from './ButtonWrapper';
 import './ButtonGroup.scss';
 
 interface ButtonGroupProps {
-	activeFilter: string,
-	setActiveFilter: ()=>void,
+	activeFilter: string;
+	setActiveFilter: () => void;
 }
 
-function ButtonGroup({ activeFilter, setActiveFilter }:ButtonGroupProps) {
+const ButtonGroup: FC<ButtonGroupProps> = ({
+	activeFilter,
+	setActiveFilter,
+}) => {
 	return (
 		<div className="buttonGroup">
-			{buttons.map((btn:string) => {
+			{buttons.map((btn: string) => {
 				return (
 					<ButtonWrapper
 						key={btn}
@@ -24,5 +27,5 @@ function ButtonGroup({ activeFilter, setActiveFilter }:ButtonGroupProps) {
 			})}
 		</div>
 	);
-}
+};
 export default ButtonGroup;

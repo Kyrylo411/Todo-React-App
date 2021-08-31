@@ -1,25 +1,40 @@
-import React, { useState } from 'react';
+import React, { FC, MouseEvent, useState } from 'react';
+import { ITodoItem } from '../../../../interfaces/interfaces';
 
 import CheckBox from './CheckBox';
 import './ListItem.scss';
 
-function ListItem({ item, onChange, deleteItem, changeItemCheck, id }) {
+interface ListItemProps {
+	item: ITodoItem;
+	onChange: (e: string, _id: string) => void;
+	deleteItem: (id: string) => void;
+	changeItemCheck: () => void;
+	id: string;
+}
+
+const ListItem: FC<ListItemProps> = ({
+	item,
+	onChange,
+	deleteItem,
+	changeItemCheck,
+	id,
+}) => {
 	const [inputValue, setInputValue] = useState(item.value);
 	const [editItem, setEditItem] = useState(false);
-	const handleClick = (e) => {
+	const handleClick = (e: MouseEvent) => {
 		e.stopPropagation();
 	};
-	const handleBlur = (e) => {
+	const handleBlur = (e: any) => {
 		onChange(e.target.value, item._id);
 		setEditItem(false);
 	};
-	const handleKeyDown = (e) => {
+	const handleKeyDown = (e: any) => {
 		if (e.key === 'Enter') {
 			onChange(e.target.value, item._id);
 			setEditItem(false);
 		}
 	};
-	const handleInputChange = (e) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
 	};
 	const handleDoubleClick = () => {
@@ -59,6 +74,6 @@ function ListItem({ item, onChange, deleteItem, changeItemCheck, id }) {
 			)}
 		</li>
 	);
-}
+};
 
 export default ListItem;

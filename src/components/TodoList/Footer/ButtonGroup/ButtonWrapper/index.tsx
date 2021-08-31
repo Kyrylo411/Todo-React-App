@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import Button from '../../../../Button';
 
 interface ButtonWrapperProps {
-	item: string,
-	active: boolean,
-	onClick: (item:string)=> void,
+	item: string;
+	active: boolean;
+	onClick: (item: string) => void;
 }
 
-function ButtonWrapper({ item, active, onClick }:ButtonWrapperProps) {
+const ButtonWrapper: FC<ButtonWrapperProps> = ({ item, active, onClick }) => {
 	const handleClick = () => {
 		onClick(item);
 	};
@@ -17,6 +17,6 @@ function ButtonWrapper({ item, active, onClick }:ButtonWrapperProps) {
 			<Button active={active} value={item} onClick={handleClick} />
 		</div>
 	);
-}
+};
 
 export default ButtonWrapper;
