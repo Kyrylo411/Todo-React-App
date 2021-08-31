@@ -17,6 +17,12 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.tsx?$/,
+				use: {
+					loader: 'ts-loader',
+				},
+			},
+			{
 				test: /\.(js|jsx)$/,
 				exclude: /nodeModules/,
 				use: {
@@ -34,6 +40,6 @@ module.exports = {
 		new MiniCssExtractPlugin(),
 	],
 	resolve: {
-		extensions: ['', '.js', '.jsx'],
+		extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
 	},
 };

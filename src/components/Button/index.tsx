@@ -1,9 +1,15 @@
-import React from 'react';
-
-import './Button.scss';
+import React, { FC } from 'react';
 import classNames from 'classnames';
 
-function Button({ value, active, onClick }) {
+import './Button.scss';
+
+interface ButtonProps {   
+	value: string;
+	active: boolean;
+	onClick: ()=>void;
+}
+
+const Button = ({ value, active, onClick }: ButtonProps)=> {
 	const handleClick = () => {
 		onClick();
 	};

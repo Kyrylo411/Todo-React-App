@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { buttons } from '../../../constants';
+import buttons  from '../../../constants';
 import ButtonWrapper from './ButtonWrapper';
 import './ButtonGroup.scss';
 
-function ButtonGroup({ activeFilter, setActiveFilter }) {
+interface ButtonGroupProps {
+	activeFilter: string,
+	setActiveFilter: ()=>void,
+}
+
+function ButtonGroup({ activeFilter, setActiveFilter }:ButtonGroupProps) {
 	return (
 		<div className="buttonGroup">
-			{buttons.map((btn) => {
+			{buttons.map((btn:string) => {
 				return (
 					<ButtonWrapper
 						key={btn}
