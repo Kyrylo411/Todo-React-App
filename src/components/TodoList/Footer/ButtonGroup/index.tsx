@@ -6,7 +6,7 @@ import './ButtonGroup.scss';
 
 interface ButtonGroupProps {
 	activeFilter: string;
-	setActiveFilter: () => void;
+	setActiveFilter: (textValue: string) => void;
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({

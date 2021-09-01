@@ -23,9 +23,8 @@
 	"rules": {
 		"prettier/prettier": "error",
 		"react/prop-types": 0,
-		"no-undef":"off",
-		"no-var-requires":0,
+		"no-undef": "off",
+		"no-var-requires": 0,
 		"@typescript-eslint/rule-name": 0
 	}
 }
-

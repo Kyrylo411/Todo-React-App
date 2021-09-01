@@ -9,7 +9,7 @@ interface ButtonWrapperProps {
 }
 
 const ButtonWrapper: FC<ButtonWrapperProps> = ({ item, active, onClick }) => {
-	const handleClick = () => {
+	const handleClick = (): void => {
 		onClick(item);
 	};
 	return (

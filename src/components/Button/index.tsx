@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({ value, active, onClick }) => {
-	const handleClick = () => {
+	const handleClick = (): void => {
 		onClick();
 	};
 	return (

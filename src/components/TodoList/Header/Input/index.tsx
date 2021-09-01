@@ -9,11 +9,13 @@ interface InputProps {
 }
 
 const Input: FC<InputProps> = ({ value, onChange, onKeyDown }) => {
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		onChange(e.currentTarget.value);
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+		onChange(e.target.value);
 	};
 
-	const handleKeyDown = (e: any) => {
+	const handleKeyDown = (
+		e: React.KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement },
+	): void => {
 		if (e.key === 'Enter') {
 			onKeyDown(e.target.value);
 			e.target.value = '';

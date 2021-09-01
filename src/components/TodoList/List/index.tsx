@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 
 import ListItem from './ListItem';
 import './List.scss';
-import { FilterMap, ITodoItem } from '../../../interfaces/interfaces';
+import { Filter, FilterMap, ITodoItem } from '../../interfaces';
 
 interface ListProps {
 	todoItemList: ITodoItem[];
-	deleteItem: () => void;
-	changeItemValue: () => void;
-	changeItemCheck: () => void;
-	activeFilter: keyof FilterMap;
+	deleteItem: (id: string) => void;
+	changeItemValue: (inputValue: string, id: string) => void;
+	changeItemCheck: (id: string, isChecked: boolean) => void;
+	activeFilter: Filter;
 }
 
 const List: FC<ListProps> = ({
@@ -19,7 +19,7 @@ const List: FC<ListProps> = ({
 	changeItemCheck,
 	activeFilter,
 }) => {
-	const setListToRender = () => {
+	const setListToRender = (): ITodoItem[] => {
 		const todoListToRender = todoItemList.filter((item) => {
 			const filterMap: FilterMap = {
 				Active: !item.done ? item : null,

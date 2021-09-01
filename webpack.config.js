@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -8,18 +9,19 @@ module.exports = {
 		path: path.join(__dirname, '/dist'),
 		filename: 'index.bundle.js',
 	},
-	// webpack 5 comes with devServer which loads in development mode
+	// webpack 5 comes with devServer which Tools failed to load source map: Could not load content floads in development mode
 	devServer: {
 		port: 3000,
 		watchContentBase: true,
 	},
+	devtool: 'source-map',
 	// Rules of how webpack will take our files, complie & bundle them for the browser
 	module: {
 		rules: [
 			{
 				test: /\.tsx?$/,
 				use: {
-					loader: 'ts-loader',
+					loader: ['ts-loader', 'source-map-loader'],
 				},
 			},
 			{

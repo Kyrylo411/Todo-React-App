@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ITodoItem } from '../../../../interfaces/interfaces';
+import { ITodoItem } from '../../../interfaces';
 
 import './ClearButton.scss';
 
@@ -9,10 +9,10 @@ interface ClearButtonProps {
 }
 
 const ClearButton: FC<ClearButtonProps> = ({ onClick, todoItemList }) => {
-	const handleClick = () => {
+	const handleClick = (): void => {
 		onClick();
 	};
-	const findCheckedItem = () => {
+	const findCheckedItem = (): boolean => {
 		return todoItemList.some((item) => item.done === true);
 	};
 	return findCheckedItem() ? (

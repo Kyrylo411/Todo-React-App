@@ -3,14 +3,14 @@ import ArrowButton from './ArrowButton';
 import Input from './Input';
 
 import './Header.scss';
-import { ITodoItem } from '../../../interfaces/interfaces';
+import { ITodoItem } from '../../interfaces';
 
 interface HeaderProps {
 	todoItemList: ITodoItem[];
 	value: string;
-	toggleAllItems: () => void;
-	changeInputValue: () => void;
-	addListItem: () => void;
+	toggleAllItems: (isAllItemsChecked: boolean) => void;
+	changeInputValue: (textValue: string) => void;
+	addListItem: (inputValue: string) => void;
 }
 
 const Header: FC<HeaderProps> = ({

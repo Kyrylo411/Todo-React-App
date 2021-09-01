@@ -6,17 +6,17 @@ import List from './List';
 import Footer from './Footer';
 import UnderLines from './UnderLines';
 import './TodoList.scss';
-import { FilterMap, ITodoItem } from '../../interfaces/interfaces';
+import { Filter, ITodoItem } from '../interfaces';
 
 const TodoList: FC = () => {
 	const [todoItemList, setTodoItemList] = useState<ITodoItem[]>([]);
-	const [inputValue, setInputValue] = useState<string>('');
-	const [activeFilter, setActiveFilter] = useState<keyof FilterMap>('All');
+	const [inputValue, setInputValue] = useState('');
+	const [activeFilter, setActiveFilter] = useState<Filter>('All');
 
-	const changeActiveFilter = (textValue: keyof FilterMap) => {
+	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
 	};
-	const deleteCompletedItems = () => {
+	const deleteCompletedItems = (): void => {
 		const deleteCompletedItems = async () => {
 			try {
 				const checkeditems = todoItemList.filter((item) => item.done === true);
@@ -50,7 +50,7 @@ const TodoList: FC = () => {
 		};
 		updateAllItemsCheck();
 	};
-	const changeItemCheck = (id: string, isChecked: boolean) => {
+	const changeItemCheck = (id: string, isChecked: boolean): void => {
 		const updateItemCheck = async () => {
 			try {
 				const res = await axios.put('http://localhost:5000/todo', {
@@ -68,7 +68,7 @@ const TodoList: FC = () => {
 		};
 		updateItemCheck();
 	};
-	const deleteItem = (id: string) => {
+	const deleteItem = (id: string): void => {
 		const deleteItem = async () => {
 			try {
 				await axios.delete(`http://localhost:5000/todo/${id}`);
@@ -80,10 +80,10 @@ const TodoList: FC = () => {
 
 		deleteItem();
 	};
-	const changeInputValue = (textValue: string) => {
+	const changeInputValue = (textValue: string): void => {
 		setInputValue(textValue);
 	};
-	const addListItem = (inputValue: string) => {
+	const addListItem = (inputValue: string): void => {
 		const postListItem = async () => {
 			try {
 				if (inputValue.trim()) {
@@ -108,7 +108,7 @@ const TodoList: FC = () => {
 
 		postListItem();
 	};
-	const changeItemValue = (inputValue: string, id: string) => {
+	const changeItemValue = (inputValue: string, id: string): void => {
 		const updateInputValue = async () => {
 			try {
 				if (inputValue.trim()) {
@@ -161,8 +161,8 @@ const TodoList: FC = () => {
 					changeItemValue={changeItemValue}
 				/>
 				<Footer
-					deleteCompletedItems={deleteCompletedItems}
 					todoItemList={todoItemList}
+					deleteCompletedItems={deleteCompletedItems}
 					setActiveFilter={changeActiveFilter}
 					activeFilter={activeFilter}
 				/>
