@@ -14,14 +14,13 @@ module.exports = {
 		port: 3000,
 		watchContentBase: true,
 	},
-	devtool: 'source-map',
 	// Rules of how webpack will take our files, complie & bundle them for the browser
 	module: {
 		rules: [
 			{
 				test: /\.tsx?$/,
 				use: {
-					loader: ['ts-loader', 'source-map-loader'],
+					loader: 'ts-loader',
 				},
 			},
 			{
