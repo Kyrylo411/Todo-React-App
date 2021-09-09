@@ -24,6 +24,12 @@ function todoList(state = initialState, action: TodoListAction): ITodolState {
 				todoItemList: action.payload,
 			};
 		}
+		case actionTypes.DELETE_COMPLETED_ITEMS: {
+			return {
+				...state,
+				todoItemList: action.payload,
+			};
+		}
 		default:
 			return state;
 	}

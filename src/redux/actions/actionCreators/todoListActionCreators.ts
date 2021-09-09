@@ -3,6 +3,7 @@ import {
 	AddItemAction,
 	DeleteItemAction,
 	GetItemListAction,
+	DeleteCompletedItemsAction,
 } from '../../interfaces';
 import ActionTypes from '../actionTypes';
 
@@ -23,6 +24,15 @@ export const addItemAction = (item: ITodoItem): AddItemAction => {
 export const deleteItemAction = (list: ITodoItem[]): DeleteItemAction => {
 	return {
 		type: ActionTypes.DELETE_ITEM,
+		payload: list,
+	};
+};
+
+export const deleteCompletedItemsAction = (
+	list: ITodoItem[],
+): DeleteCompletedItemsAction => {
+	return {
+		type: ActionTypes.DELETE_COMPLETED_ITEMS,
 		payload: list,
 	};
 };

@@ -15,7 +15,9 @@ export interface IAction<T> {
 export type GetItemListAction = IAction<ITodoItem[]>;
 export type AddItemAction = IAction<ITodoItem>;
 export type DeleteItemAction = IAction<ITodoItem[]>;
+export type DeleteCompletedItemsAction = IAction<ITodoItem[]>;
 
 export type TodoListAction = GetItemListAction &
 	AddItemAction &
-	DeleteItemAction;
+	DeleteItemAction &
+	DeleteCompletedItemsAction;

@@ -13,6 +13,7 @@ import {
 	getItemListAction,
 	addItemAction,
 	deleteItemAction,
+	deleteCompletedItemsAction,
 } from '../../redux/actions/actionCreators/todoListActionCreators';
 
 const TodoList: FC = () => {
@@ -26,6 +27,7 @@ const TodoList: FC = () => {
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
 	};
+
 	const deleteCompletedItems = (): void => {
 		const deleteCompletedItems = async () => {
 			try {
@@ -36,7 +38,11 @@ const TodoList: FC = () => {
 					},
 				};
 				await axios.delete('http://localhost:5000/todolist/todo', config);
-				setTodoItemList(todoList.filter((item) => item.done === false));
+				dispatch(
+					deleteCompletedItemsAction(
+						todoList.filter((item) => item.done === false),
+					),
+				);
 			} catch (e) {
 				console.log(e);
 			}
