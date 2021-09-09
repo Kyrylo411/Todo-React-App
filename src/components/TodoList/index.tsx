@@ -15,6 +15,7 @@ import {
 	deleteItemAction,
 	deleteCompletedItemsAction,
 	toggleAllItemsAction,
+	changeItemCheckAction,
 } from '../../redux/actions/actionCreators/todoListActionCreators';
 
 const TodoList: FC = () => {
@@ -72,6 +73,7 @@ const TodoList: FC = () => {
 		};
 		updateAllItemsCheck();
 	};
+	//not connected to server
 	const changeItemCheck = (id: string, isChecked: boolean): void => {
 		const updateItemCheck = async () => {
 			try {
@@ -79,9 +81,11 @@ const TodoList: FC = () => {
 					_id: id,
 					done: isChecked,
 				});
-				setTodoItemList(
-					todoList.map((item) =>
-						item._id === res.data._id ? { ...item, done: isChecked } : item,
+				dispatch(
+					changeItemCheckAction(
+						todoList.map((item) =>
+							item._id === res.data._id ? { ...item, done: isChecked } : item,
+						),
 					),
 				);
 			} catch (e) {

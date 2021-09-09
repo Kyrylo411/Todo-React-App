@@ -17,6 +17,7 @@ export type AddItemAction = IAction<ITodoItem>;
 export type DeleteItemAction = IAction<ITodoItem[]>;
 export type DeleteCompletedItemsAction = IAction<ITodoItem[]>;
 export type ToggleAllItemsAction = IAction<ITodoItem[]>;
+export type ChangeItemCheckAction = IAction<ITodoItem[]>;
 
 export type TodoListAction = GetItemListAction &
 	AddItemAction &
