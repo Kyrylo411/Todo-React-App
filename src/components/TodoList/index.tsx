@@ -20,7 +20,6 @@ import {
 } from '../../redux/actions/actionCreators/todoListActionCreators';
 
 const TodoList: FC = () => {
-	const [todoItemList, setTodoItemList] = useState<ITodoItem[]>([]);
 	const [inputValue, setInputValue] = useState('');
 	const [activeFilter, setActiveFilter] = useState<Filter>('All');
 
@@ -30,7 +29,6 @@ const TodoList: FC = () => {
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
 	};
-	//not connetcted to server
 	const deleteCompletedItems = (): void => {
 		const deleteCompletedItems = async () => {
 			try {
@@ -40,7 +38,10 @@ const TodoList: FC = () => {
 						checkeditems,
 					},
 				};
-				await axios.delete('http://localhost:5000/todolist/todo', config);
+				await axios.delete(
+					'http://localhost:5000/todolist/todo/deleteMany/61389d1fd9d4363d4a272717',
+					config,
+				);
 				dispatch(
 					deleteCompletedItemsAction(
 						todoList.filter((item) => item.done === false),
@@ -52,12 +53,11 @@ const TodoList: FC = () => {
 		};
 		deleteCompletedItems();
 	};
-	//not connected to server
 	const toggleAllItems = (isAllItemsChecked: boolean): void => {
 		const updateAllItemsCheck = async () => {
 			try {
 				await axios.put(
-					`http://localhost:5000/todolist/todo/${isAllItemsChecked}`,
+					`http://localhost:5000/todolist/todo/${isAllItemsChecked}/61389d1fd9d4363d4a272717`,
 				);
 				dispatch(
 					toggleAllItemsAction(
@@ -74,7 +74,6 @@ const TodoList: FC = () => {
 		};
 		updateAllItemsCheck();
 	};
-	//not connected to server
 	const changeItemCheck = (id: string, isChecked: boolean): void => {
 		const updateItemCheck = async () => {
 			try {
@@ -138,7 +137,6 @@ const TodoList: FC = () => {
 		postListItem();
 	};
 
-	//not connected to server
 	const changeItemValue = (inputValue: string, id: string): void => {
 		const updateInputValue = async () => {
 			try {
