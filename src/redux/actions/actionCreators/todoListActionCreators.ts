@@ -6,6 +6,7 @@ import {
 	DeleteCompletedItemsAction,
 	ToggleAllItemsAction,
 	ChangeItemCheckAction,
+	ChangeItemValueAction,
 } from '../../interfaces';
 import ActionTypes from '../actionTypes';
 
@@ -53,6 +54,15 @@ export const changeItemCheckAction = (
 ): ChangeItemCheckAction => {
 	return {
 		type: ActionTypes.CHANGE_ITEM_CHECK,
+		payload: list,
+	};
+};
+
+export const changeItemValueAction = (
+	list: ITodoItem[],
+): ChangeItemValueAction => {
+	return {
+		type: ActionTypes.CHANGE_ITEM_VALUE,
 		payload: list,
 	};
 };

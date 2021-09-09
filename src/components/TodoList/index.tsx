@@ -16,6 +16,7 @@ import {
 	deleteCompletedItemsAction,
 	toggleAllItemsAction,
 	changeItemCheckAction,
+	changeItemValueAction,
 } from '../../redux/actions/actionCreators/todoListActionCreators';
 
 const TodoList: FC = () => {
@@ -120,14 +121,6 @@ const TodoList: FC = () => {
 							done: false,
 						},
 					);
-					setTodoItemList([
-						...todoList,
-						{
-							value: inputValue,
-							_id: res.data._id,
-							done: false,
-						},
-					]);
 					dispatch(
 						addItemAction({
 							value: inputValue,
@@ -144,6 +137,8 @@ const TodoList: FC = () => {
 
 		postListItem();
 	};
+
+	//not connected to server
 	const changeItemValue = (inputValue: string, id: string): void => {
 		const updateInputValue = async () => {
 			try {
@@ -152,10 +147,12 @@ const TodoList: FC = () => {
 						_id: id,
 						value: inputValue,
 					});
-					setTodoItemList(
-						todoList.map((item) => {
-							return item._id === id ? { ...item, value: inputValue } : item;
-						}),
+					dispatch(
+						changeItemValueAction(
+							todoList.map((item) => {
+								return item._id === id ? { ...item, value: inputValue } : item;
+							}),
+						),
 					);
 				}
 			} catch (e) {

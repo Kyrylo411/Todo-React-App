@@ -42,6 +42,12 @@ function todoList(state = initialState, action: TodoListAction): ITodolState {
 				todoItemList: action.payload,
 			};
 		}
+		case actionTypes.CHANGE_ITEM_VALUE: {
+			return {
+				...state,
+				todoItemList: action.payload,
+			};
+		}
 
 		default:
 			return state;
