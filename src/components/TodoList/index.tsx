@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Header from './Header';
 import List from './List';
@@ -7,11 +8,20 @@ import Footer from './Footer';
 import UnderLines from './UnderLines';
 import './TodoList.scss';
 import { Filter, ITodoItem } from '../interfaces';
+import { GetTodoList } from '../../selectors/todo';
+import {
+	getItemListAction,
+	addItemAction,
+	deleteItemAction,
+} from '../../redux/actions/actionCreators/todoListActionCreators';
 
 const TodoList: FC = () => {
 	const [todoItemList, setTodoItemList] = useState<ITodoItem[]>([]);
 	const [inputValue, setInputValue] = useState('');
 	const [activeFilter, setActiveFilter] = useState<Filter>('All');
+
+	const dispatch = useDispatch();
+	const todoList = useSelector(GetTodoList);
 
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
@@ -19,14 +29,14 @@ const TodoList: FC = () => {
 	const deleteCompletedItems = (): void => {
 		const deleteCompletedItems = async () => {
 			try {
-				const checkeditems = todoItemList.filter((item) => item.done === true);
+				const checkeditems = todoList.filter((item) => item.done === true);
 				const config = {
 					data: {
 						checkeditems,
 					},
 				};
-				await axios.delete('http://localhost:5000/todo', config);
-				setTodoItemList(todoItemList.filter((item) => item.done === false));
+				await axios.delete('http://localhost:5000/todolist/todo', config);
+				setTodoItemList(todoList.filter((item) => item.done === false));
 			} catch (e) {
 				console.log(e);
 			}
@@ -36,9 +46,11 @@ const TodoList: FC = () => {
 	const toggleAllItems = (isAllItemsChecked: boolean): void => {
 		const updateAllItemsCheck = async () => {
 			try {
-				await axios.put(`http://localhost:5000/todo/${isAllItemsChecked}`);
+				await axios.put(
+					`http://localhost:5000/todolist/todo/${isAllItemsChecked}`,
+				);
 				setTodoItemList(
-					todoItemList.map((item) =>
+					todoList.map((item) =>
 						isAllItemsChecked
 							? { ...item, done: false }
 							: { ...item, done: true },
@@ -53,12 +65,12 @@ const TodoList: FC = () => {
 	const changeItemCheck = (id: string, isChecked: boolean): void => {
 		const updateItemCheck = async () => {
 			try {
-				const res = await axios.put('http://localhost:5000/todo', {
+				const res = await axios.put('http://localhost:5000/todolist/todo', {
 					_id: id,
 					done: isChecked,
 				});
 				setTodoItemList(
-					todoItemList.map((item) =>
+					todoList.map((item) =>
 						item._id === res.data._id ? { ...item, done: isChecked } : item,
 					),
 				);
@@ -71,8 +83,8 @@ const TodoList: FC = () => {
 	const deleteItem = (id: string): void => {
 		const deleteItem = async () => {
 			try {
-				await axios.delete(`http://localhost:5000/todo/${id}`);
-				setTodoItemList(todoItemList.filter((item) => item._id !== id));
+				await axios.delete(`http://localhost:5000/todolist/todo/${id}`);
+				dispatch(deleteItemAction(todoList.filter((item) => item._id !== id)));
 			} catch (e) {
 				console.log(e);
 			}
@@ -87,18 +99,28 @@ const TodoList: FC = () => {
 		const postListItem = async () => {
 			try {
 				if (inputValue.trim()) {
-					const res = await axios.post('http://localhost:5000/todo', {
-						value: inputValue,
-						done: false,
-					});
+					const res = await axios.post(
+						'http://localhost:5000/todolist/todo/61389d1fd9d4363d4a272717',
+						{
+							value: inputValue,
+							done: false,
+						},
+					);
 					setTodoItemList([
-						...todoItemList,
+						...todoList,
 						{
 							value: inputValue,
 							_id: res.data._id,
 							done: false,
 						},
 					]);
+					dispatch(
+						addItemAction({
+							value: inputValue,
+							_id: res.data._id,
+							done: false,
+						}),
+					);
 					setInputValue('');
 				}
 			} catch (e) {
@@ -112,12 +134,12 @@ const TodoList: FC = () => {
 		const updateInputValue = async () => {
 			try {
 				if (inputValue.trim()) {
-					await axios.put('http://localhost:5000/todo', {
+					await axios.put('http://localhost:5000/todolist/todo', {
 						_id: id,
 						value: inputValue,
 					});
 					setTodoItemList(
-						todoItemList.map((item) => {
+						todoList.map((item) => {
 							return item._id === id ? { ...item, value: inputValue } : item;
 						}),
 					);
@@ -133,10 +155,12 @@ const TodoList: FC = () => {
 	useEffect(() => {
 		const getItemsToRender = async () => {
 			try {
-				const res = await axios.get<ITodoItem[]>('http://localhost:5000/todo');
-				setTodoItemList(res.data);
+				const res = await axios.get<ITodoItem[]>(
+					'http://localhost:5000/todoList/todo/61389d1fd9d4363d4a272717',
+				);
+				dispatch(getItemListAction(res.data));
 			} catch (e) {
-				console.log(e);
+				throw new Error(e);
 			}
 		};
 		getItemsToRender();
@@ -151,23 +175,23 @@ const TodoList: FC = () => {
 					changeInputValue={changeInputValue}
 					addListItem={addListItem}
 					value={inputValue}
-					todoItemList={todoItemList}
+					todoItemList={todoList}
 				/>
 				<List
 					activeFilter={activeFilter}
-					todoItemList={todoItemList}
+					todoItemList={todoList}
 					changeItemCheck={changeItemCheck}
 					deleteItem={deleteItem}
 					changeItemValue={changeItemValue}
 				/>
 				<Footer
-					todoItemList={todoItemList}
+					todoItemList={todoList}
 					deleteCompletedItems={deleteCompletedItems}
 					setActiveFilter={changeActiveFilter}
 					activeFilter={activeFilter}
 				/>
 			</div>
-			<UnderLines visible={todoItemList.length} />
+			<UnderLines visible={todoList.length} />
 		</>
 	);
 };
