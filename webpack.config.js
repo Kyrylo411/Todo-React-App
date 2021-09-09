@@ -8,11 +8,13 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, '/dist'),
 		filename: 'index.bundle.js',
+		publicPath: '/',
 	},
 	// webpack 5 comes with devServer which Tools failed to load source map: Could not load content floads in development mode
 	devServer: {
 		port: 3000,
 		watchContentBase: true,
+		historyApiFallback: true,
 	},
 	// Rules of how webpack will take our files, complie & bundle them for the browser
 	module: {

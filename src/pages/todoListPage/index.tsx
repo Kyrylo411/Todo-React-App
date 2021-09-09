@@ -2,12 +2,12 @@ import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Header from './Header';
-import List from './List';
-import Footer from './Footer';
-import UnderLines from './UnderLines';
+import Header from '../../components/TodoList/Header';
+import List from '../../components/TodoList/List';
+import Footer from '../../components/TodoList/Footer';
+import UnderLines from '../../components/TodoList/UnderLines';
 import './TodoList.scss';
-import { Filter, ITodoItem } from '../interfaces';
+import { Filter, ITodoItem } from '../../components/interfaces';
 import { GetTodoList } from '../../selectors/todo';
 import {
 	getItemListAction,
@@ -18,6 +18,8 @@ import {
 	changeItemCheckAction,
 	changeItemValueAction,
 } from '../../redux/actions/actionCreators/todoListActionCreators';
+import { baseUrl, userId } from '../../constants';
+import Page from '../../components/Page';
 
 const TodoList: FC = () => {
 	const [inputValue, setInputValue] = useState('');
@@ -38,10 +40,7 @@ const TodoList: FC = () => {
 						checkeditems,
 					},
 				};
-				await axios.delete(
-					'http://localhost:5000/todolist/todo/deleteMany/61389d1fd9d4363d4a272717',
-					config,
-				);
+				await axios.delete(`${baseUrl}/todo/deleteMany/${userId}`, config);
 				dispatch(
 					deleteCompletedItemsAction(
 						todoList.filter((item) => item.done === false),
@@ -56,9 +55,7 @@ const TodoList: FC = () => {
 	const toggleAllItems = (isAllItemsChecked: boolean): void => {
 		const updateAllItemsCheck = async () => {
 			try {
-				await axios.put(
-					`http://localhost:5000/todolist/todo/${isAllItemsChecked}/61389d1fd9d4363d4a272717`,
-				);
+				await axios.put(`${baseUrl}/todo/${isAllItemsChecked}/${userId}`);
 				dispatch(
 					toggleAllItemsAction(
 						todoList.map((item) =>
@@ -77,7 +74,7 @@ const TodoList: FC = () => {
 	const changeItemCheck = (id: string, isChecked: boolean): void => {
 		const updateItemCheck = async () => {
 			try {
-				const res = await axios.put('http://localhost:5000/todolist/todo', {
+				const res = await axios.put(`${baseUrl}/todo`, {
 					_id: id,
 					done: isChecked,
 				});
@@ -97,7 +94,7 @@ const TodoList: FC = () => {
 	const deleteItem = (id: string): void => {
 		const deleteItem = async () => {
 			try {
-				await axios.delete(`http://localhost:5000/todolist/todo/${id}`);
+				await axios.delete(`${baseUrl}/todo/${id}`);
 				dispatch(deleteItemAction(todoList.filter((item) => item._id !== id)));
 			} catch (e) {
 				console.log(e);
@@ -113,13 +110,10 @@ const TodoList: FC = () => {
 		const postListItem = async () => {
 			try {
 				if (inputValue.trim()) {
-					const res = await axios.post(
-						'http://localhost:5000/todolist/todo/61389d1fd9d4363d4a272717',
-						{
-							value: inputValue,
-							done: false,
-						},
-					);
+					const res = await axios.post(`${baseUrl}/todo/${userId}`, {
+						value: inputValue,
+						done: false,
+					});
 					dispatch(
 						addItemAction({
 							value: inputValue,
@@ -141,7 +135,7 @@ const TodoList: FC = () => {
 		const updateInputValue = async () => {
 			try {
 				if (inputValue.trim()) {
-					await axios.put('http://localhost:5000/todolist/todo', {
+					await axios.put(`${baseUrl}/todo`, {
 						_id: id,
 						value: inputValue,
 					});
@@ -164,9 +158,7 @@ const TodoList: FC = () => {
 	useEffect(() => {
 		const getItemsToRender = async () => {
 			try {
-				const res = await axios.get<ITodoItem[]>(
-					'http://localhost:5000/todoList/todo/61389d1fd9d4363d4a272717',
-				);
+				const res = await axios.get<ITodoItem[]>(`${baseUrl}/todo/${userId}`);
 				dispatch(getItemListAction(res.data));
 			} catch (e) {
 				throw new Error(e);
@@ -176,7 +168,7 @@ const TodoList: FC = () => {
 	}, []);
 
 	return (
-		<>
+		<Page>
 			<h1 className="todos">todos</h1>
 			<div className="todoWrapper">
 				<Header
@@ -201,7 +193,7 @@ const TodoList: FC = () => {
 				/>
 			</div>
 			<UnderLines visible={todoList.length} />
-		</>
+		</Page>
 	);
 };
 

@@ -7,6 +7,10 @@ export interface ITodolState {
 	error?: null | string;
 }
 
+export interface IAuthState {
+	isAuth: boolean;
+}
+
 export interface IAction<T> {
 	type: ActionTypes;
 	payload: T;
@@ -26,3 +30,7 @@ export type TodoListAction = GetItemListAction &
 	DeleteCompletedItemsAction &
 	ToggleAllItemsAction &
 	ChangeItemValueAction;
+
+export type AuthorizationAction = IAction<boolean>;
+
+export type AuthAction = AuthorizationAction;
