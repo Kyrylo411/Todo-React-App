@@ -14,6 +14,7 @@ import {
 	addItemAction,
 	deleteItemAction,
 	deleteCompletedItemsAction,
+	toggleAllItemsAction,
 } from '../../redux/actions/actionCreators/todoListActionCreators';
 
 const TodoList: FC = () => {
@@ -27,7 +28,7 @@ const TodoList: FC = () => {
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
 	};
-
+	//not connetcted to server
 	const deleteCompletedItems = (): void => {
 		const deleteCompletedItems = async () => {
 			try {
@@ -49,17 +50,20 @@ const TodoList: FC = () => {
 		};
 		deleteCompletedItems();
 	};
+	//not connected to server
 	const toggleAllItems = (isAllItemsChecked: boolean): void => {
 		const updateAllItemsCheck = async () => {
 			try {
 				await axios.put(
 					`http://localhost:5000/todolist/todo/${isAllItemsChecked}`,
 				);
-				setTodoItemList(
-					todoList.map((item) =>
-						isAllItemsChecked
-							? { ...item, done: false }
-							: { ...item, done: true },
+				dispatch(
+					toggleAllItemsAction(
+						todoList.map((item) =>
+							isAllItemsChecked
+								? { ...item, done: false }
+								: { ...item, done: true },
+						),
 					),
 				);
 			} catch (e) {

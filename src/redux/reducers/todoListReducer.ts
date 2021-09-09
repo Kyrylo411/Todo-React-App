@@ -30,6 +30,12 @@ function todoList(state = initialState, action: TodoListAction): ITodolState {
 				todoItemList: action.payload,
 			};
 		}
+		case actionTypes.TOGGLE_ALL_ITEMS: {
+			return {
+				...state,
+				todoItemList: action.payload,
+			};
+		}
 		default:
 			return state;
 	}
