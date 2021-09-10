@@ -4,10 +4,11 @@ export const useStyles = makeStyles({
 	inputWrapper: {
 		display: 'flex',
 		margin: '50px',
+		flexDirection: 'column',
 	},
 	wrapper: {
 		width: '500px',
-		height: ' 100%',
+		height: '400px',
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'flex-start',

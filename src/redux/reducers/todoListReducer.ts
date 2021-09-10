@@ -1,5 +1,5 @@
-import { ITodolState, TodoListAction } from '../interfaces';
-import actionTypes from '../actions/actionTypes';
+import { ITodolState, TodoListAction } from '../interfaces/todo';
+import TodoActionTypes from '../actions/todoActionTypes';
 
 const initialState: ITodolState = {
 	todoItemList: [],
@@ -7,42 +7,42 @@ const initialState: ITodolState = {
 
 function todoList(state = initialState, action: TodoListAction): ITodolState {
 	switch (action.type) {
-		case actionTypes.GET_ITEM_LIST:
+		case TodoActionTypes.GET_ITEM_LIST:
 			return {
 				...state,
 				todoItemList: action.payload,
 			};
-		case actionTypes.ADD_ITEM: {
+		case TodoActionTypes.ADD_ITEM: {
 			return {
 				...state,
 				todoItemList: [...state.todoItemList, action.payload],
 			};
 		}
-		case actionTypes.DELETE_ITEM: {
+		case TodoActionTypes.DELETE_ITEM: {
 			return {
 				...state,
 				todoItemList: action.payload,
 			};
 		}
-		case actionTypes.DELETE_COMPLETED_ITEMS: {
+		case TodoActionTypes.DELETE_COMPLETED_ITEMS: {
 			return {
 				...state,
 				todoItemList: action.payload,
 			};
 		}
-		case actionTypes.TOGGLE_ALL_ITEMS: {
+		case TodoActionTypes.TOGGLE_ALL_ITEMS: {
 			return {
 				...state,
 				todoItemList: action.payload,
 			};
 		}
-		case actionTypes.CHANGE_ITEM_CHECK: {
+		case TodoActionTypes.CHANGE_ITEM_CHECK: {
 			return {
 				...state,
 				todoItemList: action.payload,
 			};
 		}
-		case actionTypes.CHANGE_ITEM_VALUE: {
+		case TodoActionTypes.CHANGE_ITEM_VALUE: {
 			return {
 				...state,
 				todoItemList: action.payload,

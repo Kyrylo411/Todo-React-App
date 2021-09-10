@@ -1,18 +1,12 @@
 import { ITodoItem } from '../../components/interfaces';
-import ActionTypes from '../actions/actionTypes';
+import TodoActionTypes from '../actions/todoActionTypes';
 
 export interface ITodolState {
 	todoItemList: ITodoItem[];
-	loading?: boolean;
-	error?: null | string;
-}
-
-export interface IAuthState {
-	isAuth: boolean;
 }
 
 export interface IAction<T> {
-	type: ActionTypes;
+	type: TodoActionTypes;
 	payload: T;
 }
 
@@ -30,7 +24,3 @@ export type TodoListAction = GetItemListAction &
 	DeleteCompletedItemsAction &
 	ToggleAllItemsAction &
 	ChangeItemValueAction;
-
-export type AuthorizationAction = IAction<boolean>;
-
-export type AuthAction = AuthorizationAction;

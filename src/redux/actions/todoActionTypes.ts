@@ -1,4 +1,4 @@
-enum ActionTypes {
+enum TodoActionTypes {
 	GET_ITEM_LIST = 'GET_ITEM_LIST',
 	ADD_ITEM = 'ADD_ITEM',
 	DELETE_ITEM = 'DELETE_ITEM',
@@ -8,4 +8,4 @@ enum ActionTypes {
 	CHANGE_ITEM_VALUE = 'CHANGE_ITEM_VALUE',
 }
 
-export default ActionTypes;
+export default TodoActionTypes;
