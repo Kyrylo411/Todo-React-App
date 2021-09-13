@@ -19,13 +19,12 @@ const NavBar: FC = () => {
 	};
 	const classes = useStyles();
 
-	const menuItems: IMenuItem[] = [];
-	isLogedIn
-		? menuItems.push({ to: '/todos', value: 'Todo List' })
-		: menuItems.push(
+	const menuItems = isLogedIn
+		? [{ to: '/todos', value: 'Todo List' }]
+		: [
 				{ to: '/auth', value: 'Sign Up' },
 				{ to: '/login', value: 'Sign In' },
-		  );
+		  ];
 
 	return (
 		<Box className="linkWrapper">
