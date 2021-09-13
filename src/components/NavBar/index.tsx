@@ -7,12 +7,14 @@ import { logOutAction } from '../../redux/actions/actionCreators/authActionCreat
 import { useStyles } from './styles';
 import { IMenuItem } from '../interfaces';
 import api from '../../http';
+import { AuthResponse } from '../../model/response/AuthResponse';
 
 const NavBar: FC = () => {
 	const isLogedIn = useSelector(IsLogedIn);
 	const dispatch = useDispatch();
-	const hadleLogOutClick = async () => {
-		await api.post('/auth/logout');
+
+	const hadleLogOutClick = async (): Promise<void> => {
+		await api.post<AuthResponse>('/auth/logout');
 		localStorage.removeItem('token');
 		localStorage.removeItem('userId');
 		dispatch(logOutAction(false));

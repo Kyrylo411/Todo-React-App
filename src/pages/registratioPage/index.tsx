@@ -7,6 +7,7 @@ import { useStyles } from './styles';
 import api from '../../http';
 import { logInAction } from '../../redux/actions/actionCreators/authActionCreators';
 import { useDispatch } from 'react-redux';
+import { AuthResponse } from '../../model/response/AuthResponse';
 
 const AuthPage: FC = () => {
 	const [login, setLogin] = useState('');
@@ -26,9 +27,9 @@ const AuthPage: FC = () => {
 		setLogin(value);
 	};
 
-	const handleAuthClick = async () => {
+	const handleAuthClick = async (): Promise<void> => {
 		try {
-			await api.post('/auth/registration', {
+			await api.post<AuthResponse>('/auth/registration', {
 				login,
 				password,
 			});

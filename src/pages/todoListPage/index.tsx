@@ -31,130 +31,128 @@ const TodoList: FC = () => {
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
 	};
-	const deleteCompletedItems = (): void => {
-		const deleteCompletedItems = async () => {
-			try {
-				const checkeditems = todoList.filter((item) => item.done === true);
-				const config = {
-					data: {
-						checkeditems,
-					},
-				};
+	const deleteCompletedItems = async (): Promise<void> => {
+		try {
+			const checkeditems = todoList.filter((item) => item.done === true);
+			const config = {
+				data: {
+					checkeditems,
+				},
+			};
 
-				await api.delete(`/todolist/todo/deleteMany/${userId}`, config);
-				dispatch(
-					deleteCompletedItemsAction(
-						todoList.filter((item) => item.done === false),
-					),
-				);
-			} catch (e) {
-				console.log(e);
-			}
-		};
-		deleteCompletedItems();
+			await api.delete<ITodoItem[]>(
+				`/todolist/todo/deleteMany/${userId}`,
+				config,
+			);
+			dispatch(
+				deleteCompletedItemsAction(
+					todoList.filter((item: ITodoItem) => item.done === false),
+				),
+			);
+		} catch (e) {
+			console.log(e);
+		}
 	};
-	const toggleAllItems = (isAllItemsChecked: boolean): void => {
-		const updateAllItemsCheck = async () => {
-			try {
-				await api.put(`/todolist/todo/${isAllItemsChecked}/${userId}`);
-				dispatch(
-					toggleAllItemsAction(
-						todoList.map((item) =>
-							isAllItemsChecked
-								? { ...item, done: false }
-								: { ...item, done: true },
-						),
+	const toggleAllItems = async (isAllItemsChecked: boolean): Promise<void> => {
+		try {
+			await api.put<ITodoItem[]>(
+				`/todolist/todo/${isAllItemsChecked}/${userId}`,
+			);
+			dispatch(
+				toggleAllItemsAction(
+					todoList.map((item: ITodoItem) =>
+						isAllItemsChecked
+							? { ...item, done: false }
+							: { ...item, done: true },
 					),
-				);
-			} catch (e) {
-				console.log(e);
-			}
-		};
-		updateAllItemsCheck();
+				),
+			);
+		} catch (e) {
+			console.log(e);
+		}
 	};
-	const changeItemCheck = (id: string, isChecked: boolean): void => {
-		const updateItemCheck = async () => {
-			try {
-				const res = await api.put(`/todolist/todo/`, {
-					_id: id,
-					done: isChecked,
-				});
-				dispatch(
-					changeItemCheckAction(
-						todoList.map((item) =>
-							item._id === res.data._id ? { ...item, done: isChecked } : item,
-						),
+	const changeItemCheck = async (
+		id: string,
+		isChecked: boolean,
+	): Promise<void> => {
+		try {
+			const res = await api.put<ITodoItem>(`/todolist/todo/`, {
+				_id: id,
+				done: isChecked,
+			});
+			dispatch(
+				changeItemCheckAction(
+					todoList.map((item: ITodoItem) =>
+						item._id === res.data._id ? { ...item, done: isChecked } : item,
 					),
-				);
-			} catch (e) {
-				console.log(e);
-			}
-		};
-		updateItemCheck();
+				),
+			);
+		} catch (e) {
+			console.log(e);
+		}
 	};
-	const deleteItem = (id: string): void => {
-		const deleteItem = async () => {
-			try {
-				await api.delete(`/todolist/todo/${id}`);
-				dispatch(deleteItemAction(todoList.filter((item) => item._id !== id)));
-			} catch (e) {
-				console.log(e);
-			}
-		};
 
-		deleteItem();
+	const deleteItem = async (id: string): Promise<void> => {
+		try {
+			await api.delete<ITodoItem[]>(`/todolist/todo/${id}`);
+			dispatch(
+				deleteItemAction(todoList.filter((item: ITodoItem) => item._id !== id)),
+			);
+		} catch (e) {
+			console.log(e);
+		}
 	};
+
 	const changeInputValue = (textValue: string): void => {
 		setInputValue(textValue);
 	};
-	const addListItem = (inputValue: string): void => {
-		const postListItem = async () => {
-			try {
-				if (inputValue.trim()) {
-					const res = await api.post(`/todolist/todo/${userId}`, {
-						value: inputValue,
-						done: false,
-					});
-					dispatch(
-						addItemAction({
-							value: inputValue,
-							_id: res.data._id,
-							done: false,
-						}),
-					);
-					setInputValue('');
-				}
-			} catch (e) {
-				console.log(e);
-			}
-		};
 
-		postListItem();
+	const addListItem = async (inputValue: string): Promise<void> => {
+		try {
+			if (inputValue.trim()) {
+				const res = await api.post<ITodoItem>(`/todolist/todo/${userId}`, {
+					value: inputValue,
+					done: false,
+				});
+				dispatch(
+					addItemAction({
+						value: inputValue,
+						_id: res.data._id,
+						done: false,
+					}),
+				);
+				setInputValue('');
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
-	const changeItemValue = (inputValue: string, id: string): void => {
-		const updateInputValue = async () => {
-			try {
-				if (inputValue.trim()) {
-					await api.put(`/todolist/todo`, { _id: id, value: inputValue });
-					dispatch(
-						changeItemValueAction(
-							todoList.map((item) => {
-								return item._id === id ? { ...item, value: inputValue } : item;
-							}),
-						),
-					);
-				}
-			} catch (e) {
-				console.log(e);
+	const changeItemValue = async (
+		inputValue: string,
+		id: string,
+	): Promise<void> => {
+		try {
+			if (inputValue.trim()) {
+				await api.put<ITodoItem[]>(`/todolist/todo`, {
+					_id: id,
+					value: inputValue,
+				});
+				dispatch(
+					changeItemValueAction(
+						todoList.map((item: ITodoItem) => {
+							return item._id === id ? { ...item, value: inputValue } : item;
+						}),
+					),
+				);
 			}
-		};
-
-		updateInputValue();
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	useEffect(() => {
-		const getItemsToRender = async () => {
+		const getItemsToRender = async (): Promise<void> => {
 			try {
 				const res = await api.get<ITodoItem[]>(`/todolist/todo/${userId}`);
 				dispatch(getItemListAction(res.data));

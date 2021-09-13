@@ -1,11 +1,11 @@
 export interface IUser {
 	login: string;
 	password: string;
-	id?: string;
+	_id?: string;
 }
 
 export interface AuthResponse {
-	accesstoken: string;
-	refreshtoken: string;
+	accessToken: string;
+	refreshToken: string;
 	user: IUser;
 }

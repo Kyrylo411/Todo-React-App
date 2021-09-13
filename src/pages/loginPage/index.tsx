@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { logInAction } from '../../redux/actions/actionCreators/authActionCreators';
 import { useHistory } from 'react-router-dom';
 import api from '../../http';
+import { AuthResponse } from '../../model/response/AuthResponse';
 
 const LoginPage: FC = () => {
 	const [login, setLogin] = useState('');
@@ -23,9 +24,12 @@ const LoginPage: FC = () => {
 	const handleLoginChange = (value: string) => {
 		setLogin(value);
 	};
-	const hadleLoginClick = async () => {
+	const hadleLoginClick = async (): Promise<void> => {
 		try {
-			const response = await api.post('/auth/login', { login, password });
+			const response = await api.post<AuthResponse>('/auth/login', {
+				login,
+				password,
+			});
 			localStorage.setItem('token', response.data.accessToken);
 			localStorage.setItem('userId', response.data.user._id);
 			dispatch(logInAction(true));
