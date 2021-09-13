@@ -1,34 +1,22 @@
-import AuthActionTypes from '../actions/authActionTypes';
-import { AuthAction, IAuthState } from '../interfaces/auth';
+import { AuthActionType, IAuthState, AuthAction } from '../interfaces/auth';
 
-const initialState: IAuthState = {
-	userName: '',
+const authState: IAuthState = {
 	isLogedIn: false,
 };
-
-export default function authorization(
-	state = initialState,
+export const authorization = (
+	state = authState,
 	action: AuthAction,
-): IAuthState {
+): IAuthState => {
 	switch (action.type) {
-		case AuthActionTypes.USER_REGISTRATION:
+		case AuthActionType.USER_LOG_IN:
 			return {
-				...state,
-				userName: action.payload as string,
+				isLogedIn: action.payload,
 			};
-
-		case AuthActionTypes.USER_LOG_IN:
+		case AuthActionType.USER_LOG_OUT:
 			return {
-				...state,
-				isLogedIn: action.payload as boolean,
+				isLogedIn: action.payload,
 			};
-		case AuthActionTypes.USER_LOG_OUT:
-			return {
-				...state,
-				isLogedIn: action.payload as boolean,
-			};
-
 		default:
 			return state;
 	}
-}
+};

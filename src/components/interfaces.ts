@@ -8,3 +8,8 @@ export interface ITodoItem {
 export type Filter = 'Active' | 'Completed' | 'All';
 
 export type FilterMap = Record<Filter, ITodoItem>;
+
+export interface IMenuItem {
+	to: string;
+	value: string;
+}

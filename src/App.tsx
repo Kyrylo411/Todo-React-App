@@ -1,15 +1,27 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 
 import { TodoListPage, AuthPage, LoginPage } from './pages';
 import ProtectedRoute from './components/PrivateRoute';
-import { IsLogedIn } from './selectors/auth';
 import NavBar from './components/NavBar';
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { logInAction } from './redux/actions/actionCreators/authActionCreators';
 
 const App: FC = () => {
-	const isLogedIn = useSelector(IsLogedIn);
+	// const dispatch = useDispatch();
+	// const history = useHistory();
+
+	// useEffect(() => {
+	// 	if (localStorage.getItem('token') && localStorage.getItem('userId')) {
+	// 		dispatch(logInAction(true));
+	// 		// history.push('/todos');
+	// 		// Redirect('/todos');
+	// 		console.log(history);
+	// 	}
+	// }, []);
+
 	return (
 		<BrowserRouter>
 			<NavBar />
@@ -21,11 +33,7 @@ const App: FC = () => {
 					<Route path={'/login'} exact>
 						<LoginPage />
 					</Route>
-					<ProtectedRoute
-						isAuthenticated={isLogedIn}
-						component={TodoListPage}
-						exact
-					/>
+					<ProtectedRoute component={TodoListPage} exact />
 				</Switch>
 			</Box>
 		</BrowserRouter>

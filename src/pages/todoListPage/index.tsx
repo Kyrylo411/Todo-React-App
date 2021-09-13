@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Header from '../../components/TodoList/Header';
@@ -18,8 +17,8 @@ import {
 	changeItemCheckAction,
 	changeItemValueAction,
 } from '../../redux/actions/actionCreators/todoListActionCreators';
-import { baseUrl, userId } from '../../constants';
 import Page from '../../components/Page';
+import api from '../../http';
 
 const TodoList: FC = () => {
 	const [inputValue, setInputValue] = useState('');
@@ -27,6 +26,7 @@ const TodoList: FC = () => {
 
 	const dispatch = useDispatch();
 	const todoList = useSelector(GetTodoList);
+	const userId = localStorage.getItem('userId');
 
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
@@ -40,7 +40,8 @@ const TodoList: FC = () => {
 						checkeditems,
 					},
 				};
-				await axios.delete(`${baseUrl}/todo/deleteMany/${userId}`, config);
+
+				await api.delete(`/todolist/todo/deleteMany/${userId}`, config);
 				dispatch(
 					deleteCompletedItemsAction(
 						todoList.filter((item) => item.done === false),
@@ -55,7 +56,7 @@ const TodoList: FC = () => {
 	const toggleAllItems = (isAllItemsChecked: boolean): void => {
 		const updateAllItemsCheck = async () => {
 			try {
-				await axios.put(`${baseUrl}/todo/${isAllItemsChecked}/${userId}`);
+				await api.put(`/todolist/todo/${isAllItemsChecked}/${userId}`);
 				dispatch(
 					toggleAllItemsAction(
 						todoList.map((item) =>
@@ -74,7 +75,7 @@ const TodoList: FC = () => {
 	const changeItemCheck = (id: string, isChecked: boolean): void => {
 		const updateItemCheck = async () => {
 			try {
-				const res = await axios.put(`${baseUrl}/todo`, {
+				const res = await api.put(`/todolist/todo/`, {
 					_id: id,
 					done: isChecked,
 				});
@@ -94,7 +95,7 @@ const TodoList: FC = () => {
 	const deleteItem = (id: string): void => {
 		const deleteItem = async () => {
 			try {
-				await axios.delete(`${baseUrl}/todo/${id}`);
+				await api.delete(`/todolist/todo/${id}`);
 				dispatch(deleteItemAction(todoList.filter((item) => item._id !== id)));
 			} catch (e) {
 				console.log(e);
@@ -110,7 +111,7 @@ const TodoList: FC = () => {
 		const postListItem = async () => {
 			try {
 				if (inputValue.trim()) {
-					const res = await axios.post(`${baseUrl}/todo/${userId}`, {
+					const res = await api.post(`/todolist/todo/${userId}`, {
 						value: inputValue,
 						done: false,
 					});
@@ -135,10 +136,7 @@ const TodoList: FC = () => {
 		const updateInputValue = async () => {
 			try {
 				if (inputValue.trim()) {
-					await axios.put(`${baseUrl}/todo`, {
-						_id: id,
-						value: inputValue,
-					});
+					await api.put(`/todolist/todo`, { _id: id, value: inputValue });
 					dispatch(
 						changeItemValueAction(
 							todoList.map((item) => {
@@ -158,7 +156,7 @@ const TodoList: FC = () => {
 	useEffect(() => {
 		const getItemsToRender = async () => {
 			try {
-				const res = await axios.get<ITodoItem[]>(`${baseUrl}/todo/${userId}`);
+				const res = await api.get<ITodoItem[]>(`/todolist/todo/${userId}`);
 				dispatch(getItemListAction(res.data));
 			} catch (e) {
 				throw new Error(e);

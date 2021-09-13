@@ -1,21 +1,21 @@
 import React, { FC, useState } from 'react';
 import { Box, Button, Paper } from '@material-ui/core';
-
 import { useStyles } from './styles';
 import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
-import { useDispatch, useSelector } from 'react-redux';
-import { GetUser } from '../../selectors/auth';
+import { useDispatch } from 'react-redux';
 import { logInAction } from '../../redux/actions/actionCreators/authActionCreators';
 import { useHistory } from 'react-router-dom';
+import api from '../../http';
 
 const LoginPage: FC = () => {
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');
+
 	const classes = useStyles();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const userName = useSelector(GetUser);
+
 	const handlePasswordChange = (value: string) => {
 		setPassword(value);
 	};
@@ -23,13 +23,18 @@ const LoginPage: FC = () => {
 	const handleLoginChange = (value: string) => {
 		setLogin(value);
 	};
-	const hadleLoginClick = () => {
-		if (login === userName) {
+	const hadleLoginClick = async () => {
+		try {
+			const response = await api.post('/auth/login', { login, password });
+			localStorage.setItem('token', response.data.accessToken);
+			localStorage.setItem('userId', response.data.user._id);
 			dispatch(logInAction(true));
+			setLogin('');
+			setPassword('');
 			history.push('/todos');
+		} catch (e) {
+			console.log(e);
 		}
-		setLogin('');
-		setPassword('');
 	};
 	return (
 		<Page>

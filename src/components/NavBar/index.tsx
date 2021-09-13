@@ -5,49 +5,52 @@ import { IsLogedIn } from '../../selectors/auth';
 import { NavLink } from 'react-router-dom';
 import { logOutAction } from '../../redux/actions/actionCreators/authActionCreators';
 import { useStyles } from './styles';
+import { IMenuItem } from '../interfaces';
+import api from '../../http';
 
 const NavBar: FC = () => {
 	const isLogedIn = useSelector(IsLogedIn);
 	const dispatch = useDispatch();
-	const hadleLogOutClick = () => {
+	const hadleLogOutClick = async () => {
+		await api.post('/auth/logout');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
 		dispatch(logOutAction(false));
 	};
 	const classes = useStyles();
 
-	return isLogedIn ? (
+	const menuItems: IMenuItem[] = [];
+	isLogedIn
+		? menuItems.push({ to: '/todos', value: 'Todo List' })
+		: menuItems.push(
+				{ to: '/auth', value: 'Sign Up' },
+				{ to: '/login', value: 'Sign In' },
+		  );
+
+	return (
 		<Box className="linkWrapper">
-			<Button
-				size="small"
-				variant="outlined"
-				color="secondary"
-				onClick={hadleLogOutClick}
-			>
-				Log Out
-			</Button>
-			<NavLink
-				className={classes.a}
-				activeClassName={classes.activeLink}
-				to="/todos"
-			>
-				Todo List
-			</NavLink>
-		</Box>
-	) : (
-		<Box className="linkWrapper">
-			<NavLink
-				className={classes.a}
-				activeClassName={classes.activeLink}
-				to="/auth"
-			>
-				Sign Up
-			</NavLink>
-			<NavLink
-				className={classes.a}
-				activeClassName={classes.activeLink}
-				to="/login"
-			>
-				Sign in
-			</NavLink>
+			{isLogedIn ? (
+				<Button
+					size="small"
+					variant="outlined"
+					color="secondary"
+					onClick={hadleLogOutClick}
+				>
+					Log Out
+				</Button>
+			) : null}
+			{menuItems.map((item: IMenuItem) => {
+				return (
+					<NavLink
+						className={classes.a}
+						activeClassName={classes.activeLink}
+						key={item.value}
+						to={item.to}
+					>
+						{item.value}
+					</NavLink>
+				);
+			})}
 		</Box>
 	);
 };
