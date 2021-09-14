@@ -3,21 +3,16 @@ import React, { FC } from 'react';
 import ClearButton from './ClearButton';
 import ButtonGroup from './ButtonGroup';
 import './Footer.scss';
-import { ITodoItem } from '../../interfaces';
+import { useSelector } from 'react-redux';
+import { GetTodoList } from '../../../selectors/todo';
 
 interface FooterProps {
-	todoItemList: ITodoItem[];
 	activeFilter: string;
 	setActiveFilter: (textValue: string) => void;
-	deleteCompletedItems: () => void;
 }
 
-const Footer: FC<FooterProps> = ({
-	todoItemList,
-	activeFilter,
-	setActiveFilter,
-	deleteCompletedItems,
-}) => {
+const Footer: FC<FooterProps> = ({ activeFilter, setActiveFilter }) => {
+	const todoItemList = useSelector(GetTodoList);
 	const countItems = (): string => {
 		const notCheckeditems = todoItemList.filter((item) => item.done === false);
 		return notCheckeditems.length > 1 || notCheckeditems.length === 0
@@ -32,7 +27,7 @@ const Footer: FC<FooterProps> = ({
 				setActiveFilter={setActiveFilter}
 				activeFilter={activeFilter}
 			/>
-			<ClearButton onClick={deleteCompletedItems} todoItemList={todoItemList} />
+			<ClearButton />
 		</div>
 	) : null;
 };

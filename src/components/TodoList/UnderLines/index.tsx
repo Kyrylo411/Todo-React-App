@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { GetTodoList } from '../../../selectors/todo';
 import './UnderLines.scss';
 
-interface UnderLinesProps {
-	visible: number;
-}
+const UnderLines: FC = () => {
+	const todoList = useSelector(GetTodoList);
 
-const UnderLines: FC<UnderLinesProps> = ({ visible }) => {
-	return visible ? (
+	return todoList.length ? (
 		<div className="underLines">
 			<div className="firstLine" />
 			<div className="secondLine" />

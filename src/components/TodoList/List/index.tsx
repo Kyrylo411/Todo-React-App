@@ -3,23 +3,16 @@ import React, { FC } from 'react';
 import ListItem from './ListItem';
 import './List.scss';
 import { Filter, FilterMap, ITodoItem } from '../../interfaces';
+import { useSelector } from 'react-redux';
+import { GetTodoList } from '../../../selectors/todo';
 
 interface ListProps {
-	todoItemList: ITodoItem[];
-	deleteItem: (id: string) => void;
-	changeItemValue: (inputValue: string, id: string) => void;
-	changeItemCheck: (id: string, isChecked: boolean) => void;
 	activeFilter: Filter;
 }
 
-const List: FC<ListProps> = ({
-	todoItemList,
-	deleteItem,
-	changeItemValue,
-	changeItemCheck,
-	activeFilter,
-}) => {
+const List: FC<ListProps> = ({ activeFilter }) => {
 	const setListToRender = (): ITodoItem[] => {
+		const todoItemList = useSelector(GetTodoList);
 		const todoListToRender = todoItemList.filter((item) => {
 			const filterMap: FilterMap = {
 				Active: !item.done ? item : null,
@@ -32,17 +25,8 @@ const List: FC<ListProps> = ({
 	};
 	return (
 		<ul className="todoList">
-			{setListToRender().map((item) => {
-				return (
-					<ListItem
-						key={item._id}
-						item={item}
-						changeItemCheck={changeItemCheck}
-						id={item._id}
-						deleteItem={deleteItem}
-						onChange={changeItemValue}
-					/>
-				);
+			{setListToRender().map((item: ITodoItem) => {
+				return <ListItem key={item._id} item={item} id={item._id} />;
 			})}
 		</ul>
 	);
