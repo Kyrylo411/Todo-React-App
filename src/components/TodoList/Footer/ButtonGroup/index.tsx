@@ -4,15 +4,12 @@ import buttons from '../../../../constants/constants';
 import ButtonWrapper from './ButtonWrapper';
 import './ButtonGroup.scss';
 
-interface ButtonGroupProps {
+interface Props {
 	activeFilter: string;
 	setActiveFilter: (textValue: string) => void;
 }
 
-const ButtonGroup: FC<ButtonGroupProps> = ({
-	activeFilter,
-	setActiveFilter,
-}) => {
+const ButtonGroup: FC<Props> = ({ activeFilter, setActiveFilter }) => {
 	return (
 		<div className="buttonGroup">
 			{buttons.map((btn: string) => {

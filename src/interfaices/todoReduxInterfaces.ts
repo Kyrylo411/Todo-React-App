@@ -1,4 +1,4 @@
-import { ITodoItem } from './interfaces';
+import { ITodoItem } from './todoItem';
 
 export enum TodoActionType {
 	GET_ITEM_LIST = 'GET_ITEM_LIST',

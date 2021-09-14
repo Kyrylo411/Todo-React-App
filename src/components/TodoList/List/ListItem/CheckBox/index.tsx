@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import api from '../../../../../http';
 import { changeItemCheckAction } from '../../../../../redux/actions/actionCreators/todoListActionCreators';
 import { GetTodoList } from '../../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../../interfaices/interfaces';
+import { ITodoItem } from '../../../../../interfaices/todoItem';
 import './CheckBox.scss';
 
-interface CheckBoxProps {
+interface Props {
 	id: string;
 	isChecked: boolean;
 }
 
-const CheckBox: FC<CheckBoxProps> = ({ id, isChecked }) => {
+const CheckBox: FC<Props> = ({ id, isChecked }) => {
 	const dispatch = useDispatch();
 	const todoList = useSelector(GetTodoList);
 

@@ -6,12 +6,12 @@ import './Footer.scss';
 import { useSelector } from 'react-redux';
 import { GetTodoList } from '../../../redux/selectors/todo';
 
-interface FooterProps {
+interface Props {
 	activeFilter: string;
 	setActiveFilter: (textValue: string) => void;
 }
 
-const Footer: FC<FooterProps> = ({ activeFilter, setActiveFilter }) => {
+const Footer: FC<Props> = ({ activeFilter, setActiveFilter }) => {
 	const todoItemList = useSelector(GetTodoList);
 	const countItems = (): string => {
 		const notCheckeditems = todoItemList.filter((item) => item.done === false);

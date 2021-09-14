@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import api from '../../../../http';
 import { deleteCompletedItemsAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import { GetTodoList } from '../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../interfaices/interfaces';
+import { ITodoItem } from '../../../../interfaices/todoItem';
 
 import './ClearButton.scss';
 

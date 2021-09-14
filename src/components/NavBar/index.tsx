@@ -5,9 +5,13 @@ import { IsLogedIn } from '../../redux/selectors/auth';
 import { NavLink } from 'react-router-dom';
 import { logOutAction } from '../../redux/actions/actionCreators/authActionCreators';
 import { useStyles } from './styles';
-import { IMenuItem } from '../../interfaices/interfaces';
 import api from '../../http';
 import { AuthResponse } from '../../interfaices/authResponse';
+
+interface IMenuItem {
+	to: string;
+	value: string;
+}
 
 const NavBar: FC = () => {
 	const isLogedIn = useSelector(IsLogedIn);

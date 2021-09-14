@@ -6,17 +6,17 @@ import {
 	deleteItemAction,
 } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import { GetTodoList } from '../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../interfaices/interfaces';
+import { ITodoItem } from '../../../../interfaices/todoItem';
 
 import CheckBox from './CheckBox';
 import './ListItem.scss';
 
-interface ListItemProps {
+interface Props {
 	item: ITodoItem;
 	id: string;
 }
 
-const ListItem: FC<ListItemProps> = ({ item, id }) => {
+const ListItem: FC<Props> = ({ item, id }) => {
 	const [inputValue, setInputValue] = useState(item.value);
 	const [editItem, setEditItem] = useState(false);
 	const todoList = useSelector(GetTodoList);

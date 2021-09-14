@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 
 import Button from '../../../../Button';
 
-interface ButtonWrapperProps {
+interface Props {
 	item: string;
 	active: boolean;
 	onClick: (item: string) => void;
 }
 
-const ButtonWrapper: FC<ButtonWrapperProps> = ({ item, active, onClick }) => {
+const ButtonWrapper: FC<Props> = ({ item, active, onClick }) => {
 	const handleClick = (): void => {
 		onClick(item);
 	};

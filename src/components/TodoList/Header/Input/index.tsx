@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import api from '../../../../http';
 import { addItemAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
-import { ITodoItem } from '../../../../interfaices/interfaces';
+import { ITodoItem } from '../../../../interfaices/todoItem';
 import './Input.scss';
 
 const Input: FC = () => {

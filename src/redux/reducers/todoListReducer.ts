@@ -1,4 +1,4 @@
-import { ITodoItem } from '../../interfaices/interfaces';
+import { ITodoItem } from '../../interfaices/todoItem';
 import {
 	TodoListAction,
 	TodoActionType,
