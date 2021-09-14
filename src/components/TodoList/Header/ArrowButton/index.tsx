@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
-import jwt_decode from 'jwt-decode';
 
 import './ArrowButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,23 +7,15 @@ import { GetTodoList } from '../../../../redux/selectors/todo';
 import { ITodoItem } from '../../../../interfaices/todos';
 import { toggleAllItemsAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import api from '../../../../http';
-import { customJwtPayload } from '../../../../interfaices/jwtPayload';
 
 const ArrowButton: FC = () => {
 	const todoItemList = useSelector(GetTodoList);
 	const dispatch = useDispatch();
 
-	const decodedToken: customJwtPayload = jwt_decode(
-		localStorage.getItem('token'),
-	);
-	const userId = decodedToken._doc._id;
-
 	const handleClick = async () => {
 		const isAllItemsChecked = todoItemList.every((item) => item.done === true);
 		try {
-			await api.put<ITodoItem[]>(
-				`/todolist/todo/${isAllItemsChecked}/${userId}`,
-			);
+			await api.put<ITodoItem[]>(`/todolist/todo/${isAllItemsChecked}`);
 			dispatch(
 				toggleAllItemsAction(
 					todoItemList.map((item: ITodoItem) =>

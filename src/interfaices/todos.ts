@@ -2,7 +2,7 @@ export interface ITodoItem {
 	_id?: string;
 	value: string;
 	done: boolean;
-	userId?: string;
+	userId: string;
 }
 
 export type Filter = 'Active' | 'Completed' | 'All';

@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import jwt_decode from 'jwt-decode';
 
-import { customJwtPayload } from '../../interfaices/jwtPayload';
 import Header from '../../components/TodoList/Header';
 import List from '../../components/TodoList/List';
 import Footer from '../../components/TodoList/Footer';
@@ -18,11 +16,6 @@ const TodoList: FC = () => {
 	const [activeFilter, setActiveFilter] = useState<Filter>('All');
 	const dispatch = useDispatch();
 
-	const decodedToken: customJwtPayload = jwt_decode(
-		localStorage.getItem('token'),
-	);
-	const userId = decodedToken._doc._id;
-
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
 	};
@@ -30,7 +23,7 @@ const TodoList: FC = () => {
 	useEffect(() => {
 		const getItemsToRender = async (): Promise<void> => {
 			try {
-				const res = await api.get<ITodoItem[]>(`/todolist/todo/${userId}`);
+				const res = await api.get<ITodoItem[]>(`/todolist/todo`);
 				dispatch(getItemListAction(res.data));
 			} catch (e) {
 				throw new Error(e);

@@ -1,18 +1,18 @@
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import jwt_decode from 'jwt-decode';
 
 import api from '../../../../http';
 import { addItemAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import { ITodoItem } from '../../../../interfaices/todos';
 import './Input.scss';
+import jwtDecode from 'jwt-decode';
 import { customJwtPayload } from '../../../../interfaices/jwtPayload';
 
 const Input: FC = () => {
 	const [value, setValue] = useState('');
 	const dispatch = useDispatch();
 
-	const decodedToken: customJwtPayload = jwt_decode(
+	const decodedToken: customJwtPayload = jwtDecode(
 		localStorage.getItem('token'),
 	);
 	const userId = decodedToken._doc._id;
@@ -27,7 +27,7 @@ const Input: FC = () => {
 		if (e.key === 'Enter') {
 			try {
 				if (e.target.value.trim()) {
-					const res = await api.post<ITodoItem>(`/todolist/todo/${userId}`, {
+					const res = await api.post<ITodoItem>(`/todolist/todo`, {
 						value: e.target.value,
 						done: false,
 					});
@@ -36,6 +36,7 @@ const Input: FC = () => {
 							value: e.target.value,
 							_id: res.data._id,
 							done: false,
+							userId,
 						}),
 					);
 					setValue('');
