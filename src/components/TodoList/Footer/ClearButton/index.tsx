@@ -1,15 +1,20 @@
 import React, { FC } from 'react';
+import jwt_decode from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
+
 import api from '../../../../http';
 import { deleteCompletedItemsAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import { GetTodoList } from '../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../interfaices/todoItem';
-
+import { ITodoItem } from '../../../../interfaices/todos';
+import { customJwtPayload } from '../../../../interfaices/jwtPayload';
 import './ClearButton.scss';
 
 const ClearButton: FC = () => {
 	const todoItemList = useSelector(GetTodoList);
-	const userId = localStorage.getItem('userId');
+	const decodedToken: customJwtPayload = jwt_decode(
+		localStorage.getItem('token'),
+	);
+	const userId = decodedToken._doc._id;
 	const dispatch = useDispatch();
 
 	const handleClick = async () => {

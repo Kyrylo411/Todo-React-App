@@ -1,14 +1,21 @@
 import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import jwt_decode from 'jwt-decode';
+
 import api from '../../../../http';
 import { addItemAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
-import { ITodoItem } from '../../../../interfaices/todoItem';
+import { ITodoItem } from '../../../../interfaices/todos';
 import './Input.scss';
+import { customJwtPayload } from '../../../../interfaices/jwtPayload';
 
 const Input: FC = () => {
 	const [value, setValue] = useState('');
-	const userId = localStorage.getItem('userId');
 	const dispatch = useDispatch();
+
+	const decodedToken: customJwtPayload = jwt_decode(
+		localStorage.getItem('token'),
+	);
+	const userId = decodedToken._doc._id;
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setValue(e.target.value);
@@ -49,4 +56,5 @@ const Input: FC = () => {
 		/>
 	);
 };
+
 export default Input;

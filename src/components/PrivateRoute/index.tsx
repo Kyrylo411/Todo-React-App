@@ -1,14 +1,18 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { Redirect, Route, RouteProps } from 'react-router';
-import { IsLogedIn } from '../../redux/selectors/auth';
 
 type Props = {
 	component: React.ReactNode;
+	isLogedIn: boolean;
+	redirectTo: string;
 } & RouteProps;
 
-const ProtectedRoute: FC<Props> = ({ component: Component, ...rest }) => {
-	const isLogedIn = useSelector(IsLogedIn);
+const PrivateRoute: FC<Props> = ({
+	component: Component,
+	isLogedIn,
+	redirectTo,
+	...rest
+}) => {
 	return (
 		<Route
 			{...rest}
@@ -16,11 +20,11 @@ const ProtectedRoute: FC<Props> = ({ component: Component, ...rest }) => {
 				return isLogedIn ? (
 					<Component {...props} {...rest} />
 				) : (
-					<Redirect to="/auth" />
+					<Redirect to={redirectTo} />
 				);
 			}}
 		/>
 	);
 };
 
-export default ProtectedRoute;
+export default PrivateRoute;

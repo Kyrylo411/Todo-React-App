@@ -18,10 +18,13 @@ const NavBar: FC = () => {
 	const dispatch = useDispatch();
 
 	const hadleLogOutClick = async (): Promise<void> => {
-		await api.post<AuthResponse>('/auth/logout');
-		localStorage.removeItem('token');
-		localStorage.removeItem('userId');
-		dispatch(logOutAction(false));
+		try {
+			await api.post<AuthResponse>('/auth/logout');
+			localStorage.removeItem('token');
+			dispatch(logOutAction(false));
+		} catch (e) {
+			console.log(e);
+		}
 	};
 	const classes = useStyles();
 

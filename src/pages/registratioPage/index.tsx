@@ -1,12 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
 import { Button, Box, Paper } from '@material-ui/core';
 import { useStyles } from './styles';
 import api from '../../http';
-import { logInAction } from '../../redux/actions/actionCreators/authActionCreators';
-import { useDispatch } from 'react-redux';
 import { AuthResponse } from '../../interfaices/authResponse';
 
 const AuthPage: FC = () => {
@@ -14,7 +12,6 @@ const AuthPage: FC = () => {
 	const [password, setPassword] = useState('');
 	const [checkPassword, setCheckPassword] = useState('');
 	const history = useHistory();
-	const dispatch = useDispatch();
 	const classes = useStyles();
 
 	const handlePasswordChange = (value: string) => {
@@ -41,12 +38,6 @@ const AuthPage: FC = () => {
 			console.log(e);
 		}
 	};
-	useEffect(() => {
-		if (localStorage.getItem('token') && localStorage.getItem('userId')) {
-			dispatch(logInAction(true));
-			history.push('/todos');
-		}
-	}, []);
 
 	return (
 		<Page>

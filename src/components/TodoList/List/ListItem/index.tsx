@@ -6,7 +6,7 @@ import {
 	deleteItemAction,
 } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import { GetTodoList } from '../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../interfaices/todoItem';
+import { ITodoItem } from '../../../../interfaices/todos';
 
 import CheckBox from './CheckBox';
 import './ListItem.scss';

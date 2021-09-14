@@ -31,7 +31,6 @@ const LoginPage: FC = () => {
 				password,
 			});
 			localStorage.setItem('token', response.data.accessToken);
-			localStorage.setItem('userId', response.data.user._id);
 			dispatch(logInAction(true));
 			setLogin('');
 			setPassword('');

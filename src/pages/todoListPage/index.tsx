@@ -1,13 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
+import { customJwtPayload } from '../../interfaices/jwtPayload';
 import Header from '../../components/TodoList/Header';
 import List from '../../components/TodoList/List';
 import Footer from '../../components/TodoList/Footer';
 import UnderLines from '../../components/TodoList/UnderLines';
 import './TodoList.scss';
-import { ITodoItem } from '../../interfaices/todoItem';
-import { Filter } from '../../interfaices/filter';
+import { ITodoItem } from '../../interfaices/todos';
+import { Filter } from '../../interfaices/todos';
 import { getItemListAction } from '../../redux/actions/actionCreators/todoListActionCreators';
 import Page from '../../components/Page';
 import api from '../../http';
@@ -15,7 +17,11 @@ import api from '../../http';
 const TodoList: FC = () => {
 	const [activeFilter, setActiveFilter] = useState<Filter>('All');
 	const dispatch = useDispatch();
-	const userId = localStorage.getItem('userId');
+
+	const decodedToken: customJwtPayload = jwt_decode(
+		localStorage.getItem('token'),
+	);
+	const userId = decodedToken._doc._id;
 
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);

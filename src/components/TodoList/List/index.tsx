@@ -2,13 +2,11 @@ import React, { FC } from 'react';
 
 import ListItem from './ListItem';
 import './List.scss';
-import { Filter } from '../../../interfaices/filter';
+import { Filter, FilterMap } from '../../../interfaices/todos';
 
 import { useSelector } from 'react-redux';
 import { GetTodoList } from '../../../redux/selectors/todo';
-import { ITodoItem } from '../../../interfaices/todoItem';
-
-type FilterMap = Record<Filter, ITodoItem>;
+import { ITodoItem } from '../../../interfaices/todos';
 
 interface Props {
 	activeFilter: Filter;

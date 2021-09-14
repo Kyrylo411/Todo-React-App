@@ -1,4 +1,4 @@
-import { ITodoItem } from '../../../interfaices/todoItem';
+import { ITodoItem } from '../../../interfaices/todos';
 import {
 	AddItemAction,
 	DeleteItemAction,
