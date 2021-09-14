@@ -1,5 +1,8 @@
-import { LogInAction, LogOutAction } from '../../interfaces/auth';
-import { AuthActionType } from '../../interfaces/auth';
+import {
+	LogInAction,
+	LogOutAction,
+} from '../../../interfaices/authReduxInterfaces';
+import { AuthActionType } from '../../../interfaices/authReduxInterfaces';
 
 export const logInAction = (isLogedIn: boolean): LogInAction => {
 	return {

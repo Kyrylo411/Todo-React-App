@@ -1,16 +1,13 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, RouteProps } from 'react-router';
-import { IsLogedIn } from '../../selectors/auth';
+import { IsLogedIn } from '../../redux/selectors/auth';
 
-export type ProtectedRouteProps = {
+type Props = {
 	component: React.ReactNode;
 } & RouteProps;
 
-const ProtectedRoute: FC<ProtectedRouteProps> = ({
-	component: Component,
-	...rest
-}) => {
+const ProtectedRoute: FC<Props> = ({ component: Component, ...rest }) => {
 	const isLogedIn = useSelector(IsLogedIn);
 	return (
 		<Route

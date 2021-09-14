@@ -1,57 +1,35 @@
+import { ITodoItem } from '../../interfaices/interfaces';
 import {
-	ITodolState,
 	TodoListAction,
 	TodoActionType,
-} from '../interfaces/todo';
+} from '../../interfaices/todoReduxInterfaces';
 
-const initialState: ITodolState = {
-	todoItemList: [],
-};
-
-function todoList(state = initialState, action: TodoListAction): ITodolState {
+function todoList(
+	state: ITodoItem[] = [],
+	action: TodoListAction,
+): ITodoItem[] {
 	switch (action.type) {
 		case TodoActionType.GET_ITEM_LIST:
-			return {
-				...state,
-				todoItemList: action.payload,
-			};
+			return (state = action.payload);
+
 		case TodoActionType.ADD_ITEM: {
-			return {
-				...state,
-				todoItemList: [...state.todoItemList, action.payload],
-			};
+			return (state = [...state, action.payload]);
 		}
 		case TodoActionType.DELETE_ITEM: {
-			return {
-				...state,
-				todoItemList: action.payload,
-			};
+			return (state = action.payload);
 		}
 		case TodoActionType.DELETE_COMPLETED_ITEMS: {
-			return {
-				...state,
-				todoItemList: action.payload,
-			};
+			return (state = action.payload);
 		}
 		case TodoActionType.TOGGLE_ALL_ITEMS: {
-			return {
-				...state,
-				todoItemList: action.payload,
-			};
+			return (state = action.payload);
 		}
 		case TodoActionType.CHANGE_ITEM_CHECK: {
-			return {
-				...state,
-				todoItemList: action.payload,
-			};
+			return (state = action.payload);
 		}
 		case TodoActionType.CHANGE_ITEM_VALUE: {
-			return {
-				...state,
-				todoItemList: action.payload,
-			};
+			return (state = action.payload);
 		}
-
 		default:
 			return state;
 	}

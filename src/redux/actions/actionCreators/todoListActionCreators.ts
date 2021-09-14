@@ -1,4 +1,4 @@
-import { ITodoItem } from '../../../components/interfaces';
+import { ITodoItem } from '../../../interfaices/interfaces';
 import {
 	AddItemAction,
 	DeleteItemAction,
@@ -7,8 +7,8 @@ import {
 	ToggleAllItemsAction,
 	ChangeItemCheckAction,
 	ChangeItemValueAction,
-} from '../../interfaces/todo';
-import { TodoActionType } from '../../interfaces/todo';
+} from '../../../interfaices/todoReduxInterfaces';
+import { TodoActionType } from '../../../interfaices/todoReduxInterfaces';
 
 export const getItemListAction = (list: ITodoItem[]): GetItemListAction => {
 	return {

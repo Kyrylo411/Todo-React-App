@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../../../../../http';
 import { changeItemCheckAction } from '../../../../../redux/actions/actionCreators/todoListActionCreators';
-import { GetTodoList } from '../../../../../selectors/todo';
-import { ITodoItem } from '../../../../interfaces';
+import { GetTodoList } from '../../../../../redux/selectors/todo';
+import { ITodoItem } from '../../../../../interfaices/interfaces';
 import './CheckBox.scss';
 
 interface CheckBoxProps {

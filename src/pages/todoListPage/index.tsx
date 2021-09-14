@@ -6,7 +6,7 @@ import List from '../../components/TodoList/List';
 import Footer from '../../components/TodoList/Footer';
 import UnderLines from '../../components/TodoList/UnderLines';
 import './TodoList.scss';
-import { Filter, ITodoItem } from '../../components/interfaces';
+import { Filter, ITodoItem } from '../../interfaices/interfaces';
 import { getItemListAction } from '../../redux/actions/actionCreators/todoListActionCreators';
 import Page from '../../components/Page';
 import api from '../../http';

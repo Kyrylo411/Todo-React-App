@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Box, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { IsLogedIn } from '../../selectors/auth';
+import { IsLogedIn } from '../../redux/selectors/auth';
 import { NavLink } from 'react-router-dom';
 import { logOutAction } from '../../redux/actions/actionCreators/authActionCreators';
 import { useStyles } from './styles';
-import { IMenuItem } from '../interfaces';
+import { IMenuItem } from '../../interfaices/interfaces';
 import api from '../../http';
-import { AuthResponse } from '../../model/response/AuthResponse';
+import { AuthResponse } from '../../interfaices/authResponse';
 
 const NavBar: FC = () => {
 	const isLogedIn = useSelector(IsLogedIn);

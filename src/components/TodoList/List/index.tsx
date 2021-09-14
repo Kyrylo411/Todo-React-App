@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 
 import ListItem from './ListItem';
 import './List.scss';
-import { Filter, FilterMap, ITodoItem } from '../../interfaces';
+import { Filter, FilterMap, ITodoItem } from '../../../interfaices/interfaces';
 import { useSelector } from 'react-redux';
-import { GetTodoList } from '../../../selectors/todo';
+import { GetTodoList } from '../../../redux/selectors/todo';
 
 interface ListProps {
 	activeFilter: Filter;

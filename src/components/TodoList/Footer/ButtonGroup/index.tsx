@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import buttons from '../../../constants';
+import buttons from '../../../../constants/constants';
 import ButtonWrapper from './ButtonWrapper';
 import './ButtonGroup.scss';
 

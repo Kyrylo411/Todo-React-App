@@ -1,21 +1,14 @@
-import { AuthActionType, IAuthState, AuthAction } from '../interfaces/auth';
+import {
+	AuthActionType,
+	AuthAction,
+} from '../../interfaices/authReduxInterfaces';
 
-const authState: IAuthState = {
-	isLogedIn: false,
-};
-export const authorization = (
-	state = authState,
-	action: AuthAction,
-): IAuthState => {
+export const authorization = (state = false, action: AuthAction): boolean => {
 	switch (action.type) {
 		case AuthActionType.USER_LOG_IN:
-			return {
-				isLogedIn: action.payload,
-			};
+			return (state = action.payload);
 		case AuthActionType.USER_LOG_OUT:
-			return {
-				isLogedIn: action.payload,
-			};
+			return (state = action.payload);
 		default:
 			return state;
 	}

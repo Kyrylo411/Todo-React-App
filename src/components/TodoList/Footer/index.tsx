@@ -4,7 +4,7 @@ import ClearButton from './ClearButton';
 import ButtonGroup from './ButtonGroup';
 import './Footer.scss';
 import { useSelector } from 'react-redux';
-import { GetTodoList } from '../../../selectors/todo';
+import { GetTodoList } from '../../../redux/selectors/todo';
 
 interface FooterProps {
 	activeFilter: string;

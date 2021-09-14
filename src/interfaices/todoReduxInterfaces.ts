@@ -1,4 +1,4 @@
-import { ITodoItem } from '../../components/interfaces';
+import { ITodoItem } from './interfaces';
 
 export enum TodoActionType {
 	GET_ITEM_LIST = 'GET_ITEM_LIST',
@@ -8,10 +8,6 @@ export enum TodoActionType {
 	TOGGLE_ALL_ITEMS = 'TOGGLE_ALL_ITEMS',
 	CHANGE_ITEM_CHECK = 'CHANGE_ITEM_CHECK',
 	CHANGE_ITEM_VALUE = 'CHANGE_ITEM_VALUE',
-}
-
-export interface ITodolState {
-	todoItemList: ITodoItem[];
 }
 
 export interface IAction<T extends TodoActionType, P> {

@@ -3,8 +3,8 @@ import classNames from 'classnames';
 
 import './ArrowButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetTodoList } from '../../../../selectors/todo';
-import { ITodoItem } from '../../../interfaces';
+import { GetTodoList } from '../../../../redux/selectors/todo';
+import { ITodoItem } from '../../../../interfaices/interfaces';
 import { toggleAllItemsAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import api from '../../../../http';
 

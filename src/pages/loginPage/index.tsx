@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { logInAction } from '../../redux/actions/actionCreators/authActionCreators';
 import { useHistory } from 'react-router-dom';
 import api from '../../http';
-import { AuthResponse } from '../../model/response/AuthResponse';
+import { AuthResponse } from '../../interfaices/authResponse';
 
 const LoginPage: FC = () => {
 	const [login, setLogin] = useState('');

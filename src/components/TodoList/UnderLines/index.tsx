@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { GetTodoList } from '../../../selectors/todo';
+import { GetTodoList } from '../../../redux/selectors/todo';
 import './UnderLines.scss';
 
 const UnderLines: FC = () => {

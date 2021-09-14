@@ -5,14 +5,6 @@ export enum AuthActionType {
 	REMOVE_USER_ID = 'REMOVE_USER_ID',
 }
 
-export interface IAuthState {
-	isLogedIn: boolean;
-}
-
-export interface IUSerId {
-	userId: string;
-}
-
 export interface IAuthAction<T extends AuthActionType, P> {
 	type: T;
 	payload: P;
