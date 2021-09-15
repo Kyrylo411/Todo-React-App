@@ -3,6 +3,7 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { SagaIterator } from 'redux-saga';
 
 import api from '../../http';
+import { TodoActionType } from '../../interfaices/todoReduxInterfaces';
 import { ITodoItem } from '../../interfaices/todos';
 import {
 	getItemListFailure,
@@ -22,7 +23,7 @@ function* getTodoListWorker(): SagaIterator {
 }
 
 function* todoListWatcher(): SagaIterator {
-	yield takeEvery('ITEM_LIST_REQUEST', getTodoListWorker);
+	yield takeEvery(TodoActionType.ITEM_LIST_REQUEST, getTodoListWorker);
 }
 
 export default todoListWatcher;

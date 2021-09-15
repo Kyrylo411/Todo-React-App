@@ -50,13 +50,3 @@ export function loading(state = false, action: TodoListAction): boolean {
 			return state;
 	}
 }
-
-export function errors(state = '', action: TodoListAction): string {
-	switch (action.type) {
-		case TodoActionType.ITEM_LIST_FAILURE: {
-			return (state = action.payload);
-		}
-		default:
-			return state;
-	}
-}
