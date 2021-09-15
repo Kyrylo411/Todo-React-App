@@ -1,7 +1,10 @@
 import { ITodoItem } from './todos';
 
 export enum TodoActionType {
-	GET_ITEM_LIST = 'GET_ITEM_LIST',
+	ITEM_LIST_REQUEST = 'ITEM_LIST_REQUEST',
+	ITEM_LIST_SUCCESS = 'ITEM_LIST_SUCCESS',
+	ITEM_LIST_FAILURE = 'ITEM_LIST_FAILURE',
+
 	ADD_ITEM = 'ADD_ITEM',
 	DELETE_ITEM = 'DELETE_ITEM',
 	DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS',
@@ -12,13 +15,24 @@ export enum TodoActionType {
 
 export interface IAction<T extends TodoActionType, P> {
 	type: T;
-	payload: P;
+	payload?: P;
 }
 
-export type GetItemListAction = IAction<
-	TodoActionType.GET_ITEM_LIST,
+export type GetItemListRequest = IAction<
+	TodoActionType.ITEM_LIST_REQUEST,
+	null
+>;
+
+export type GetItemListSuccess = IAction<
+	TodoActionType.ITEM_LIST_SUCCESS,
 	ITodoItem[]
 >;
+
+export type GetItemListFailure = IAction<
+	TodoActionType.ITEM_LIST_FAILURE,
+	string
+>;
+
 export type AddItemAction = IAction<TodoActionType.ADD_ITEM, ITodoItem>;
 export type DeleteItemAction = IAction<TodoActionType.DELETE_ITEM, ITodoItem[]>;
 export type DeleteCompletedItemsAction = IAction<
@@ -39,10 +53,12 @@ export type ChangeItemValueAction = IAction<
 >;
 
 export type TodoListAction =
-	| GetItemListAction
 	| AddItemAction
 	| DeleteItemAction
 	| DeleteCompletedItemsAction
 	| ToggleAllItemsAction
 	| ChangeItemValueAction
-	| ChangeItemCheckAction;
+	| ChangeItemCheckAction
+	| GetItemListSuccess
+	| GetItemListRequest
+	| GetItemListFailure;

@@ -8,7 +8,7 @@ import UnderLines from '../../components/TodoList/UnderLines';
 import './TodoList.scss';
 import { Filter } from '../../interfaices/todos';
 import Page from '../../components/Page';
-import { fetchTodoList } from '../../redux/sagas/actions/actionCreators/todoActionCreators';
+import { getItemLisRequest } from '../../redux/actions/actionCreators/todoListActionCreators';
 
 const TodoList: FC = () => {
 	const [activeFilter, setActiveFilter] = useState<Filter>('All');
@@ -19,7 +19,7 @@ const TodoList: FC = () => {
 	};
 
 	useEffect(() => {
-		dispatch(fetchTodoList());
+		dispatch(getItemLisRequest());
 	}, []);
 
 	return (

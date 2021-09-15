@@ -4,12 +4,12 @@ import {
 	TodoActionType,
 } from '../../interfaices/todoReduxInterfaces';
 
-function todoList(
+export function todoList(
 	state: ITodoItem[] = [],
 	action: TodoListAction,
 ): ITodoItem[] {
 	switch (action.type) {
-		case TodoActionType.GET_ITEM_LIST:
+		case TodoActionType.ITEM_LIST_SUCCESS:
 			return (state = action.payload);
 
 		case TodoActionType.ADD_ITEM: {
@@ -35,4 +35,28 @@ function todoList(
 	}
 }
 
-export default todoList;
+export function loading(state = false, action: TodoListAction): boolean {
+	switch (action.type) {
+		case TodoActionType.ITEM_LIST_REQUEST: {
+			return (state = true);
+		}
+		case TodoActionType.ITEM_LIST_SUCCESS: {
+			return (state = false);
+		}
+		case TodoActionType.ITEM_LIST_FAILURE: {
+			return (state = false);
+		}
+		default:
+			return state;
+	}
+}
+
+export function errors(state = '', action: TodoListAction): string {
+	switch (action.type) {
+		case TodoActionType.ITEM_LIST_FAILURE: {
+			return (state = action.payload);
+		}
+		default:
+			return state;
+	}
+}

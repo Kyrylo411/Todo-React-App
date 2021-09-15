@@ -2,21 +2,34 @@ import { ITodoItem } from '../../../interfaices/todos';
 import {
 	AddItemAction,
 	DeleteItemAction,
-	GetItemListAction,
+	GetItemListSuccess,
 	DeleteCompletedItemsAction,
 	ToggleAllItemsAction,
 	ChangeItemCheckAction,
 	ChangeItemValueAction,
+	GetItemListRequest,
+	GetItemListFailure,
 } from '../../../interfaices/todoReduxInterfaces';
 import { TodoActionType } from '../../../interfaices/todoReduxInterfaces';
-
-export const getItemListAction = (list: ITodoItem[]): GetItemListAction => {
+//
+export const getItemLisRequest = (): GetItemListRequest => {
 	return {
-		type: TodoActionType.GET_ITEM_LIST,
+		type: TodoActionType.ITEM_LIST_REQUEST,
+	};
+};
+export const getItemListSuccess = (list: ITodoItem[]): GetItemListSuccess => {
+	return {
+		type: TodoActionType.ITEM_LIST_SUCCESS,
 		payload: list,
 	};
 };
-
+export const getItemListFailure = (message: string): GetItemListFailure => {
+	return {
+		type: TodoActionType.ITEM_LIST_FAILURE,
+		payload: message,
+	};
+};
+//
 export const addItemAction = (item: ITodoItem): AddItemAction => {
 	return {
 		type: TodoActionType.ADD_ITEM,
