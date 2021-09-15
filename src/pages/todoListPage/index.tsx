@@ -6,11 +6,9 @@ import List from '../../components/TodoList/List';
 import Footer from '../../components/TodoList/Footer';
 import UnderLines from '../../components/TodoList/UnderLines';
 import './TodoList.scss';
-import { ITodoItem } from '../../interfaices/todos';
 import { Filter } from '../../interfaices/todos';
-import { getItemListAction } from '../../redux/actions/actionCreators/todoListActionCreators';
 import Page from '../../components/Page';
-import api from '../../http';
+import { fetchTodoList } from '../../redux/sagas/actions/actionCreators/todoActionCreators';
 
 const TodoList: FC = () => {
 	const [activeFilter, setActiveFilter] = useState<Filter>('All');
@@ -21,15 +19,7 @@ const TodoList: FC = () => {
 	};
 
 	useEffect(() => {
-		const getItemsToRender = async (): Promise<void> => {
-			try {
-				const res = await api.get<ITodoItem[]>(`/todolist/todo`);
-				dispatch(getItemListAction(res.data));
-			} catch (e) {
-				throw new Error(e);
-			}
-		};
-		getItemsToRender();
+		dispatch(fetchTodoList());
 	}, []);
 
 	return (
