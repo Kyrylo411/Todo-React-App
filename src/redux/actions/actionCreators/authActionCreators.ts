@@ -4,6 +4,9 @@ import {
 	LogInRequest,
 	LogInSuccess,
 	LogOutAction,
+	RegistrationFailure,
+	RegistrationRequest,
+	RegistrationSuccess,
 	UserData,
 } from '../../../interfaices/authReduxInterfaces';
 import { AuthActionType } from '../../../interfaices/authReduxInterfaces';
@@ -38,5 +41,26 @@ export const logOutAction = (isLogedIn: boolean): LogOutAction => {
 	return {
 		type: AuthActionType.USER_LOG_OUT,
 		payload: isLogedIn,
+	};
+};
+
+export const registrationRequest = (data: UserData): RegistrationRequest => {
+	return {
+		type: AuthActionType.REGISTRATION_REQUEST,
+		payload: data,
+	};
+};
+
+export const registrationSuccess = (): RegistrationSuccess => {
+	return {
+		type: AuthActionType.REGISTRATION_SUCCESS,
+		payload: null,
+	};
+};
+
+export const registrationFailure = (message: string): RegistrationFailure => {
+	return {
+		type: AuthActionType.REGISTRATION_FAILURE,
+		payload: message,
 	};
 };

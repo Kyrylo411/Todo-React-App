@@ -4,8 +4,8 @@ import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
 import { Button, Box, Paper } from '@material-ui/core';
 import { useStyles } from './styles';
-import api from '../../http';
-import { AuthResponse } from '../../interfaices/authResponse';
+import { registrationRequest } from '../../redux/actions/actionCreators/authActionCreators';
+import { useDispatch } from 'react-redux';
 
 const AuthPage: FC = () => {
 	const [login, setLogin] = useState('');
@@ -13,6 +13,7 @@ const AuthPage: FC = () => {
 	const [checkPassword, setCheckPassword] = useState('');
 	const history = useHistory();
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
 	const handlePasswordChange = (value: string) => {
 		setPassword(value);
@@ -25,18 +26,11 @@ const AuthPage: FC = () => {
 	};
 
 	const handleAuthClick = async (): Promise<void> => {
-		try {
-			await api.post<AuthResponse>('/auth/registration', {
-				login,
-				password,
-			});
-			setLogin('');
-			setPassword('');
-			setCheckPassword('');
-			history.push('/login');
-		} catch (e) {
-			console.log(e);
-		}
+		dispatch(registrationRequest({ login, password }));
+		setLogin('');
+		setPassword('');
+		setCheckPassword('');
+		history.push('/login');
 	};
 
 	return (

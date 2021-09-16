@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 
-import { setTodoList, loading } from './todoListReducer';
-import { authorization } from './authReducer';
+import { setTodoList, todoLoading } from './todoListReducer';
+import { authorization, authLoading } from './authReducer';
 
 export const rootReducer = combineReducers({
 	setTodoList,
 	authorization,
-	loading,
+	todoLoading,
+	authLoading,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -45,7 +45,7 @@ export function setTodoList(
 	}
 }
 
-export function loading(state = false, action: TodoListAction): boolean {
+export function todoLoading(state = false, action: TodoListAction): boolean {
 	switch (action.type) {
 		case TodoActionType.ITEM_LIST_REQUEST: {
 			return (state = true);
