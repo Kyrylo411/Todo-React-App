@@ -3,7 +3,6 @@ import {
 	DeleteItemFailure,
 	DeleteItemRequest,
 	DeleteItemSuccess,
-	ToggleAllItemsAction,
 	ChangeItemCheckAction,
 	ChangeItemValueAction,
 	GetItemListRequest,
@@ -15,6 +14,9 @@ import {
 	DeleteCompletedRequest,
 	DeleteCompletedSuccess,
 	DeleteCompletedFailure,
+	ToggleAllRequest,
+	ToggleAllSuccess,
+	ToggleAllFailure,
 } from '../../../interfaices/todoReduxInterfaces';
 import { TodoActionType } from '../../../interfaices/todoReduxInterfaces';
 
@@ -102,12 +104,28 @@ export const deleteCompletedFailure = (
 	};
 };
 
-export const toggleAllItemsAction = (
-	list: ITodoItem[],
-): ToggleAllItemsAction => {
+export const toggleAllItemsRequest = (
+	isAllChecked: boolean,
+): ToggleAllRequest => {
 	return {
-		type: TodoActionType.TOGGLE_ALL_ITEMS,
-		payload: list,
+		type: TodoActionType.TOGGLE_ALL_REQUEST,
+		payload: isAllChecked,
+	};
+};
+
+export const toggleAllItemsSuccess = (
+	isAllChecked: boolean,
+): ToggleAllSuccess => {
+	return {
+		type: TodoActionType.TOGGLE_ALL_SUCCESS,
+		payload: isAllChecked,
+	};
+};
+
+export const toggleAllItemsFailure = (message: string): ToggleAllFailure => {
+	return {
+		type: TodoActionType.TOGGLE_ALL_FAILURE,
+		payload: message,
 	};
 };
 

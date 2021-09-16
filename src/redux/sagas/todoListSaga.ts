@@ -10,6 +10,7 @@ import {
 	TodoActionType,
 	DeleteItemRequest,
 	DeleteCompletedRequest,
+	ToggleAllRequest,
 } from '../../interfaices/todoReduxInterfaces';
 import { ITodoItem } from '../../interfaices/todos';
 import {
@@ -20,6 +21,8 @@ import {
 	deleteItemSuccess,
 	getItemListFailure,
 	getItemListSuccess,
+	toggleAllItemsFailure,
+	toggleAllItemsSuccess,
 } from '../actions/actionCreators/todoListActionCreators';
 
 const fetchTodoList = async (): Promise<AxiosResponse<ITodoItem[]>> =>
@@ -93,6 +96,20 @@ function* deleteCompletedWorker(action: DeleteCompletedRequest): SagaIterator {
 	}
 }
 
+const toggleAllItems = async (
+	isAllChecked: boolean,
+): Promise<AxiosResponse<ITodoItem[]>> =>
+	await api.put<ITodoItem[]>(`/todolist/todo/${isAllChecked}`);
+
+function* toggleAllWorker(action: ToggleAllRequest) {
+	try {
+		yield call(toggleAllItems, action.payload);
+		yield put(toggleAllItemsSuccess(action.payload));
+	} catch (e) {
+		yield call(toggleAllItemsFailure, e);
+	}
+}
+
 function* todoListWatcher(): SagaIterator {
 	yield takeLatest(TodoActionType.ITEM_LIST_REQUEST, getTodoListWorker);
 	yield takeEvery(TodoActionType.ADD_ITEM_REQUEST, addItemWorker);
@@ -101,6 +118,7 @@ function* todoListWatcher(): SagaIterator {
 		TodoActionType.DELETE_COMPLETED_REQUEST,
 		deleteCompletedWorker,
 	);
+	yield takeEvery(TodoActionType.TOGGLE_ALL_REQUEST, toggleAllWorker);
 }
 
 export default todoListWatcher;

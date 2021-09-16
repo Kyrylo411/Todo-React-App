@@ -17,7 +17,10 @@ export enum TodoActionType {
 	DELETE_COMPLETED_SUCCESS = 'DELETE_COMPLETED_SUCCESS',
 	DELETE_COMPLETED_FAILURE = 'DELETE_COMPLETED_FAILURE',
 
-	TOGGLE_ALL_ITEMS = 'TOGGLE_ALL_ITEMS',
+	TOGGLE_ALL_REQUEST = 'TOGGLE_ALL_REQUEST',
+	TOGGLE_ALL_SUCCESS = 'TOGGLE_ALL_SUCCESS',
+	TOGGLE_ALL_FAILURE = 'TOGGLE_ALL_FAILURE',
+
 	CHANGE_ITEM_CHECK = 'CHANGE_ITEM_CHECK',
 	CHANGE_ITEM_VALUE = 'CHANGE_ITEM_VALUE',
 }
@@ -74,10 +77,19 @@ export type DeleteCompletedFailure = IAction<
 	string
 >;
 
-export type ToggleAllItemsAction = IAction<
-	TodoActionType.TOGGLE_ALL_ITEMS,
-	ITodoItem[]
+export type ToggleAllRequest = IAction<
+	TodoActionType.TOGGLE_ALL_REQUEST,
+	boolean
 >;
+export type ToggleAllSuccess = IAction<
+	TodoActionType.TOGGLE_ALL_SUCCESS,
+	boolean
+>;
+export type ToggleAllFailure = IAction<
+	TodoActionType.TOGGLE_ALL_FAILURE,
+	string
+>;
+
 export type ChangeItemCheckAction = IAction<
 	TodoActionType.CHANGE_ITEM_CHECK,
 	ITodoItem[]
@@ -91,7 +103,6 @@ export type TodoListAction =
 	| AdditemRequest
 	| AdditemSuccess
 	| AdditemFAilure
-	| ToggleAllItemsAction
 	| ChangeItemValueAction
 	| ChangeItemCheckAction
 	| GetItemListSuccess
@@ -102,4 +113,7 @@ export type TodoListAction =
 	| DeleteItemFailure
 	| DeleteCompletedFailure
 	| DeleteCompletedRequest
-	| DeleteCompletedSuccess;
+	| DeleteCompletedSuccess
+	| ToggleAllFailure
+	| ToggleAllSuccess
+	| ToggleAllRequest;

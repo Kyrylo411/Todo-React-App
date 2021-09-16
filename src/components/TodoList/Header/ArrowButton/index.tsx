@@ -4,30 +4,15 @@ import classNames from 'classnames';
 import './ArrowButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetTodoList } from '../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../interfaices/todos';
-import { toggleAllItemsAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
-import api from '../../../../http';
+import { toggleAllItemsRequest } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 
 const ArrowButton: FC = () => {
 	const todoItemList = useSelector(GetTodoList);
 	const dispatch = useDispatch();
 
-	const handleClick = async () => {
+	const handleClick = () => {
 		const isAllItemsChecked = todoItemList.every((item) => item.done === true);
-		try {
-			await api.put<ITodoItem[]>(`/todolist/todo/${isAllItemsChecked}`);
-			dispatch(
-				toggleAllItemsAction(
-					todoItemList.map((item: ITodoItem) =>
-						isAllItemsChecked
-							? { ...item, done: false }
-							: { ...item, done: true },
-					),
-				),
-			);
-		} catch (e) {
-			console.log(e);
-		}
+		dispatch(toggleAllItemsRequest(isAllItemsChecked));
 	};
 	const arrowClass = classNames({
 		arrow: true,
