@@ -6,6 +6,10 @@ export enum TodoActionType {
 	ITEM_LIST_FAILURE = 'ITEM_LIST_FAILURE',
 
 	ADD_ITEM = 'ADD_ITEM',
+	ADD_ITEM_REQUEST = 'ADD_ITEM_REQUEST',
+	ADD_ITEM_SUCCES = 'ADD_ITEM_SUCCES',
+	ADD_ITEM_FAILURE = 'ADD_ITEM_FAILURE',
+
 	DELETE_ITEM = 'DELETE_ITEM',
 	DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS',
 	TOGGLE_ALL_ITEMS = 'TOGGLE_ALL_ITEMS',
@@ -15,7 +19,7 @@ export enum TodoActionType {
 
 export interface IAction<T extends TodoActionType, P> {
 	type: T;
-	payload?: P;
+	payload: P;
 }
 
 export type GetItemListRequest = IAction<
@@ -33,7 +37,10 @@ export type GetItemListFailure = IAction<
 	string
 >;
 
-export type AddItemAction = IAction<TodoActionType.ADD_ITEM, ITodoItem>;
+export type AdditemRequest = IAction<TodoActionType.ADD_ITEM_REQUEST, string>;
+export type AdditemSuccess = IAction<TodoActionType.ADD_ITEM_SUCCES, ITodoItem>;
+export type AdditemFAilure = IAction<TodoActionType.ADD_ITEM_FAILURE, string>;
+
 export type DeleteItemAction = IAction<TodoActionType.DELETE_ITEM, ITodoItem[]>;
 export type DeleteCompletedItemsAction = IAction<
 	TodoActionType.DELETE_COMPLETED_ITEMS,
@@ -53,7 +60,9 @@ export type ChangeItemValueAction = IAction<
 >;
 
 export type TodoListAction =
-	| AddItemAction
+	| AdditemRequest
+	| AdditemSuccess
+	| AdditemFAilure
 	| DeleteItemAction
 	| DeleteCompletedItemsAction
 	| ToggleAllItemsAction

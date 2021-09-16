@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { todoList, loading } from './todoListReducer';
+import { setTodoList, loading } from './todoListReducer';
 import { authorization } from './authReducer';
 
 export const rootReducer = combineReducers({
-	todoList,
+	setTodoList,
 	authorization,
 	loading,
 });

@@ -1,6 +1,5 @@
 import { ITodoItem } from '../../../interfaices/todos';
 import {
-	AddItemAction,
 	DeleteItemAction,
 	GetItemListSuccess,
 	DeleteCompletedItemsAction,
@@ -9,12 +8,16 @@ import {
 	ChangeItemValueAction,
 	GetItemListRequest,
 	GetItemListFailure,
+	AdditemRequest,
+	AdditemSuccess,
+	AdditemFAilure,
 } from '../../../interfaices/todoReduxInterfaces';
 import { TodoActionType } from '../../../interfaices/todoReduxInterfaces';
-//
+
 export const getItemLisRequest = (): GetItemListRequest => {
 	return {
 		type: TodoActionType.ITEM_LIST_REQUEST,
+		payload: null,
 	};
 };
 export const getItemListSuccess = (list: ITodoItem[]): GetItemListSuccess => {
@@ -30,13 +33,26 @@ export const getItemListFailure = (message: string): GetItemListFailure => {
 	};
 };
 //
-export const addItemAction = (item: ITodoItem): AddItemAction => {
+
+export const addItemRequest = (value: string): AdditemRequest => {
 	return {
-		type: TodoActionType.ADD_ITEM,
+		type: TodoActionType.ADD_ITEM_REQUEST,
+		payload: value,
+	};
+};
+export const addItemSuccess = (item: ITodoItem): AdditemSuccess => {
+	return {
+		type: TodoActionType.ADD_ITEM_SUCCES,
 		payload: item,
 	};
 };
-
+export const addItemFAilure = (message: string): AdditemFAilure => {
+	return {
+		type: TodoActionType.ADD_ITEM_FAILURE,
+		payload: message,
+	};
+};
+//
 export const deleteItemAction = (list: ITodoItem[]): DeleteItemAction => {
 	return {
 		type: TodoActionType.DELETE_ITEM,

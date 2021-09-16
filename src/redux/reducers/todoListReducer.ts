@@ -4,7 +4,7 @@ import {
 	TodoActionType,
 } from '../../interfaices/todoReduxInterfaces';
 
-export function todoList(
+export function setTodoList(
 	state: ITodoItem[] = [],
 	action: TodoListAction,
 ): ITodoItem[] {
@@ -12,7 +12,7 @@ export function todoList(
 		case TodoActionType.ITEM_LIST_SUCCESS:
 			return (state = action.payload);
 
-		case TodoActionType.ADD_ITEM: {
+		case TodoActionType.ADD_ITEM_SUCCES: {
 			return (state = [...state, action.payload]);
 		}
 		case TodoActionType.DELETE_ITEM: {
