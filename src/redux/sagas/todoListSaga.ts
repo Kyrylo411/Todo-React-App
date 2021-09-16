@@ -67,7 +67,7 @@ function* addItemWorker(action: AdditemRequest): SagaIterator {
 			}),
 		);
 	} catch (e) {
-		yield call(addItemFAilure, e);
+		yield put(addItemFAilure(e));
 	}
 }
 
@@ -79,7 +79,7 @@ function* deleteItemWorker(action: DeleteItemRequest): SagaIterator {
 		);
 		yield put(deleteItemSuccess(res.data));
 	} catch (e) {
-		yield call(deleteItemFailure, e);
+		yield put(deleteItemFailure(e));
 	}
 }
 
@@ -92,7 +92,7 @@ function* deleteCompletedWorker(action: DeleteCompletedRequest): SagaIterator {
 		);
 		yield put(deleteCompletedSuccess(res.data));
 	} catch (e) {
-		yield call(deleteItemFailure, e);
+		yield put(deleteItemFailure(e));
 	}
 }
 
@@ -101,7 +101,7 @@ function* toggleAllWorker(action: ToggleAllRequest): SagaIterator {
 		yield call(api.put, `/todolist/todo/${action.payload}`);
 		yield put(toggleAllItemsSuccess(action.payload));
 	} catch (e) {
-		yield call(toggleAllItemsFailure, e);
+		yield put(toggleAllItemsFailure(e));
 	}
 }
 
@@ -119,7 +119,7 @@ function* changeItemCheckworker(action: ChangeItemCheckRequest): SagaIterator {
 			changeItemCheckSuccess({ id: res.data._id, checked: res.data.done }),
 		);
 	} catch (e) {
-		yield call(changeItemCheckFailure, e);
+		yield put(changeItemCheckFailure(e));
 	}
 }
 
@@ -137,7 +137,7 @@ function* changeIputValueWorker(action: ChangeItemValueRequest): SagaIterator {
 			changeItemValueSuccess({ id: res.data._id, value: res.data.value }),
 		);
 	} catch (e) {
-		yield call(changeItemValueFailure, e);
+		yield put(changeItemValueFailure(e));
 	}
 }
 

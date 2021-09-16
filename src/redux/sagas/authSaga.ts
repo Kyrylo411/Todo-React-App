@@ -28,7 +28,7 @@ function* logInWorker(action: LogInRequest): SagaIterator {
 		localStorage.setItem('token', res.data.accessToken);
 		yield put(logInSuccess(true));
 	} catch (e) {
-		yield call(logInFailure, e);
+		yield put(logInFailure(e));
 	}
 }
 
@@ -38,10 +38,9 @@ function* registrationWorker(action: RegistrationRequest): SagaIterator {
 			login: action.payload.login,
 			password: action.payload.password,
 		});
-
-		yield call(registrationSuccess);
+		yield put(registrationSuccess());
 	} catch (e) {
-		yield call(registrationFailure, e);
+		yield put(registrationFailure(e));
 	}
 }
 
