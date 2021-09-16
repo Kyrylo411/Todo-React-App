@@ -57,7 +57,7 @@ export const addItemSuccess = (item: ITodoItem): AdditemSuccess => {
 		payload: item,
 	};
 };
-export const addItemFAilure = (message: string): AdditemFAilure => {
+export const addItemFailure = (message: string): AdditemFAilure => {
 	return {
 		type: TodoActionType.ADD_ITEM_FAILURE,
 		payload: message,

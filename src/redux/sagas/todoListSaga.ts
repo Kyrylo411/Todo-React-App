@@ -16,7 +16,7 @@ import {
 } from '../../interfaices/todoReduxInterfaces';
 import { ITodoItem } from '../../interfaices/todos';
 import {
-	addItemFAilure,
+	addItemFailure,
 	addItemSuccess,
 	changeItemCheckFailure,
 	changeItemCheckSuccess,
@@ -67,7 +67,7 @@ function* addItemWorker(action: AdditemRequest): SagaIterator {
 			}),
 		);
 	} catch (e) {
-		yield put(addItemFAilure(e));
+		yield put(addItemFailure(e));
 	}
 }
 
