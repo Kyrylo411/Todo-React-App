@@ -5,9 +5,6 @@ export enum AuthActionType {
 	CHECK_IS_LOGGED_IN = 'CHECK_IS_LOGGED_IN',
 
 	USER_LOG_OUT = 'USER_LOG_OUT',
-	USER_LOG_OUT_REQUEST = 'USER_LOG_OUT_REQUEST',
-	USER_LOG_OUT_SUCCESS = 'USER_LOG_OUT_SUCCESS',
-	USER_LOG_OUT_FAILURE = 'USER_LOG_OUT_FAILURE',
 }
 
 export interface IAuthAction<T extends AuthActionType, P> {
@@ -39,25 +36,9 @@ export type CheckIsLoggedIn = IAuthAction<
 
 export type LogOutAction = IAuthAction<AuthActionType.USER_LOG_OUT, boolean>;
 
-export type LogOutRequest = IAuthAction<
-	AuthActionType.USER_LOG_OUT_REQUEST,
-	boolean
->;
-export type LogOutSuccess = IAuthAction<
-	AuthActionType.USER_LOG_OUT_SUCCESS,
-	boolean
->;
-export type LogOutFAilure = IAuthAction<
-	AuthActionType.USER_LOG_OUT_FAILURE,
-	boolean
->;
-
 export type AuthAction =
 	| LogOutAction
 	| LogInRequest
 	| LogInSuccess
 	| LogInFailure
-	| LogOutRequest
-	| LogOutSuccess
-	| LogOutFAilure
 	| CheckIsLoggedIn;
