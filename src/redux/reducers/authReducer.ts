@@ -27,6 +27,15 @@ export function authLoading(state = false, action: AuthAction): boolean {
 		case AuthActionType.REGISTRATION_FAILURE: {
 			return (state = false);
 		}
+		case AuthActionType.USER_LOG_IN_REQUEST: {
+			return (state = true);
+		}
+		case AuthActionType.USER_LOG_IN_SUCCESS: {
+			return (state = false);
+		}
+		case AuthActionType.USER_LOG_IN_FAILURE: {
+			return (state = false);
+		}
 		default:
 			return state;
 	}

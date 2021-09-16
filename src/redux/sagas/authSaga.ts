@@ -5,7 +5,6 @@ import {
 	AuthActionType,
 	LogInRequest,
 	RegistrationRequest,
-	UserData,
 } from '../../interfaices/authReduxInterfaces';
 import { AuthResponse } from '../../interfaices/authResponse';
 import {
@@ -16,15 +15,16 @@ import {
 } from '../actions/actionCreators/authActionCreators';
 import { AxiosResponse } from 'axios';
 
-const logIn = async (userData: UserData) =>
-	await api.post<AuthResponse>('/auth/login', {
-		login: userData.login,
-		password: userData.password,
-	});
-
 function* logInWorker(action: LogInRequest): SagaIterator {
 	try {
-		const res: AxiosResponse<AuthResponse> = yield call(logIn, action.payload);
+		const res: AxiosResponse<AuthResponse> = yield call(
+			api.post,
+			'/auth/login',
+			{
+				login: action.payload.login,
+				password: action.payload.password,
+			},
+		);
 		localStorage.setItem('token', res.data.accessToken);
 		yield put(logInSuccess(true));
 	} catch (e) {
@@ -32,16 +32,14 @@ function* logInWorker(action: LogInRequest): SagaIterator {
 	}
 }
 
-const registration = async (userData: UserData) =>
-	await api.post<AuthResponse>('/auth/registration', {
-		login: userData.login,
-		password: userData.password,
-	});
-
 function* registrationWorker(action: RegistrationRequest): SagaIterator {
 	try {
-		yield call(registration, action.payload);
-		yield put(registrationSuccess());
+		yield call(api.post, '/auth/registration', {
+			login: action.payload.login,
+			password: action.payload.password,
+		});
+
+		yield call(registrationSuccess);
 	} catch (e) {
 		yield call(registrationFailure, e);
 	}

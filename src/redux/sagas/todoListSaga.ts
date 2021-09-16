@@ -11,10 +11,8 @@ import {
 	DeleteItemRequest,
 	DeleteCompletedRequest,
 	ToggleAllRequest,
-	CheckData,
 	ChangeItemCheckRequest,
 	ChangeItemValueRequest,
-	ValueData,
 } from '../../interfaices/todoReduxInterfaces';
 import { ITodoItem } from '../../interfaices/todos';
 import {
@@ -33,23 +31,17 @@ import {
 	toggleAllItemsSuccess,
 } from '../actions/actionCreators/todoListActionCreators';
 
-const fetchTodoList = async (): Promise<AxiosResponse<ITodoItem[]>> =>
-	await api.get(`/todolist/todo`);
-
 function* getTodoListWorker(): SagaIterator {
 	try {
-		const res: AxiosResponse<ITodoItem[]> = yield call(fetchTodoList);
+		const res: AxiosResponse<ITodoItem[]> = yield call(
+			api.get,
+			'/todolist/todo',
+		);
 		yield put(getItemListSuccess(res.data));
 	} catch (e) {
-		yield call(getItemListFailure, e);
+		yield put(getItemListFailure(e));
 	}
 }
-
-const postItem = async (value: string): Promise<AxiosResponse<ITodoItem>> =>
-	await api.post<ITodoItem>(`/todolist/todo`, {
-		value,
-		done: false,
-	});
 
 function* addItemWorker(action: AdditemRequest): SagaIterator {
 	try {
@@ -58,7 +50,14 @@ function* addItemWorker(action: AdditemRequest): SagaIterator {
 		);
 		const userId = decodedToken._doc._id;
 
-		const res: AxiosResponse<ITodoItem> = yield call(postItem, action.payload);
+		const res: AxiosResponse<ITodoItem> = yield call(
+			api.post,
+			'/todolist/todo',
+			{
+				value: action.payload,
+				done: false,
+			},
+		);
 		yield put(
 			addItemSuccess({
 				value: res.data.value,
@@ -72,14 +71,11 @@ function* addItemWorker(action: AdditemRequest): SagaIterator {
 	}
 }
 
-const deleteItem = async (id: string): Promise<AxiosResponse<ITodoItem>> =>
-	await api.delete<ITodoItem>(`/todolist/todo/${id}`);
-
 function* deleteItemWorker(action: DeleteItemRequest): SagaIterator {
 	try {
 		const res: AxiosResponse<ITodoItem> = yield call(
-			deleteItem,
-			action.payload,
+			api.delete,
+			`/todolist/todo/${action.payload}`,
 		);
 		yield put(deleteItemSuccess(res.data));
 	} catch (e) {
@@ -87,16 +83,12 @@ function* deleteItemWorker(action: DeleteItemRequest): SagaIterator {
 	}
 }
 
-const deleteCompleted = async (
-	checkeditems: ITodoItem[],
-): Promise<AxiosResponse<ITodoItem[]>> =>
-	await api.delete<ITodoItem[]>(`/todolist/todo`, { data: { checkeditems } });
-
 function* deleteCompletedWorker(action: DeleteCompletedRequest): SagaIterator {
 	try {
 		const res: AxiosResponse<ITodoItem[]> = yield call(
-			deleteCompleted,
-			action.payload,
+			api.delete,
+			`/todolist/todo`,
+			{ data: action.payload },
 		);
 		yield put(deleteCompletedSuccess(res.data));
 	} catch (e) {
@@ -104,31 +96,24 @@ function* deleteCompletedWorker(action: DeleteCompletedRequest): SagaIterator {
 	}
 }
 
-const toggleAllItems = async (
-	isAllChecked: boolean,
-): Promise<AxiosResponse<ITodoItem[]>> =>
-	await api.put<ITodoItem[]>(`/todolist/todo/${isAllChecked}`);
-
 function* toggleAllWorker(action: ToggleAllRequest): SagaIterator {
 	try {
-		yield call(toggleAllItems, action.payload);
+		yield call(api.put, `/todolist/todo/${action.payload}`);
 		yield put(toggleAllItemsSuccess(action.payload));
 	} catch (e) {
 		yield call(toggleAllItemsFailure, e);
 	}
 }
 
-const changeItemCheck = async (res: CheckData) =>
-	await api.put<ITodoItem>(`/todolist/todo/`, {
-		_id: res.id,
-		done: res.checked,
-	});
-
 function* changeItemCheckworker(action: ChangeItemCheckRequest): SagaIterator {
 	try {
 		const res: AxiosResponse<ITodoItem> = yield call(
-			changeItemCheck,
-			action.payload,
+			api.put,
+			'/todolist/todo/',
+			{
+				_id: action.payload.id,
+				done: action.payload.checked,
+			},
 		);
 		yield put(
 			changeItemCheckSuccess({ id: res.data._id, checked: res.data.done }),
@@ -138,17 +123,15 @@ function* changeItemCheckworker(action: ChangeItemCheckRequest): SagaIterator {
 	}
 }
 
-const changeItemValue = async (data: ValueData) =>
-	await api.put<ITodoItem[]>(`/todolist/todo`, {
-		_id: data.id,
-		value: data.value,
-	});
-
 function* changeIputValueWorker(action: ChangeItemValueRequest): SagaIterator {
 	try {
 		const res: AxiosResponse<ITodoItem> = yield call(
-			changeItemValue,
-			action.payload,
+			api.put,
+			'/todolist/todo',
+			{
+				_id: action.payload.id,
+				value: action.payload.value,
+			},
 		);
 		yield put(
 			changeItemValueSuccess({ id: res.data._id, value: res.data.value }),
