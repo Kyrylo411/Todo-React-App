@@ -33,8 +33,12 @@ export function setTodoList(
 					: item,
 			);
 		}
-		case TodoActionType.CHANGE_ITEM_VALUE: {
-			return (state = action.payload);
+		case TodoActionType.CHANGE_ITEM_VALUE_SUCCESS: {
+			return state.map((item: ITodoItem) => {
+				return item._id === action.payload.id
+					? { ...item, value: action.payload.value }
+					: item;
+			});
 		}
 		default:
 			return state;

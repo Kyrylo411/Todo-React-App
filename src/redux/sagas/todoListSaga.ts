@@ -11,8 +11,10 @@ import {
 	DeleteItemRequest,
 	DeleteCompletedRequest,
 	ToggleAllRequest,
-	Response,
+	CheckData,
 	ChangeItemCheckRequest,
+	ChangeItemValueRequest,
+	ValueData,
 } from '../../interfaices/todoReduxInterfaces';
 import { ITodoItem } from '../../interfaices/todos';
 import {
@@ -20,6 +22,8 @@ import {
 	addItemSuccess,
 	changeItemCheckFailure,
 	changeItemCheckSuccess,
+	changeItemValueFailure,
+	changeItemValueSuccess,
 	deleteCompletedSuccess,
 	deleteItemFailure,
 	deleteItemSuccess,
@@ -114,7 +118,7 @@ function* toggleAllWorker(action: ToggleAllRequest): SagaIterator {
 	}
 }
 
-const changeItemCheck = async (res: Response) =>
+const changeItemCheck = async (res: CheckData) =>
 	await api.put<ITodoItem>(`/todolist/todo/`, {
 		_id: res.id,
 		done: res.checked,
@@ -134,6 +138,26 @@ function* changeItemCheckworker(action: ChangeItemCheckRequest): SagaIterator {
 	}
 }
 
+const changeItemValue = async (data: ValueData) =>
+	await api.put<ITodoItem[]>(`/todolist/todo`, {
+		_id: data.id,
+		value: data.value,
+	});
+
+function* changeIputValueWorker(action: ChangeItemValueRequest): SagaIterator {
+	try {
+		const res: AxiosResponse<ITodoItem> = yield call(
+			changeItemValue,
+			action.payload,
+		);
+		yield put(
+			changeItemValueSuccess({ id: res.data._id, value: res.data.value }),
+		);
+	} catch (e) {
+		yield call(changeItemValueFailure, e);
+	}
+}
+
 function* todoListWatcher(): SagaIterator {
 	yield takeLatest(TodoActionType.ITEM_LIST_REQUEST, getTodoListWorker);
 	yield takeEvery(TodoActionType.ADD_ITEM_REQUEST, addItemWorker);
@@ -146,6 +170,10 @@ function* todoListWatcher(): SagaIterator {
 	yield takeEvery(
 		TodoActionType.CHANGE_ITEM_CHECK_REQUEST,
 		changeItemCheckworker,
+	);
+	yield takeLatest(
+		TodoActionType.CHANGE_ITEM_VALUE_REQUEST,
+		changeIputValueWorker,
 	);
 }
 

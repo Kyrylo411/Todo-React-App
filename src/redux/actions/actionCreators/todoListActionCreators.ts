@@ -17,9 +17,13 @@ import {
 	ToggleAllSuccess,
 	ToggleAllFailure,
 	ChangeItemCheckRequest,
-	Response,
+	CheckData,
 	ChangeItemCheckFailure,
 	ChangeItemCheckSuccess,
+	ChangeItemValueRequest,
+	ValueData,
+	ChangeItemValueSuccess,
+	ChangeItemValueFailure,
 } from '../../../interfaices/todoReduxInterfaces';
 import { TodoActionType } from '../../../interfaices/todoReduxInterfaces';
 
@@ -133,19 +137,19 @@ export const toggleAllItemsFailure = (message: string): ToggleAllFailure => {
 };
 
 export const changeItemCheckRequest = (
-	response: Response,
+	data: CheckData,
 ): ChangeItemCheckRequest => {
 	return {
 		type: TodoActionType.CHANGE_ITEM_CHECK_REQUEST,
-		payload: response,
+		payload: data,
 	};
 };
 export const changeItemCheckSuccess = (
-	response: Response,
+	data: CheckData,
 ): ChangeItemCheckSuccess => {
 	return {
 		type: TodoActionType.CHANGE_ITEM_CHECK_SUCCESS,
-		payload: response,
+		payload: data,
 	};
 };
 export const changeItemCheckFailure = (
@@ -163,5 +167,32 @@ export const changeItemValueAction = (
 	return {
 		type: TodoActionType.CHANGE_ITEM_VALUE,
 		payload: list,
+	};
+};
+
+export const changeItemValueRequest = (
+	data: ValueData,
+): ChangeItemValueRequest => {
+	return {
+		type: TodoActionType.CHANGE_ITEM_VALUE_REQUEST,
+		payload: data,
+	};
+};
+
+export const changeItemValueSuccess = (
+	data: ValueData,
+): ChangeItemValueSuccess => {
+	return {
+		type: TodoActionType.CHANGE_ITEM_VALUE_SUCCESS,
+		payload: data,
+	};
+};
+
+export const changeItemValueFailure = (
+	message: string,
+): ChangeItemValueFailure => {
+	return {
+		type: TodoActionType.CHANGE_ITEM_VALUE_FAILURE,
+		payload: message,
 	};
 };

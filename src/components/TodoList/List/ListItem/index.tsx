@@ -1,11 +1,9 @@
 import React, { FC, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import api from '../../../../http';
+import { useDispatch } from 'react-redux';
 import {
-	changeItemValueAction,
+	changeItemValueRequest,
 	deleteItemRequest,
 } from '../../../../redux/actions/actionCreators/todoListActionCreators';
-import { GetTodoList } from '../../../../redux/selectors/todo';
 import { ITodoItem } from '../../../../interfaices/todos';
 
 import CheckBox from './CheckBox';
@@ -19,7 +17,6 @@ interface Props {
 const ListItem: FC<Props> = ({ item, id }) => {
 	const [inputValue, setInputValue] = useState(item.value);
 	const [editItem, setEditItem] = useState(false);
-	const todoList = useSelector(GetTodoList);
 	const dispatch = useDispatch();
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -43,23 +40,7 @@ const ListItem: FC<Props> = ({ item, id }) => {
 		inputValue: string,
 		id: string,
 	): Promise<void> => {
-		try {
-			if (inputValue.trim()) {
-				await api.put<ITodoItem[]>(`/todolist/todo`, {
-					_id: id,
-					value: inputValue,
-				});
-				dispatch(
-					changeItemValueAction(
-						todoList.map((item: ITodoItem) => {
-							return item._id === id ? { ...item, value: inputValue } : item;
-						}),
-					),
-				);
-			}
-		} catch (e) {
-			console.log(e);
-		}
+		dispatch(changeItemValueRequest({ id: id, value: inputValue }));
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

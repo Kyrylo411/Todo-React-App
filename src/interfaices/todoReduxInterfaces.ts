@@ -26,6 +26,9 @@ export enum TodoActionType {
 	CHANGE_ITEM_CHECK_FAILURE = 'CHANGE_ITEM_CHECK_FAILURE',
 
 	CHANGE_ITEM_VALUE = 'CHANGE_ITEM_VALUE',
+	CHANGE_ITEM_VALUE_REQUEST = 'CHANGE_ITEM_VALUE_REQUEST',
+	CHANGE_ITEM_VALUE_SUCCESS = 'CHANGE_ITEM_VALUE_SUCCESS',
+	CHANGE_ITEM_VALUE_FAILURE = 'CHANGE_ITEM_VALUE_FAILURE',
 }
 
 export interface IAction<T extends TodoActionType, P> {
@@ -93,28 +96,48 @@ export type ToggleAllFailure = IAction<
 	string
 >;
 
-export type Response = {
+export type CheckData = {
 	id: string;
 	checked: boolean;
 };
 
 export type ChangeItemCheckRequest = IAction<
 	TodoActionType.CHANGE_ITEM_CHECK_REQUEST,
-	Response
+	CheckData
 >;
 
 export type ChangeItemCheckSuccess = IAction<
 	TodoActionType.CHANGE_ITEM_CHECK_SUCCESS,
-	Response
+	CheckData
 >;
 export type ChangeItemCheckFailure = IAction<
 	TodoActionType.CHANGE_ITEM_CHECK_FAILURE,
 	string
 >;
 
+export type ValueData = {
+	id: string;
+	value: string;
+};
+
 export type ChangeItemValueAction = IAction<
 	TodoActionType.CHANGE_ITEM_VALUE,
 	ITodoItem[]
+>;
+
+export type ChangeItemValueRequest = IAction<
+	TodoActionType.CHANGE_ITEM_VALUE_REQUEST,
+	ValueData
+>;
+
+export type ChangeItemValueSuccess = IAction<
+	TodoActionType.CHANGE_ITEM_VALUE_SUCCESS,
+	ValueData
+>;
+
+export type ChangeItemValueFailure = IAction<
+	TodoActionType.CHANGE_ITEM_VALUE_FAILURE,
+	string
 >;
 
 export type TodoListAction =
@@ -122,6 +145,9 @@ export type TodoListAction =
 	| AdditemSuccess
 	| AdditemFAilure
 	| ChangeItemValueAction
+	| ChangeItemValueRequest
+	| ChangeItemValueSuccess
+	| ChangeItemValueFailure
 	| ChangeItemCheckFailure
 	| ChangeItemCheckRequest
 	| ChangeItemCheckSuccess
