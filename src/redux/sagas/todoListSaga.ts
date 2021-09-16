@@ -1,10 +1,8 @@
 import { put, call, takeEvery, takeLatest } from '@redux-saga/core/effects';
 import { AxiosResponse } from 'axios';
 import { SagaIterator } from 'redux-saga';
-import jwtDecode from 'jwt-decode';
 
 import api from '../../http';
-import { customJwtPayload } from '../../interfaices/jwtPayload';
 import {
 	AdditemRequest,
 	TodoActionType,
@@ -45,11 +43,6 @@ function* getTodoListWorker(): SagaIterator {
 
 function* addItemWorker(action: AdditemRequest): SagaIterator {
 	try {
-		const decodedToken: customJwtPayload = jwtDecode(
-			localStorage.getItem('token'),
-		);
-		const userId = decodedToken._doc._id;
-
 		const res: AxiosResponse<ITodoItem> = yield call(
 			api.post,
 			'/todolist/todo',
@@ -58,16 +51,9 @@ function* addItemWorker(action: AdditemRequest): SagaIterator {
 				done: false,
 			},
 		);
-		yield put(
-			addItemSuccess({
-				value: res.data.value,
-				_id: res.data._id,
-				done: false,
-				userId,
-			}),
-		);
+		yield put(addItemSuccess(res.data));
 	} catch (e) {
-		yield put(addItemFailure(e));
+		yield put(addItemFailure(e.message));
 	}
 }
 

@@ -24,8 +24,6 @@ const LoginPage: FC = () => {
 	};
 	const hadleLoginClick = async (): Promise<void> => {
 		dispatch(logInRequest({ login, password }));
-		setLogin('');
-		setPassword('');
 		history.push('/todos');
 	};
 	return (

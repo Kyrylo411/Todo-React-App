@@ -16,7 +16,6 @@ const TodoList: FC = () => {
 	const [activeFilter, setActiveFilter] = useState<Filter>('All');
 	const dispatch = useDispatch();
 	const loading = useSelector(TodoListLoading);
-	console.log(loading);
 
 	const changeActiveFilter = (textValue: Filter): void => {
 		setActiveFilter(textValue);
@@ -47,24 +46,3 @@ const TodoList: FC = () => {
 };
 
 export default TodoList;
-
-// return (
-// 	<Page>
-// 		<h1 className="todos">todos</h1>
-// 		<div className="todoWrapper">
-// 			{loading ? (
-// 				<CircularProgress />
-// 			) : (
-// 				<>
-// 					<Header />
-// 					<List activeFilter={activeFilter} />
-// 					<Footer
-// 						setActiveFilter={changeActiveFilter}
-// 						activeFilter={activeFilter}
-// 					/>
-// 				</>
-// 			)}
-// 		</div>
-// 		<UnderLines />
-// 	</Page>
-// );
