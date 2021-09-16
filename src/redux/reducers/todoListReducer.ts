@@ -15,8 +15,10 @@ export function setTodoList(
 		case TodoActionType.ADD_ITEM_SUCCES: {
 			return (state = [...state, action.payload]);
 		}
-		case TodoActionType.DELETE_ITEM: {
-			return (state = action.payload);
+		case TodoActionType.DELETE_ITEM_SUCCESS: {
+			return (state = state.filter(
+				(item: ITodoItem) => item._id !== action.payload._id,
+			));
 		}
 		case TodoActionType.DELETE_COMPLETED_ITEMS: {
 			return (state = action.payload);

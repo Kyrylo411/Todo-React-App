@@ -12,7 +12,7 @@ const Input: FC = () => {
 		setValue(e.target.value);
 	};
 
-	const handleKeyDown = async (
+	const handleKeyDown = (
 		e: React.KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement },
 	) => {
 		if (e.key === 'Enter') {

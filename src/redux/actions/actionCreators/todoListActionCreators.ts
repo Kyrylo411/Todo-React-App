@@ -1,12 +1,14 @@
 import { ITodoItem } from '../../../interfaices/todos';
 import {
-	DeleteItemAction,
-	GetItemListSuccess,
+	DeleteItemFailure,
+	DeleteItemRequest,
+	DeleteItemSuccess,
 	DeleteCompletedItemsAction,
 	ToggleAllItemsAction,
 	ChangeItemCheckAction,
 	ChangeItemValueAction,
 	GetItemListRequest,
+	GetItemListSuccess,
 	GetItemListFailure,
 	AdditemRequest,
 	AdditemSuccess,
@@ -53,13 +55,26 @@ export const addItemFAilure = (message: string): AdditemFAilure => {
 	};
 };
 //
-export const deleteItemAction = (list: ITodoItem[]): DeleteItemAction => {
+
+export const deleteItemRequest = (id: string): DeleteItemRequest => {
 	return {
-		type: TodoActionType.DELETE_ITEM,
+		type: TodoActionType.DELETE_ITEM_REQUEST,
+		payload: id,
+	};
+};
+export const deleteItemSuccess = (list: ITodoItem): DeleteItemSuccess => {
+	return {
+		type: TodoActionType.DELETE_ITEM_SUCCESS,
 		payload: list,
 	};
 };
-
+export const deleteItemFailure = (message: string): DeleteItemFailure => {
+	return {
+		type: TodoActionType.DELETE_ITEM_FAILURE,
+		payload: message,
+	};
+};
+//
 export const deleteCompletedItemsAction = (
 	list: ITodoItem[],
 ): DeleteCompletedItemsAction => {

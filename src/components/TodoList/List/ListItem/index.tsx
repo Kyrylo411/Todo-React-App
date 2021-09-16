@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import api from '../../../../http';
 import {
 	changeItemValueAction,
-	deleteItemAction,
+	deleteItemRequest,
 } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import { GetTodoList } from '../../../../redux/selectors/todo';
 import { ITodoItem } from '../../../../interfaices/todos';
@@ -77,15 +77,8 @@ const ListItem: FC<Props> = ({ item, id }) => {
 		};
 	};
 	const editTodoInput = handleDoubleClick();
-	const handleDeleteClick = async () => {
-		try {
-			await api.delete<ITodoItem[]>(`/todolist/todo/${id}`);
-			dispatch(
-				deleteItemAction(todoList.filter((item: ITodoItem) => item._id !== id)),
-			);
-		} catch (e) {
-			console.log(e);
-		}
+	const handleDeleteClick = () => {
+		dispatch(deleteItemRequest(id));
 	};
 
 	return (

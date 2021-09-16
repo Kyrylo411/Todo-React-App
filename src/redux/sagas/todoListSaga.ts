@@ -8,11 +8,14 @@ import { customJwtPayload } from '../../interfaices/jwtPayload';
 import {
 	AdditemRequest,
 	TodoActionType,
+	DeleteItemRequest,
 } from '../../interfaices/todoReduxInterfaces';
 import { ITodoItem } from '../../interfaices/todos';
 import {
 	addItemFAilure,
 	addItemSuccess,
+	deleteItemFailure,
+	deleteItemSuccess,
 	getItemListFailure,
 	getItemListSuccess,
 } from '../actions/actionCreators/todoListActionCreators';
@@ -56,9 +59,25 @@ function* addItemWorker(action: AdditemRequest): SagaIterator {
 	}
 }
 
+const deleteItem = async (id: string): Promise<AxiosResponse<ITodoItem>> =>
+	await api.delete<ITodoItem>(`/todolist/todo/${id}`);
+
+function* deleteItemWorker(action: DeleteItemRequest): SagaIterator {
+	try {
+		const res: AxiosResponse<ITodoItem> = yield call(
+			deleteItem,
+			action.payload,
+		);
+		yield put(deleteItemSuccess(res.data));
+	} catch (e) {
+		yield call(deleteItemFailure, e);
+	}
+}
+
 function* todoListWatcher(): SagaIterator {
 	yield takeLatest(TodoActionType.ITEM_LIST_REQUEST, getTodoListWorker);
 	yield takeEvery(TodoActionType.ADD_ITEM_REQUEST, addItemWorker);
+	yield takeEvery(TodoActionType.DELETE_ITEM_REQUEST, deleteItemWorker);
 }
 
 export default todoListWatcher;
