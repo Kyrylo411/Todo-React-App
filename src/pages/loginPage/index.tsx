@@ -4,10 +4,8 @@ import { useStyles } from './styles';
 import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
 import { useDispatch } from 'react-redux';
-import { logInAction } from '../../redux/actions/actionCreators/authActionCreators';
+import { logInRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useHistory } from 'react-router-dom';
-import api from '../../http';
-import { AuthResponse } from '../../interfaices/authResponse';
 
 const LoginPage: FC = () => {
 	const [login, setLogin] = useState('');
@@ -25,19 +23,10 @@ const LoginPage: FC = () => {
 		setLogin(value);
 	};
 	const hadleLoginClick = async (): Promise<void> => {
-		try {
-			const response = await api.post<AuthResponse>('/auth/login', {
-				login,
-				password,
-			});
-			localStorage.setItem('token', response.data.accessToken);
-			dispatch(logInAction(true));
-			setLogin('');
-			setPassword('');
-			history.push('/todos');
-		} catch (e) {
-			console.log(e);
-		}
+		dispatch(logInRequest({ login, password }));
+		setLogin('');
+		setPassword('');
+		history.push('/todos');
 	};
 	return (
 		<Page>

@@ -8,13 +8,13 @@ import NavBar from './components/NavBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { IsLogedIn } from './redux/selectors/auth';
 import { useEffect } from 'react';
-import { logInAction } from './redux/actions/actionCreators/authActionCreators';
+import { checkIsLoggedIn } from './redux/actions/actionCreators/authActionCreators';
 
 const App: FC = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		const isLogedIn = !!localStorage.getItem('token');
-		dispatch(logInAction(isLogedIn));
+		dispatch(checkIsLoggedIn(isLogedIn));
 	}, []);
 	const isLogedIn = useSelector(IsLogedIn);
 
