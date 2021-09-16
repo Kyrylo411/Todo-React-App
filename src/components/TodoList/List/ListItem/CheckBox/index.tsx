@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import api from '../../../../../http';
-import { changeItemCheckAction } from '../../../../../redux/actions/actionCreators/todoListActionCreators';
-import { GetTodoList } from '../../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../../interfaices/todos';
+import { useDispatch } from 'react-redux';
+import { changeItemCheckRequest } from '../../../../../redux/actions/actionCreators/todoListActionCreators';
+
 import './CheckBox.scss';
 
 interface Props {
@@ -13,29 +11,14 @@ interface Props {
 
 const CheckBox: FC<Props> = ({ id, isChecked }) => {
 	const dispatch = useDispatch();
-	const todoList = useSelector(GetTodoList);
 
 	const handleClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
 	};
 
 	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-		try {
-			const checked = e.target.checked;
-			const res = await api.put<ITodoItem>(`/todolist/todo/`, {
-				_id: id,
-				done: checked,
-			});
-			dispatch(
-				changeItemCheckAction(
-					todoList.map((item: ITodoItem) =>
-						item._id === res.data._id ? { ...item, done: checked } : item,
-					),
-				),
-			);
-		} catch (e) {
-			console.log(e);
-		}
+		const checked = e.target.checked;
+		dispatch(changeItemCheckRequest({ id, checked }));
 	};
 
 	return (

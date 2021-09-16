@@ -13,23 +13,25 @@ export function setTodoList(
 			return (state = action.payload);
 
 		case TodoActionType.ADD_ITEM_SUCCES: {
-			return (state = [...state, action.payload]);
+			return [...state, action.payload];
 		}
 		case TodoActionType.DELETE_ITEM_SUCCESS: {
-			return (state = state.filter(
-				(item: ITodoItem) => item._id !== action.payload._id,
-			));
+			return state.filter((item: ITodoItem) => item._id !== action.payload._id);
 		}
 		case TodoActionType.DELETE_COMPLETED_SUCCESS: {
-			return (state = state.filter((item: ITodoItem) => item.done === false));
+			return state.filter((item: ITodoItem) => item.done === false);
 		}
 		case TodoActionType.TOGGLE_ALL_SUCCESS: {
-			return (state = state.map((item: ITodoItem) =>
+			return state.map((item: ITodoItem) =>
 				action.payload ? { ...item, done: false } : { ...item, done: true },
-			));
+			);
 		}
-		case TodoActionType.CHANGE_ITEM_CHECK: {
-			return (state = action.payload);
+		case TodoActionType.CHANGE_ITEM_CHECK_SUCCESS: {
+			return state.map((item: ITodoItem) =>
+				item._id === action.payload.id
+					? { ...item, done: action.payload.checked }
+					: item,
+			);
 		}
 		case TodoActionType.CHANGE_ITEM_VALUE: {
 			return (state = action.payload);
