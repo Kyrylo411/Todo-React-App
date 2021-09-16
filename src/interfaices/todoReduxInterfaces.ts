@@ -5,17 +5,18 @@ export enum TodoActionType {
 	ITEM_LIST_SUCCESS = 'ITEM_LIST_SUCCESS',
 	ITEM_LIST_FAILURE = 'ITEM_LIST_FAILURE',
 
-	ADD_ITEM = 'ADD_ITEM',
 	ADD_ITEM_REQUEST = 'ADD_ITEM_REQUEST',
 	ADD_ITEM_SUCCES = 'ADD_ITEM_SUCCES',
 	ADD_ITEM_FAILURE = 'ADD_ITEM_FAILURE',
 
-	DELETE_ITEM = 'DELETE_ITEM',
 	DELETE_ITEM_REQUEST = 'DELETE_ITEM_REQUEST',
 	DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS',
 	DELETE_ITEM_FAILURE = 'DELETE_ITEM_FAILURE',
 
-	DELETE_COMPLETED_ITEMS = 'DELETE_COMPLETED_ITEMS',
+	DELETE_COMPLETED_REQUEST = 'DELETE_COMPLETED_REQUEST',
+	DELETE_COMPLETED_SUCCESS = 'DELETE_COMPLETED_SUCCESS',
+	DELETE_COMPLETED_FAILURE = 'DELETE_COMPLETED_FAILURE',
+
 	TOGGLE_ALL_ITEMS = 'TOGGLE_ALL_ITEMS',
 	CHANGE_ITEM_CHECK = 'CHANGE_ITEM_CHECK',
 	CHANGE_ITEM_VALUE = 'CHANGE_ITEM_VALUE',
@@ -45,8 +46,6 @@ export type AdditemRequest = IAction<TodoActionType.ADD_ITEM_REQUEST, string>;
 export type AdditemSuccess = IAction<TodoActionType.ADD_ITEM_SUCCES, ITodoItem>;
 export type AdditemFAilure = IAction<TodoActionType.ADD_ITEM_FAILURE, string>;
 
-export type DeleteItemAction = IAction<TodoActionType.DELETE_ITEM, ITodoItem[]>;
-
 export type DeleteItemRequest = IAction<
 	TodoActionType.DELETE_ITEM_REQUEST,
 	string
@@ -62,10 +61,19 @@ export type DeleteItemFailure = IAction<
 	string
 >;
 
-export type DeleteCompletedItemsAction = IAction<
-	TodoActionType.DELETE_COMPLETED_ITEMS,
+export type DeleteCompletedRequest = IAction<
+	TodoActionType.DELETE_COMPLETED_REQUEST,
 	ITodoItem[]
 >;
+export type DeleteCompletedSuccess = IAction<
+	TodoActionType.DELETE_COMPLETED_SUCCESS,
+	ITodoItem[]
+>;
+export type DeleteCompletedFailure = IAction<
+	TodoActionType.DELETE_COMPLETED_FAILURE,
+	string
+>;
+
 export type ToggleAllItemsAction = IAction<
 	TodoActionType.TOGGLE_ALL_ITEMS,
 	ITodoItem[]
@@ -83,7 +91,6 @@ export type TodoListAction =
 	| AdditemRequest
 	| AdditemSuccess
 	| AdditemFAilure
-	| DeleteCompletedItemsAction
 	| ToggleAllItemsAction
 	| ChangeItemValueAction
 	| ChangeItemCheckAction
@@ -93,4 +100,6 @@ export type TodoListAction =
 	| DeleteItemRequest
 	| DeleteItemSuccess
 	| DeleteItemFailure
-	| DeleteItemAction;
+	| DeleteCompletedFailure
+	| DeleteCompletedRequest
+	| DeleteCompletedSuccess;

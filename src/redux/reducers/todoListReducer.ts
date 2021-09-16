@@ -20,8 +20,8 @@ export function setTodoList(
 				(item: ITodoItem) => item._id !== action.payload._id,
 			));
 		}
-		case TodoActionType.DELETE_COMPLETED_ITEMS: {
-			return (state = action.payload);
+		case TodoActionType.DELETE_COMPLETED_SUCCESS: {
+			return (state = state.filter((item: ITodoItem) => item.done === false));
 		}
 		case TodoActionType.TOGGLE_ALL_ITEMS: {
 			return (state = action.payload);

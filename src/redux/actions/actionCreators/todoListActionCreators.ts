@@ -3,7 +3,6 @@ import {
 	DeleteItemFailure,
 	DeleteItemRequest,
 	DeleteItemSuccess,
-	DeleteCompletedItemsAction,
 	ToggleAllItemsAction,
 	ChangeItemCheckAction,
 	ChangeItemValueAction,
@@ -13,6 +12,9 @@ import {
 	AdditemRequest,
 	AdditemSuccess,
 	AdditemFAilure,
+	DeleteCompletedRequest,
+	DeleteCompletedSuccess,
+	DeleteCompletedFailure,
 } from '../../../interfaices/todoReduxInterfaces';
 import { TodoActionType } from '../../../interfaices/todoReduxInterfaces';
 
@@ -34,7 +36,6 @@ export const getItemListFailure = (message: string): GetItemListFailure => {
 		payload: message,
 	};
 };
-//
 
 export const addItemRequest = (value: string): AdditemRequest => {
 	return {
@@ -54,7 +55,6 @@ export const addItemFAilure = (message: string): AdditemFAilure => {
 		payload: message,
 	};
 };
-//
 
 export const deleteItemRequest = (id: string): DeleteItemRequest => {
 	return {
@@ -74,13 +74,31 @@ export const deleteItemFailure = (message: string): DeleteItemFailure => {
 		payload: message,
 	};
 };
-//
-export const deleteCompletedItemsAction = (
-	list: ITodoItem[],
-): DeleteCompletedItemsAction => {
+
+export const deleteCompletedRequest = (
+	config: ITodoItem[],
+): DeleteCompletedRequest => {
 	return {
-		type: TodoActionType.DELETE_COMPLETED_ITEMS,
+		type: TodoActionType.DELETE_COMPLETED_REQUEST,
+		payload: config,
+	};
+};
+
+export const deleteCompletedSuccess = (
+	list: ITodoItem[],
+): DeleteCompletedSuccess => {
+	return {
+		type: TodoActionType.DELETE_COMPLETED_SUCCESS,
 		payload: list,
+	};
+};
+
+export const deleteCompletedFailure = (
+	message: string,
+): DeleteCompletedFailure => {
+	return {
+		type: TodoActionType.DELETE_COMPLETED_FAILURE,
+		payload: message,
 	};
 };
 

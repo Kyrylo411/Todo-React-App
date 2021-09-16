@@ -1,34 +1,17 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import api from '../../../../http';
-import { deleteCompletedItemsAction } from '../../../../redux/actions/actionCreators/todoListActionCreators';
+import { deleteCompletedRequest } from '../../../../redux/actions/actionCreators/todoListActionCreators';
 import { GetTodoList } from '../../../../redux/selectors/todo';
-import { ITodoItem } from '../../../../interfaices/todos';
 import './ClearButton.scss';
 
 const ClearButton: FC = () => {
 	const todoItemList = useSelector(GetTodoList);
 	const dispatch = useDispatch();
 
-	const handleClick = async () => {
-		try {
-			const checkeditems = todoItemList.filter((item) => item.done === true);
-			const config = {
-				data: {
-					checkeditems,
-				},
-			};
-
-			await api.delete<ITodoItem[]>(`/todolist/todo`, config);
-			dispatch(
-				deleteCompletedItemsAction(
-					todoItemList.filter((item: ITodoItem) => item.done === false),
-				),
-			);
-		} catch (e) {
-			console.log(e);
-		}
+	const handleClick = () => {
+		const checkeditems = todoItemList.filter((item) => item.done === true);
+		dispatch(deleteCompletedRequest(checkeditems));
 	};
 
 	const findCheckedItem = (): boolean => {

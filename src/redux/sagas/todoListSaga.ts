@@ -9,11 +9,13 @@ import {
 	AdditemRequest,
 	TodoActionType,
 	DeleteItemRequest,
+	DeleteCompletedRequest,
 } from '../../interfaices/todoReduxInterfaces';
 import { ITodoItem } from '../../interfaices/todos';
 import {
 	addItemFAilure,
 	addItemSuccess,
+	deleteCompletedSuccess,
 	deleteItemFailure,
 	deleteItemSuccess,
 	getItemListFailure,
@@ -74,10 +76,31 @@ function* deleteItemWorker(action: DeleteItemRequest): SagaIterator {
 	}
 }
 
+const deleteCompleted = async (
+	checkeditems: ITodoItem[],
+): Promise<AxiosResponse<ITodoItem[]>> =>
+	await api.delete<ITodoItem[]>(`/todolist/todo`, { data: { checkeditems } });
+
+function* deleteCompletedWorker(action: DeleteCompletedRequest): SagaIterator {
+	try {
+		const res: AxiosResponse<ITodoItem[]> = yield call(
+			deleteCompleted,
+			action.payload,
+		);
+		yield put(deleteCompletedSuccess(res.data));
+	} catch (e) {
+		yield call(deleteItemFailure, e);
+	}
+}
+
 function* todoListWatcher(): SagaIterator {
 	yield takeLatest(TodoActionType.ITEM_LIST_REQUEST, getTodoListWorker);
 	yield takeEvery(TodoActionType.ADD_ITEM_REQUEST, addItemWorker);
 	yield takeEvery(TodoActionType.DELETE_ITEM_REQUEST, deleteItemWorker);
+	yield takeEvery(
+		TodoActionType.DELETE_COMPLETED_REQUEST,
+		deleteCompletedWorker,
+	);
 }
 
 export default todoListWatcher;
