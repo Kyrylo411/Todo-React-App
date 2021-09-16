@@ -3,7 +3,6 @@ import {
 	DeleteItemFailure,
 	DeleteItemRequest,
 	DeleteItemSuccess,
-	ChangeItemValueAction,
 	GetItemListRequest,
 	GetItemListSuccess,
 	GetItemListFailure,
@@ -158,15 +157,6 @@ export const changeItemCheckFailure = (
 	return {
 		type: TodoActionType.CHANGE_ITEM_CHECK_FAILURE,
 		payload: message,
-	};
-};
-
-export const changeItemValueAction = (
-	list: ITodoItem[],
-): ChangeItemValueAction => {
-	return {
-		type: TodoActionType.CHANGE_ITEM_VALUE,
-		payload: list,
 	};
 };
 

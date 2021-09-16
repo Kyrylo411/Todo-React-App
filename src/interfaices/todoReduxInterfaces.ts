@@ -25,7 +25,6 @@ export enum TodoActionType {
 	CHANGE_ITEM_CHECK_SUCCESS = 'CHANGE_ITEM_CHECK_SUCCESS',
 	CHANGE_ITEM_CHECK_FAILURE = 'CHANGE_ITEM_CHECK_FAILURE',
 
-	CHANGE_ITEM_VALUE = 'CHANGE_ITEM_VALUE',
 	CHANGE_ITEM_VALUE_REQUEST = 'CHANGE_ITEM_VALUE_REQUEST',
 	CHANGE_ITEM_VALUE_SUCCESS = 'CHANGE_ITEM_VALUE_SUCCESS',
 	CHANGE_ITEM_VALUE_FAILURE = 'CHANGE_ITEM_VALUE_FAILURE',
@@ -120,11 +119,6 @@ export type ValueData = {
 	value: string;
 };
 
-export type ChangeItemValueAction = IAction<
-	TodoActionType.CHANGE_ITEM_VALUE,
-	ITodoItem[]
->;
-
 export type ChangeItemValueRequest = IAction<
 	TodoActionType.CHANGE_ITEM_VALUE_REQUEST,
 	ValueData
@@ -144,7 +138,6 @@ export type TodoListAction =
 	| AdditemRequest
 	| AdditemSuccess
 	| AdditemFAilure
-	| ChangeItemValueAction
 	| ChangeItemValueRequest
 	| ChangeItemValueSuccess
 	| ChangeItemValueFailure
