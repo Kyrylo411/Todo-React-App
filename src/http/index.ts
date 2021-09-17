@@ -13,11 +13,23 @@ api.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 
 api.interceptors.response.use(
-	(config: AxiosResponse) => config,
+	(config: AxiosResponse) => {
+		console.log(config);
+		return config;
+	},
+	(error) => {
+		throw error;
+	},
+);
+
+api.interceptors.response.use(
+	(config: AxiosResponse) => {
+		console.log(config);
+		return config;
+	},
 	async (error) => {
 		const originalRequest = error.config;
-
-		if (error.response.status === 401 || error.response.status === 500) {
+		if (error.response.status === 401) {
 			try {
 				const response = await axios.get(`${API_URL}/auth/refresh`, {
 					withCredentials: true,
@@ -28,6 +40,7 @@ api.interceptors.response.use(
 				console.log('Пользователь не авторизован');
 			}
 		}
+		throw error.response.data;
 	},
 );
 

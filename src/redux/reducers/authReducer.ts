@@ -40,3 +40,19 @@ export function authLoading(state = false, action: AuthAction): boolean {
 			return state;
 	}
 }
+
+export function setAuthError(state = '', action: AuthAction): string {
+	switch (action.type) {
+		case AuthActionType.REGISTRATION_FAILURE: {
+			return (state = action.payload);
+		}
+		case AuthActionType.USER_LOG_IN_FAILURE: {
+			return (state = action.payload);
+		}
+		case AuthActionType.USER_LOG_OUT_FAILURE: {
+			return (state = action.payload);
+		}
+		default:
+			return state;
+	}
+}

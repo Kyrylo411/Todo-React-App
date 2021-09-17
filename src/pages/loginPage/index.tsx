@@ -6,7 +6,7 @@ import CustomInput from '../../components/CustomInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useHistory } from 'react-router-dom';
-import { AuthLoading } from '../../redux/selectors/auth';
+import { AuthError, AuthLoading } from '../../redux/selectors/auth';
 
 const LoginPage: FC = () => {
 	const [login, setLogin] = useState('');
@@ -19,6 +19,7 @@ const LoginPage: FC = () => {
 	const handlePasswordChange = (value: string) => {
 		setPassword(value);
 	};
+	const errorMessage = useSelector(AuthError);
 
 	const handleLoginChange = (value: string) => {
 		setLogin(value);
@@ -33,6 +34,7 @@ const LoginPage: FC = () => {
 		setLogin('');
 		setPassword('');
 	};
+	console.log(errorMessage);
 	return (
 		<Page>
 			{loading ? (

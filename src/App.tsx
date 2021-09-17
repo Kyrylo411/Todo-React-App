@@ -12,11 +12,11 @@ import { checkIsLoggedIn } from './redux/actions/actionCreators/authActionCreato
 
 const App: FC = () => {
 	const dispatch = useDispatch();
+	const isLogedIn = useSelector(IsLogedIn);
 	useEffect(() => {
 		const isLogedIn = !!localStorage.getItem('token');
 		dispatch(checkIsLoggedIn(isLogedIn));
 	}, []);
-	const isLogedIn = useSelector(IsLogedIn);
 
 	return (
 		<BrowserRouter>
