@@ -10,6 +10,8 @@ import { AuthResponse } from '../../interfaices/authResponse';
 import {
 	logInFailure,
 	logInSuccess,
+	logOutFailure,
+	logOutSuccess,
 	registrationFailure,
 	registrationSuccess,
 } from '../actions/actionCreators/authActionCreators';
@@ -25,11 +27,22 @@ function* logInWorker(action: LogInRequest): SagaIterator {
 				password: action.payload.password,
 			},
 		);
+		console.log(res);
 		localStorage.setItem('token', res.data.accessToken);
 		yield put(logInSuccess(true));
 	} catch (e) {
 		console.log(e.message);
 		yield put(logInFailure(e.message));
+	}
+}
+
+function* logOutWorker(): SagaIterator {
+	try {
+		yield call(api.post, '/auth/logout');
+		yield put(logOutSuccess(false));
+		localStorage.removeItem('token');
+	} catch (e) {
+		yield put(logOutFailure(e.message));
 	}
 }
 
@@ -53,6 +66,7 @@ function* registrationWorker(action: RegistrationRequest): SagaIterator {
 function* authWatcher(): SagaIterator {
 	yield takeEvery(AuthActionType.USER_LOG_IN_REQUEST, logInWorker);
 	yield takeEvery(AuthActionType.REGISTRATION_REQUEST, registrationWorker);
+	yield takeEvery(AuthActionType.USER_LOG_OUT_REQUEST, logOutWorker);
 }
 
 export default authWatcher;

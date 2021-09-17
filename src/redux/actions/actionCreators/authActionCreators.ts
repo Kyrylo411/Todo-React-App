@@ -3,7 +3,9 @@ import {
 	LogInFailure,
 	LogInRequest,
 	LogInSuccess,
-	LogOutAction,
+	LogOutFailure,
+	LogOutRequest,
+	LogOutSuccess,
 	RegistrationFailure,
 	RegistrationRequest,
 	RegistrationSuccess,
@@ -37,10 +39,22 @@ export const checkIsLoggedIn = (isLogedIn: boolean): CheckIsLoggedIn => {
 	};
 };
 
-export const logOutAction = (isLogedIn: boolean): LogOutAction => {
+export const logOutRequest = (): LogOutRequest => {
 	return {
-		type: AuthActionType.USER_LOG_OUT,
+		type: AuthActionType.USER_LOG_OUT_REQUEST,
+		payload: null,
+	};
+};
+export const logOutSuccess = (isLogedIn: boolean): LogOutSuccess => {
+	return {
+		type: AuthActionType.USER_LOG_OUT_SUCCESS,
 		payload: isLogedIn,
+	};
+};
+export const logOutFailure = (message: string): LogOutFailure => {
+	return {
+		type: AuthActionType.USER_LOG_OUT_FAILURE,
+		payload: message,
 	};
 };
 

@@ -3,10 +3,8 @@ import { Box, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { IsLogedIn } from '../../redux/selectors/auth';
 import { NavLink } from 'react-router-dom';
-import { logOutAction } from '../../redux/actions/actionCreators/authActionCreators';
+import { logOutRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useStyles } from './styles';
-import api from '../../http';
-import { AuthResponse } from '../../interfaices/authResponse';
 
 interface IMenuItem {
 	to: string;
@@ -17,14 +15,8 @@ const NavBar: FC = () => {
 	const isLogedIn = useSelector(IsLogedIn);
 	const dispatch = useDispatch();
 
-	const hadleLogOutClick = async (): Promise<void> => {
-		try {
-			await api.post<AuthResponse>('/auth/logout');
-			localStorage.removeItem('token');
-			dispatch(logOutAction(false));
-		} catch (e) {
-			console.log(e);
-		}
+	const handleLogOutClick = async (): Promise<void> => {
+		dispatch(logOutRequest());
 	};
 	const classes = useStyles();
 
@@ -42,7 +34,7 @@ const NavBar: FC = () => {
 					size="small"
 					variant="outlined"
 					color="secondary"
-					onClick={hadleLogOutClick}
+					onClick={handleLogOutClick}
 				>
 					Log Out
 				</Button>

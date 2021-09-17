@@ -2,12 +2,16 @@ export enum AuthActionType {
 	USER_LOG_IN_REQUEST = 'USER_LOG_IN_REQUEST',
 	USER_LOG_IN_SUCCESS = 'USER_LOG_IN_SUCCESS',
 	USER_LOG_IN_FAILURE = 'USER_LOG_IN_FAILURE',
+
 	CHECK_IS_LOGGED_IN = 'CHECK_IS_LOGGED_IN',
+
 	REGISTRATION_REQUEST = 'REGISTRATION_REQUEST',
 	REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS',
 	REGISTRATION_FAILURE = 'REGISTRATION_FAILURE',
 
-	USER_LOG_OUT = 'USER_LOG_OUT',
+	USER_LOG_OUT_REQUEST = 'USER_LOG_OUT_REQUEST',
+	USER_LOG_OUT_SUCCESS = 'USER_LOG_OUT_SUCCESS',
+	USER_LOG_OUT_FAILURE = 'USER_LOG_OUT_FAILURE',
 }
 
 export interface IAuthAction<T extends AuthActionType, P> {
@@ -50,14 +54,27 @@ export type RegistrationFailure = IAuthAction<
 	string
 >;
 
-export type LogOutAction = IAuthAction<AuthActionType.USER_LOG_OUT, boolean>;
+export type LogOutRequest = IAuthAction<
+	AuthActionType.USER_LOG_OUT_REQUEST,
+	null
+>;
+export type LogOutSuccess = IAuthAction<
+	AuthActionType.USER_LOG_OUT_SUCCESS,
+	boolean
+>;
+export type LogOutFailure = IAuthAction<
+	AuthActionType.USER_LOG_OUT_FAILURE,
+	string
+>;
 
 export type AuthAction =
-	| LogOutAction
 	| LogInRequest
 	| LogInSuccess
 	| LogInFailure
 	| CheckIsLoggedIn
 	| RegistrationRequest
 	| RegistrationSuccess
-	| RegistrationFailure;
+	| RegistrationFailure
+	| LogOutRequest
+	| LogOutSuccess
+	| LogOutFailure;

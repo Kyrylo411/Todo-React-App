@@ -9,7 +9,7 @@ export const authorization = (state = false, action: AuthAction): boolean => {
 			return (state = action.payload);
 		case AuthActionType.USER_LOG_IN_SUCCESS:
 			return (state = action.payload);
-		case AuthActionType.USER_LOG_OUT:
+		case AuthActionType.USER_LOG_OUT_SUCCESS:
 			return (state = action.payload);
 		default:
 			return state;
