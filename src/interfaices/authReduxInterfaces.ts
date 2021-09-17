@@ -22,10 +22,14 @@ export type UserData = {
 	login: string;
 	password: string;
 };
+export interface AuthData {
+	data: UserData;
+	callback(): void;
+}
 
 export type LogInRequest = IAuthAction<
 	AuthActionType.USER_LOG_IN_REQUEST,
-	UserData
+	AuthData
 >;
 export type LogInSuccess = IAuthAction<
 	AuthActionType.USER_LOG_IN_SUCCESS,
@@ -43,7 +47,7 @@ export type CheckIsLoggedIn = IAuthAction<
 
 export type RegistrationRequest = IAuthAction<
 	AuthActionType.REGISTRATION_REQUEST,
-	UserData
+	AuthData
 >;
 export type RegistrationSuccess = IAuthAction<
 	AuthActionType.REGISTRATION_SUCCESS,

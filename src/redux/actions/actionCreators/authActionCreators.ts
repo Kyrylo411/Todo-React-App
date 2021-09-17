@@ -6,14 +6,14 @@ import {
 	LogOutFailure,
 	LogOutRequest,
 	LogOutSuccess,
+	AuthData,
 	RegistrationFailure,
 	RegistrationRequest,
 	RegistrationSuccess,
-	UserData,
 } from '../../../interfaices/authReduxInterfaces';
 import { AuthActionType } from '../../../interfaices/authReduxInterfaces';
 
-export const logInRequest = (data: UserData): LogInRequest => {
+export const logInRequest = (data: AuthData): LogInRequest => {
 	return {
 		type: AuthActionType.USER_LOG_IN_REQUEST,
 		payload: data,
@@ -58,7 +58,7 @@ export const logOutFailure = (message: string): LogOutFailure => {
 	};
 };
 
-export const registrationRequest = (data: UserData): RegistrationRequest => {
+export const registrationRequest = (data: AuthData): RegistrationRequest => {
 	return {
 		type: AuthActionType.REGISTRATION_REQUEST,
 		payload: data,

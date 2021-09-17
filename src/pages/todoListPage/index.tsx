@@ -7,18 +7,18 @@ import List from '../../components/TodoList/List';
 import Footer from '../../components/TodoList/Footer';
 import UnderLines from '../../components/TodoList/UnderLines';
 import './TodoList.scss';
-import { Filter } from '../../interfaices/todos';
+import { Filter, FilterTypes } from '../../interfaices/todos';
 import Page from '../../components/Page';
 import { getItemLisRequest } from '../../redux/actions/actionCreators/todoListActionCreators';
 import { TodoListLoading } from '../../redux/selectors/todo';
 
 const TodoList: FC = () => {
-	const [activeFilter, setActiveFilter] = useState<Filter>('All');
+	const [activeFilter, setActiveFilter] = useState<FilterTypes>(Filter.All);
 	const dispatch = useDispatch();
 	const loading = useSelector(TodoListLoading);
 
-	const changeActiveFilter = (textValue: Filter): void => {
-		setActiveFilter(textValue);
+	const changeActiveFilter = (textValue: FilterTypes): void => {
+		setActiveFilter(Filter[textValue]);
 	};
 
 	useEffect(() => {

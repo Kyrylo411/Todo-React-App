@@ -5,6 +5,12 @@ export interface ITodoItem {
 	userId: string;
 }
 
-export type Filter = 'Active' | 'Completed' | 'All';
+export type FilterTypes = 'Active' | 'Completed' | 'All';
 
-export type FilterMap = Record<Filter, ITodoItem>;
+export enum Filter {
+	Active = 'Active',
+	Completed = 'Completed',
+	All = 'All',
+}
+
+export type FilterMap = Record<FilterTypes, ITodoItem>;

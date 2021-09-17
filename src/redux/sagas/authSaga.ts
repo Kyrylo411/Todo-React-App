@@ -23,15 +23,14 @@ function* logInWorker(action: LogInRequest): SagaIterator {
 			api.post,
 			'/auth/login',
 			{
-				login: action.payload.login,
-				password: action.payload.password,
+				login: action.payload.data.login,
+				password: action.payload.data.password,
 			},
 		);
-		console.log(res);
 		localStorage.setItem('token', res.data.accessToken);
 		yield put(logInSuccess(true));
+		action.payload.callback();
 	} catch (e) {
-		console.log(e.message);
 		yield put(logInFailure(e.message));
 	}
 }
@@ -48,16 +47,13 @@ function* logOutWorker(): SagaIterator {
 
 function* registrationWorker(action: RegistrationRequest): SagaIterator {
 	try {
-		const res: AxiosResponse<AuthResponse> = yield call(
-			api.post,
-			'/auth/registration',
-			{
-				login: action.payload.login,
-				password: action.payload.password,
-			},
-		);
-		console.log(res);
+		yield call(api.post, '/auth/registration', {
+			login: action.payload.data.login,
+			password: action.payload.data.password,
+		});
+
 		yield put(registrationSuccess());
+		action.payload.callback();
 	} catch (e) {
 		yield put(registrationFailure(e.message));
 	}

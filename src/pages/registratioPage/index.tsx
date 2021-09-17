@@ -35,8 +35,15 @@ const AuthPage: FC = () => {
 
 	const handleAuthClick = async (): Promise<void> => {
 		if (login && password) {
-			dispatch(registrationRequest({ login, password }));
-			history.push('/login');
+			dispatch(
+				registrationRequest({
+					data: { login, password },
+					callback: () => history.push('/login'),
+				}),
+			);
+			setLogin('');
+			setPassword('');
+			setCheckPassword('');
 		}
 	};
 

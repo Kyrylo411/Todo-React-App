@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 
 import ListItem from './ListItem';
 import './List.scss';
-import { Filter, FilterMap } from '../../../interfaices/todos';
+import { FilterTypes, FilterMap } from '../../../interfaices/todos';
 
 import { useSelector } from 'react-redux';
 import { GetTodoList } from '../../../redux/selectors/todo';
 import { ITodoItem } from '../../../interfaices/todos';
 
 interface Props {
-	activeFilter: Filter;
+	activeFilter: FilterTypes;
 }
 
 const List: FC<Props> = ({ activeFilter }) => {
