@@ -24,4 +24,17 @@ export const useStyles = makeStyles({
 		outline: 'gray',
 		color: '#777',
 	},
+	form: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	error: {
+		borderLeft: '2px solid red',
+	},
+	span: {
+		marginLeft: '10px',
+		color: 'red',
+	},
 });

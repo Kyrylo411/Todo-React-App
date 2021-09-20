@@ -4,36 +4,31 @@ import { useStyles } from './styles';
 
 interface ICustomInputProps {
 	type: string;
-	required: boolean;
 	value: string;
-	onChange(e: string): void;
-	isFocus: boolean;
 	placeholder: string;
+	onChange(e: React.SyntheticEvent): void;
+	onBlur?(): void;
+	className?: string;
 }
 
 const CustomInput: FC<ICustomInputProps> = ({
-	required,
 	type,
 	value,
 	onChange,
-	isFocus,
 	placeholder,
+	onBlur,
 }) => {
 	const classes = useStyles();
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		onChange(e.target.value);
-	};
 	return (
 		<div>
 			<Input
-				required={required}
 				className={classes.input}
-				autoFocus={isFocus}
 				placeholder={placeholder}
 				value={value}
-				onChange={handleChange}
+				onChange={onChange}
 				type={type}
+				onBlur={onBlur}
 			/>
 		</div>
 	);

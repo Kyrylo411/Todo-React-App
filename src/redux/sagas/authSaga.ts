@@ -55,7 +55,6 @@ function* registrationWorker(action: RegistrationRequest): SagaIterator {
 		yield put(registrationSuccess());
 		action.payload.callback();
 	} catch (e) {
-		console.log(e);
 		yield put(registrationFailure(e.message));
 	}
 }

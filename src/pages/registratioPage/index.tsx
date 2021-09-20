@@ -1,50 +1,31 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { Form, Field } from 'react-final-form';
+
 import { useHistory } from 'react-router-dom';
 import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
 import { Button, Box, Paper, CircularProgress } from '@material-ui/core';
+import { Alert } from '@mui/material';
 import { useStyles } from './styles';
 import { registrationRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthLoading } from '../../redux/selectors/auth';
+import { AuthError, AuthLoading } from '../../redux/selectors/auth';
+import { IErrors, IValues } from '../../interfaices/auth';
 
 const AuthPage: FC = () => {
-	const [login, setLogin] = useState('');
-	const [password, setPassword] = useState('');
-	const [checkPassword, setCheckPassword] = useState('');
 	const history = useHistory();
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const loading = useSelector(AuthLoading);
-	const disabled = !(
-		login &&
-		password &&
-		checkPassword &&
-		password === checkPassword
-	);
+	const errorMessage = useSelector(AuthError);
 
-	const handlePasswordChange = (value: string) => {
-		setPassword(value);
-	};
-	const handleCheckPasswordChange = (value: string) => {
-		setCheckPassword(value);
-	};
-	const handleLoginChange = (value: string) => {
-		setLogin(value);
-	};
-
-	const handleAuthClick = async (): Promise<void> => {
-		if (login && password) {
-			dispatch(
-				registrationRequest({
-					data: { login, password },
-					callback: () => history.push('/login'),
-				}),
-			);
-			setLogin('');
-			setPassword('');
-			setCheckPassword('');
-		}
+	const handleAuthClick = async (values: IValues): Promise<void> => {
+		dispatch(
+			registrationRequest({
+				data: { login: values.login, password: values.password },
+				callback: () => history.push('/login'),
+			}),
+		);
 	};
 
 	return (
@@ -52,43 +33,112 @@ const AuthPage: FC = () => {
 			{loading ? (
 				<CircularProgress />
 			) : (
-				<Paper className={classes.wrapper}>
-					<Box className={classes.inputWrapper}>
-						<CustomInput
-							required={true}
-							type="text"
-							value={login}
-							isFocus={true}
-							placeholder="login"
-							onChange={handleLoginChange}
-						/>
-						<CustomInput
-							required={true}
-							type="password"
-							value={password}
-							isFocus={false}
-							placeholder="password"
-							onChange={handlePasswordChange}
-						/>
-						<CustomInput
-							required={true}
-							type="password"
-							value={checkPassword}
-							isFocus={false}
-							placeholder="check password"
-							onChange={handleCheckPasswordChange}
-						/>
-					</Box>
-					<Button
-						className={classes.button}
-						variant="outlined"
-						color="primary"
-						onClick={handleAuthClick}
-						disabled={disabled}
-					>
-						Sign Up
-					</Button>
-				</Paper>
+				<Form
+					onSubmit={handleAuthClick}
+					validate={(values: IValues) => {
+						const errors: IErrors = {};
+						if (!values.login) {
+							errors.login = 'Required';
+						}
+						if (!values.password) {
+							errors.password = 'Required';
+						} else if (values.password.length <= 3) {
+							errors.password = 'more than 3 symbols';
+						}
+						if (!values.confirm) {
+							errors.confirm = 'Required';
+						} else if (values.confirm !== values.password) {
+							errors.confirm = 'Must match';
+						}
+						return errors;
+					}}
+					render={({ handleSubmit }) => (
+						<Paper className={classes.wrapper}>
+							<form onSubmit={handleSubmit} className={classes.form}>
+								<Box className={classes.inputWrapper}>
+									<Field name="login">
+										{({ input, meta }) => (
+											<div
+												className={
+													meta.error && meta.touched ? classes.error : ''
+												}
+											>
+												<CustomInput
+													type="text"
+													value={input.value}
+													placeholder={
+														meta.error && meta.touched ? 'Required!' : 'Login'
+													}
+													onChange={input.onChange}
+													onBlur={input.onBlur}
+												/>
+											</div>
+										)}
+									</Field>
+									<Field name="password">
+										{({ input, meta }) => (
+											<div
+												className={
+													meta.error && meta.touched ? classes.error : ''
+												}
+											>
+												<CustomInput
+													type="password"
+													value={input.value}
+													placeholder={
+														meta.error && meta.touched
+															? 'Required!'
+															: 'Password'
+													}
+													onChange={input.onChange}
+													onBlur={input.onBlur}
+												/>
+												{meta.error && meta.touched && (
+													<span className={classes.span}>{meta.error}</span>
+												)}
+											</div>
+										)}
+									</Field>
+									<Field name="confirm">
+										{({ input, meta }) => (
+											<div
+												className={
+													meta.error && meta.touched ? classes.error : ''
+												}
+											>
+												<CustomInput
+													type="password"
+													value={input.value}
+													placeholder={
+														meta.error && meta.touched
+															? 'Required!'
+															: 'Confirm password'
+													}
+													onChange={input.onChange}
+													onBlur={input.onBlur}
+												/>
+												{meta.error && meta.touched && (
+													<span className={classes.span}>{meta.error}</span>
+												)}
+											</div>
+										)}
+									</Field>
+								</Box>
+								<Button
+									className={classes.button}
+									type="submit"
+									variant="outlined"
+									color="primary"
+								>
+									Sign Up
+								</Button>
+								{errorMessage ? (
+									<Alert severity="error">{errorMessage}</Alert>
+								) : null}
+							</form>
+						</Paper>
+					)}
+				/>
 			)}
 		</Page>
 	);
