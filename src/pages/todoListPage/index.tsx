@@ -13,36 +13,36 @@ import { getItemLisRequest } from '../../redux/actions/actionCreators/todoListAc
 import { TodoListLoading } from '../../redux/selectors/todo';
 
 const TodoList: FC = () => {
-	const [activeFilter, setActiveFilter] = useState<FilterTypes>(Filter.All);
-	const dispatch = useDispatch();
-	const loading = useSelector(TodoListLoading);
+  const [activeFilter, setActiveFilter] = useState<FilterTypes>(Filter.All);
+  const dispatch = useDispatch();
+  const loading = useSelector(TodoListLoading);
 
-	const changeActiveFilter = (textValue: FilterTypes): void => {
-		setActiveFilter(Filter[textValue]);
-	};
+  const changeActiveFilter = (textValue: FilterTypes): void => {
+    setActiveFilter(Filter[textValue]);
+  };
 
-	useEffect(() => {
-		dispatch(getItemLisRequest());
-	}, []);
+  useEffect(() => {
+    dispatch(getItemLisRequest());
+  }, []);
 
-	return (
-		<Page>
-			<h1 className="todos">todos</h1>
-			{loading ? (
-				<CircularProgress />
-			) : (
-				<div className="todoWrapper">
-					<Header />
-					<List activeFilter={activeFilter} />
-					<Footer
-						setActiveFilter={changeActiveFilter}
-						activeFilter={activeFilter}
-					/>
-				</div>
-			)}
-			<UnderLines />
-		</Page>
-	);
+  return (
+    <Page>
+      <h1 className="todos">todos</h1>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <div className="todoWrapper">
+          <Header />
+          <List activeFilter={activeFilter} />
+          <Footer
+            setActiveFilter={changeActiveFilter}
+            activeFilter={activeFilter}
+          />
+        </div>
+      )}
+      <UnderLines />
+    </Page>
+  );
 };
 
 export default TodoList;

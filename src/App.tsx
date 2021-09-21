@@ -9,40 +9,45 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IsLogedIn } from './redux/selectors/auth';
 import { useEffect } from 'react';
 import { checkIsLoggedIn } from './redux/actions/actionCreators/authActionCreators';
+import ThemeSwitcher from './components/ThemeSwitcher';
+import ThemeProvider from './components/ThemeProvider';
 
-const App: FC = () => {
-	const dispatch = useDispatch();
-	const isLogedIn = useSelector(IsLogedIn);
-	useEffect(() => {
-		const isLogedIn = !!localStorage.getItem('token');
-		dispatch(checkIsLoggedIn(isLogedIn));
-	}, []);
+export const App: FC = () => {
+  const dispatch = useDispatch();
+  const isLogedIn = useSelector(IsLogedIn);
+  useEffect(() => {
+    const isLogedIn = !!localStorage.getItem('token');
+    dispatch(checkIsLoggedIn(isLogedIn));
+  }, []);
 
-	return (
-		<BrowserRouter>
-			<NavBar />
-			<Box>
-				<Switch>
-					<PrivateRoute
-						path="/auth"
-						redirectTo="/todos"
-						isLogedIn={!isLogedIn}
-						component={AuthPage}
-						exact
-					/>
-					<Route path={'/login'} exact>
-						<LoginPage />
-					</Route>
-					<PrivateRoute
-						redirectTo="/auth"
-						isLogedIn={isLogedIn}
-						component={TodoListPage}
-						exact
-					/>
-				</Switch>
-			</Box>
-		</BrowserRouter>
-	);
+  return (
+    <ThemeProvider>
+      <ThemeSwitcher />
+      <BrowserRouter>
+        <NavBar />
+        <Box>
+          <Switch>
+            <PrivateRoute
+              path="/auth"
+              redirectTo="/todos"
+              isLogedIn={!isLogedIn}
+              component={AuthPage}
+              exact
+            />
+            <Route path={'/login'} exact>
+              <LoginPage />
+            </Route>
+            <PrivateRoute
+              redirectTo="/auth"
+              isLogedIn={isLogedIn}
+              component={TodoListPage}
+              exact
+            />
+          </Switch>
+        </Box>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 };
 
 export default App;

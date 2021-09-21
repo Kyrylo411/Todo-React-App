@@ -3,45 +3,43 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 export const API_URL = 'http://localhost:5000';
 
 const api = axios.create({
-	withCredentials: true,
-	baseURL: API_URL,
+  withCredentials: true,
+  baseURL: API_URL,
 });
 
 api.interceptors.request.use((config: AxiosRequestConfig) => {
-	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-	return config;
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  return config;
 });
 
 api.interceptors.response.use(
-	(config: AxiosResponse) => {
-		console.log(config);
-		return config;
-	},
-	(error) => {
-		throw error;
-	},
+  (config: AxiosResponse) => {
+    return config;
+  },
+  (error) => {
+    throw error;
+  },
 );
 
 api.interceptors.response.use(
-	(config: AxiosResponse) => {
-		console.log(config);
-		return config;
-	},
-	async (error) => {
-		const originalRequest = error.config;
-		if (error.response.status === 401) {
-			try {
-				const response = await axios.get(`${API_URL}/auth/refresh`, {
-					withCredentials: true,
-				});
-				localStorage.setItem('token', response.data.accessToken);
-				return api.request(originalRequest);
-			} catch (e) {
-				console.log('Пользователь не авторизован');
-			}
-		}
-		throw error.response.data;
-	},
+  (config: AxiosResponse) => {
+    return config;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401) {
+      try {
+        const response = await axios.get(`${API_URL}/auth/refresh`, {
+          withCredentials: true,
+        });
+        localStorage.setItem('token', response.data.accessToken);
+        return api.request(originalRequest);
+      } catch (e) {
+        console.log('Пользователь не авторизован');
+      }
+    }
+    throw error.response.data;
+  },
 );
 
 export default api;

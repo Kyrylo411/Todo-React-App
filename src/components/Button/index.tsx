@@ -4,26 +4,26 @@ import classNames from 'classnames';
 import './Button.scss';
 
 interface Props {
-	value: string;
-	active: boolean;
-	onClick: () => void;
+  value: string;
+  active: boolean;
+  onClick: () => void;
 }
 
 const Button: FC<Props> = ({ value, active, onClick }) => {
-	const handleClick = (): void => {
-		onClick();
-	};
-	return (
-		<button
-			className={classNames({
-				button: true,
-				active: active,
-			})}
-			onClick={handleClick}
-		>
-			{value}
-		</button>
-	);
+  const handleClick = (): void => {
+    onClick();
+  };
+  return (
+    <button
+      className={classNames({
+        button: true,
+        active: active,
+      })}
+      onClick={handleClick}
+    >
+      {value}
+    </button>
+  );
 };
 
 export default Button;

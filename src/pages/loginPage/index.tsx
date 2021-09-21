@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Form, Field } from 'react-final-form';
 
 import { Box, Button, CircularProgress, Paper } from '@material-ui/core';
-import { Alert } from '@mui/material';
+import { Alert } from '@material-ui/lab';
 import { useStyles } from './styles';
 import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
@@ -13,101 +13,101 @@ import { AuthError, AuthLoading } from '../../redux/selectors/auth';
 import { IErrors, IValues } from '../../interfaices/auth';
 
 const LoginPage: FC = () => {
-	const loading = useSelector(AuthLoading);
-	const classes = useStyles();
-	const history = useHistory();
-	const dispatch = useDispatch();
+  const loading = useSelector(AuthLoading);
+  const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-	const errorMessage = useSelector(AuthError);
+  const errorMessage = useSelector(AuthError);
 
-	const handleLoginClick = async (values: IValues): Promise<void> => {
-		dispatch(
-			logInRequest({
-				data: { login: values.login, password: values.password },
-				callback: () => history.push('/todos'),
-			}),
-		);
-	};
+  const handleLoginClick = async (values: IValues): Promise<void> => {
+    dispatch(
+      logInRequest({
+        data: { login: values.login, password: values.password },
+        callback: () => history.push('/todos'),
+      }),
+    );
+  };
 
-	return (
-		<Page>
-			{loading ? (
-				<CircularProgress />
-			) : (
-				<Form
-					onSubmit={handleLoginClick}
-					validate={(values: IValues) => {
-						const errors: IErrors = {};
-						if (!values.login) {
-							errors.login = 'Required';
-						}
-						if (!values.password) {
-							errors.password = 'Required';
-						}
-						return errors;
-					}}
-					render={({ handleSubmit }) => (
-						<Paper className={classes.wrapper}>
-							<form onSubmit={handleSubmit} className={classes.form}>
-								<Box className={classes.inputWrapper}>
-									<Field name="login">
-										{({ input, meta }) => (
-											<div
-												className={
-													meta.error && meta.touched ? classes.error : ''
-												}
-											>
-												<CustomInput
-													type="text"
-													value={input.value}
-													placeholder={
-														meta.error && meta.touched ? 'Required!' : 'Login'
-													}
-													onChange={input.onChange}
-													onBlur={input.onBlur}
-												/>
-											</div>
-										)}
-									</Field>
-									<Field name="password">
-										{({ input, meta }) => (
-											<div
-												className={
-													meta.error && meta.touched ? classes.error : ''
-												}
-											>
-												<CustomInput
-													type="password"
-													value={input.value}
-													placeholder={
-														meta.error && meta.touched
-															? 'Required!'
-															: 'Password'
-													}
-													onChange={input.onChange}
-													onBlur={input.onBlur}
-												/>
-											</div>
-										)}
-									</Field>
-								</Box>
-								<Button
-									className={classes.button}
-									type="submit"
-									variant="outlined"
-									color="primary"
-								>
-									Sign In
-								</Button>
-								{errorMessage ? (
-									<Alert severity="error">{errorMessage}</Alert>
-								) : null}
-							</form>
-						</Paper>
-					)}
-				/>
-			)}
-		</Page>
-	);
+  return (
+    <Page>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <Form
+          onSubmit={handleLoginClick}
+          validate={(values: IValues) => {
+            const errors: IErrors = {};
+            if (!values.login) {
+              errors.login = 'Required';
+            }
+            if (!values.password) {
+              errors.password = 'Required';
+            }
+            return errors;
+          }}
+          render={({ handleSubmit }) => (
+            <Paper className={classes.wrapper}>
+              <form onSubmit={handleSubmit} className={classes.form}>
+                <Box className={classes.inputWrapper}>
+                  <Field name="login">
+                    {({ input, meta }) => (
+                      <div
+                        className={
+                          meta.error && meta.touched ? classes.error : ''
+                        }
+                      >
+                        <CustomInput
+                          type="text"
+                          value={input.value}
+                          placeholder={
+                            meta.error && meta.touched ? 'Required!' : 'Login'
+                          }
+                          onChange={input.onChange}
+                          onBlur={input.onBlur}
+                        />
+                      </div>
+                    )}
+                  </Field>
+                  <Field name="password">
+                    {({ input, meta }) => (
+                      <div
+                        className={
+                          meta.error && meta.touched ? classes.error : ''
+                        }
+                      >
+                        <CustomInput
+                          type="password"
+                          value={input.value}
+                          placeholder={
+                            meta.error && meta.touched
+                              ? 'Required!'
+                              : 'Password'
+                          }
+                          onChange={input.onChange}
+                          onBlur={input.onBlur}
+                        />
+                      </div>
+                    )}
+                  </Field>
+                </Box>
+                <Button
+                  className={classes.button}
+                  type="submit"
+                  variant="outlined"
+                  color="primary"
+                >
+                  Sign In
+                </Button>
+                {errorMessage ? (
+                  <Alert severity="error">{errorMessage}</Alert>
+                ) : null}
+              </form>
+            </Paper>
+          )}
+        />
+      )}
+    </Page>
+  );
 };
 export default LoginPage;
