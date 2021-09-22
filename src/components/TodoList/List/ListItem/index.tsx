@@ -8,6 +8,7 @@ import { ITodoItem } from '../../../../interfaices/todos';
 
 import CheckBox from './CheckBox';
 import './ListItem.scss';
+import { useTheme } from '../../../ThemeProvider';
 
 interface Props {
   item: ITodoItem;
@@ -18,7 +19,7 @@ const ListItem: FC<Props> = ({ item, id }) => {
   const [inputValue, setInputValue] = useState(item.value);
   const [editItem, setEditItem] = useState(false);
   const dispatch = useDispatch();
-
+  const theme = useTheme();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
   };
@@ -63,7 +64,10 @@ const ListItem: FC<Props> = ({ item, id }) => {
   };
 
   return (
-    <li className="todoitem" onClick={editTodoInput}>
+    <li
+      className={theme ? 'todoitem todoitemDark' : 'todoitem'}
+      onClick={editTodoInput}
+    >
       {editItem ? (
         <input
           className="itemInput"

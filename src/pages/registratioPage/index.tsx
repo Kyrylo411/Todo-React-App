@@ -2,20 +2,20 @@ import React, { FC } from 'react';
 import { Form, Field } from 'react-final-form';
 
 import { useHistory } from 'react-router-dom';
-import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
 import { Button, Box, Paper, CircularProgress } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import { useDarkStyles, useStyles } from './styles';
+import { useStyles } from './styles';
 import { registrationRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthError, AuthLoading } from '../../redux/selectors/auth';
 import { IErrors, IValues } from '../../interfaices/auth';
 import { useTheme } from '../../components/ThemeProvider';
+import Page from '../../components/Page';
 
 const AuthPage: FC = () => {
   const theme = useTheme();
-  const classes = theme ? useDarkStyles() : useStyles();
+  const classes = useStyles({ theme });
   const history = useHistory();
   const dispatch = useDispatch();
   const loading = useSelector(AuthLoading);

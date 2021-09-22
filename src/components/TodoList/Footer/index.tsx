@@ -5,6 +5,7 @@ import ButtonGroup from './ButtonGroup';
 import './Footer.scss';
 import { useSelector } from 'react-redux';
 import { GetTodoList } from '../../../redux/selectors/todo';
+import { useTheme } from '../../ThemeProvider';
 
 interface Props {
   activeFilter: string;
@@ -13,6 +14,7 @@ interface Props {
 
 const Footer: FC<Props> = ({ activeFilter, setActiveFilter }) => {
   const todoItemList = useSelector(GetTodoList);
+  const theme = useTheme();
   const itemsLeft = useMemo(() => {
     const notCheckeditems = todoItemList.filter((item) => item.done === false);
     return notCheckeditems.length > 1 || notCheckeditems.length === 0
@@ -21,7 +23,7 @@ const Footer: FC<Props> = ({ activeFilter, setActiveFilter }) => {
   }, [todoItemList.length]);
 
   return todoItemList.length ? (
-    <div className="footer">
+    <div className={theme ? 'footer footerDark' : 'footer'}>
       <p>{itemsLeft}</p>
       <ButtonGroup
         setActiveFilter={setActiveFilter}

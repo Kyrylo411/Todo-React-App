@@ -5,53 +5,55 @@ import { IsLogedIn } from '../../redux/selectors/auth';
 import { NavLink } from 'react-router-dom';
 import { logOutRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useStyles } from './styles';
+import { useTheme } from '../ThemeProvider';
 
 interface IMenuItem {
-	to: string;
-	value: string;
+  to: string;
+  value: string;
 }
 
 const NavBar: FC = () => {
-	const isLogedIn = useSelector(IsLogedIn);
-	const dispatch = useDispatch();
+  const isLogedIn = useSelector(IsLogedIn);
+  const dispatch = useDispatch();
+  const theme = useTheme();
 
-	const handleLogOutClick = async (): Promise<void> => {
-		dispatch(logOutRequest());
-	};
-	const classes = useStyles();
+  const handleLogOutClick = async (): Promise<void> => {
+    dispatch(logOutRequest());
+  };
+  const classes = useStyles({ theme });
 
-	const menuItems = isLogedIn
-		? [{ to: '/todos', value: 'Todo List' }]
-		: [
-				{ to: '/auth', value: 'Sign Up' },
-				{ to: '/login', value: 'Sign In' },
-		  ];
+  const menuItems = isLogedIn
+    ? [{ to: '/todos', value: 'Todo List' }]
+    : [
+        { to: '/auth', value: 'Sign Up' },
+        { to: '/login', value: 'Sign In' },
+      ];
 
-	return (
-		<Box className="linkWrapper">
-			{isLogedIn ? (
-				<Button
-					size="small"
-					variant="outlined"
-					color="secondary"
-					onClick={handleLogOutClick}
-				>
-					Log Out
-				</Button>
-			) : null}
-			{menuItems.map((item: IMenuItem) => {
-				return (
-					<NavLink
-						className={classes.a}
-						activeClassName={classes.activeLink}
-						key={item.value}
-						to={item.to}
-					>
-						{item.value}
-					</NavLink>
-				);
-			})}
-		</Box>
-	);
+  return (
+    <Box className={classes.linkWrapper}>
+      {isLogedIn ? (
+        <Button
+          size="small"
+          variant="outlined"
+          color="secondary"
+          onClick={handleLogOutClick}
+        >
+          Log Out
+        </Button>
+      ) : null}
+      {menuItems.map((item: IMenuItem) => {
+        return (
+          <NavLink
+            className={classes.a}
+            activeClassName={classes.activeLink}
+            key={item.value}
+            to={item.to}
+          >
+            {item.value}
+          </NavLink>
+        );
+      })}
+    </Box>
+  );
 };
 export default NavBar;

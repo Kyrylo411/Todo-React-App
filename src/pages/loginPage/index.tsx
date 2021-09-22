@@ -4,17 +4,19 @@ import { Form, Field } from 'react-final-form';
 import { Box, Button, CircularProgress, Paper } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { useStyles } from './styles';
-import Page from '../../components/Page';
 import CustomInput from '../../components/CustomInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useHistory } from 'react-router-dom';
 import { AuthError, AuthLoading } from '../../redux/selectors/auth';
 import { IErrors, IValues } from '../../interfaices/auth';
+import { useTheme } from '../../components/ThemeProvider';
+import Page from '../../components/Page';
 
 const LoginPage: FC = () => {
+  const theme = useTheme();
   const loading = useSelector(AuthLoading);
-  const classes = useStyles();
+  const classes = useStyles({ theme });
   const history = useHistory();
   const dispatch = useDispatch();
 
