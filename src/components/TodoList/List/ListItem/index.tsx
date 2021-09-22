@@ -9,6 +9,7 @@ import { ITodoItem } from '../../../../interfaices/todos';
 import CheckBox from './CheckBox';
 import './ListItem.scss';
 import { useTheme } from '../../../ThemeProvider';
+import { useCallback } from 'react';
 
 interface Props {
   item: ITodoItem;
@@ -37,12 +38,9 @@ const ListItem: FC<Props> = ({ item, id }) => {
     }
   };
 
-  const changeItemValue = async (
-    inputValue: string,
-    id: string,
-  ): Promise<void> => {
+  const changeItemValue = useCallback((inputValue: string, id: string) => {
     dispatch(changeItemValueRequest({ id: id, value: inputValue }));
-  };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
@@ -59,9 +57,10 @@ const ListItem: FC<Props> = ({ item, id }) => {
     };
   };
   const editTodoInput = handleDoubleClick();
-  const handleDeleteClick = () => {
+
+  const handleDeleteClick = useCallback(() => {
     dispatch(deleteItemRequest(id));
-  };
+  }, []);
 
   return (
     <li

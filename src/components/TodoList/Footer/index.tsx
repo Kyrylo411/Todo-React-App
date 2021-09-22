@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, memo } from 'react';
 
 import ClearButton from './ClearButton';
 import ButtonGroup from './ButtonGroup';
@@ -13,14 +13,15 @@ interface Props {
 }
 
 const Footer: FC<Props> = ({ activeFilter, setActiveFilter }) => {
-  const todoItemList = useSelector(GetTodoList);
   const theme = useTheme();
+  const todoItemList = useSelector(GetTodoList);
+
   const itemsLeft = useMemo(() => {
     const notCheckeditems = todoItemList.filter((item) => item.done === false);
     return notCheckeditems.length > 1 || notCheckeditems.length === 0
       ? `${notCheckeditems.length} items left`
       : `${notCheckeditems.length} item left`;
-  }, [todoItemList.length]);
+  }, [todoItemList]);
 
   return todoItemList.length ? (
     <div className={theme ? 'footer footerDark' : 'footer'}>
@@ -34,4 +35,4 @@ const Footer: FC<Props> = ({ activeFilter, setActiveFilter }) => {
   ) : null;
 };
 
-export default Footer;
+export default memo(Footer);

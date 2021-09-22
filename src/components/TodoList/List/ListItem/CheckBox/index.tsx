@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { useCallback } from 'react';
+import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeItemCheckRequest } from '../../../../../redux/actions/actionCreators/todoListActionCreators';
 
@@ -16,10 +18,10 @@ const CheckBox: FC<Props> = ({ id, isChecked }) => {
     e.stopPropagation();
   };
 
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     dispatch(changeItemCheckRequest({ id, checked }));
-  };
+  }, []);
   return (
     <label className="container">
       <input
@@ -33,4 +35,4 @@ const CheckBox: FC<Props> = ({ id, isChecked }) => {
   );
 };
 
-export default CheckBox;
+export default memo(CheckBox);

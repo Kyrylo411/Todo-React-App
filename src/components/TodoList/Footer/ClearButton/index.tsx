@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteCompletedRequest } from '../../../../redux/actions/actionCreators/todoListActionCreators';
@@ -9,14 +9,15 @@ const ClearButton: FC = () => {
   const todoItemList = useSelector(GetTodoList);
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     const checkeditems = todoItemList.filter((item) => item.done === true);
     dispatch(deleteCompletedRequest(checkeditems));
-  };
+  }, [todoItemList]);
 
-  const findCheckedItem = (): boolean => {
+  const findCheckedItem = useCallback((): boolean => {
     return todoItemList.some((item) => item.done === true);
-  };
+  }, [todoItemList]);
+
   return findCheckedItem() ? (
     <button onClick={handleClick} className="clearButton">
       Clear Completed

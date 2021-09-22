@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, memo } from 'react';
 import { Form, Field } from 'react-final-form';
 
 import { Box, Button, CircularProgress, Paper } from '@material-ui/core';
@@ -22,14 +22,14 @@ const LoginPage: FC = () => {
 
   const errorMessage = useSelector(AuthError);
 
-  const handleLoginClick = async (values: IValues): Promise<void> => {
+  const handleLoginClick = useCallback((values: IValues) => {
     dispatch(
       logInRequest({
-        data: { login: values.login, password: values.password },
+        data: { login: values.login.trim(), password: values.password },
         callback: () => history.push('/todos'),
       }),
     );
-  };
+  }, []);
 
   return (
     <Page>
@@ -112,4 +112,4 @@ const LoginPage: FC = () => {
     </Page>
   );
 };
-export default LoginPage;
+export default memo(LoginPage);

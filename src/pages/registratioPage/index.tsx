@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
 
 import { useHistory } from 'react-router-dom';
@@ -21,17 +21,17 @@ const AuthPage: FC = () => {
   const loading = useSelector(AuthLoading);
   const errorMessage = useSelector(AuthError);
 
-  const handleAuthClick = async (values: IValues): Promise<void> => {
+  const handleAuthClick = useCallback((values: IValues) => {
     dispatch(
       registrationRequest({
         data: {
-          login: values.login,
+          login: values.login.trim(),
           password: values.password,
         },
         callback: () => history.push('/login'),
       }),
     );
-  };
+  }, []);
 
   return (
     <Page>
@@ -49,6 +49,8 @@ const AuthPage: FC = () => {
               errors.password = 'Required';
             } else if (values.password.length <= 3) {
               errors.password = 'more than 3 symbols';
+            } else if (values.password.includes(' ')) {
+              errors.password = 'should not includes scapes!';
             }
             if (!values.confirm) {
               errors.confirm = 'Required';
@@ -150,4 +152,4 @@ const AuthPage: FC = () => {
     </Page>
   );
 };
-export default AuthPage;
+export default memo(AuthPage);

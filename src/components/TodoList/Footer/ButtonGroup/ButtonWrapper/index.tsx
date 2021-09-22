@@ -1,22 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import Button from '../../../../Button';
 
 interface Props {
-	item: string;
-	active: boolean;
-	onClick: (item: string) => void;
+  item: string;
+  active: boolean;
+  onClick: (item: string) => void;
 }
 
 const ButtonWrapper: FC<Props> = ({ item, active, onClick }) => {
-	const handleClick = (): void => {
-		onClick(item);
-	};
-	return (
-		<div>
-			<Button active={active} value={item} onClick={handleClick} />
-		</div>
-	);
+  const handleClick = (): void => {
+    onClick(item);
+  };
+  return (
+    <div>
+      <Button active={active} value={item} onClick={handleClick} />
+    </div>
+  );
 };
 
-export default ButtonWrapper;
+export default memo(ButtonWrapper);

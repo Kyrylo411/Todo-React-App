@@ -1,17 +1,15 @@
 import React from 'react';
+import { useCallback } from 'react';
 import { FC } from 'react';
-import { useTheme, useUpdateTheme } from '../ThemeProvider';
+import { useUpdateTheme } from '../ThemeProvider';
 import './ThemeSwitch.scss';
 
 const ThemeSwitcher: FC = () => {
   const updateTheme = useUpdateTheme();
-  const darkTheme = useTheme();
 
-  console.log('darkTheme : ', darkTheme);
-
-  const checkHandler = () => {
+  const checkHandler = useCallback(() => {
     updateTheme();
-  };
+  }, [updateTheme]);
 
   return (
     <div className="themeWrapper">

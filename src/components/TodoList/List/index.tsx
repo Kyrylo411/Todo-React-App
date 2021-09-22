@@ -7,6 +7,7 @@ import { FilterTypes, FilterMap } from '../../../interfaices/todos';
 import { useSelector } from 'react-redux';
 import { GetTodoList } from '../../../redux/selectors/todo';
 import { ITodoItem } from '../../../interfaices/todos';
+import { memo } from 'react';
 
 interface Props {
   activeFilter: FilterTypes;
@@ -34,4 +35,4 @@ const List: FC<Props> = ({ activeFilter }) => {
   );
 };
 
-export default List;
+export default memo(List);

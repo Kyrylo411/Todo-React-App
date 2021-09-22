@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CircularProgress } from '@material-ui/core';
@@ -45,4 +45,4 @@ const TodoList: FC = () => {
   );
 };
 
-export default TodoList;
+export default memo(TodoList);

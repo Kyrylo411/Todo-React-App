@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { logOutRequest } from '../../redux/actions/actionCreators/authActionCreators';
 import { useStyles } from './styles';
 import { useTheme } from '../ThemeProvider';
+import { useCallback } from 'react';
 
 interface IMenuItem {
   to: string;
@@ -17,9 +18,9 @@ const NavBar: FC = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const handleLogOutClick = async (): Promise<void> => {
+  const handleLogOutClick = useCallback(() => {
     dispatch(logOutRequest());
-  };
+  }, []);
   const classes = useStyles({ theme });
 
   const menuItems = isLogedIn

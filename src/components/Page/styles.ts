@@ -14,7 +14,6 @@ export const useStyles = makeStyles(() => ({
     margin: '0',
     minWidth: 'inherit',
     width: '100vw',
-    minHeight: '100vh',
-    height: '100%',
+    minHeight: '89.8vh',
   }),
 }));

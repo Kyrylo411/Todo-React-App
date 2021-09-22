@@ -8,16 +8,14 @@ import { IsLogedIn } from './redux/selectors/auth';
 import { useEffect } from 'react';
 import { checkIsLoggedIn } from './redux/actions/actionCreators/authActionCreators';
 import ThemeSwitcher from './components/ThemeSwitcher';
-import ThemeProvider, { useTheme } from './components/ThemeProvider';
+import ThemeProvider from './components/ThemeProvider';
 import { Box } from '@material-ui/core';
 import { useStyles } from './AppStyle';
 
 export const App: FC = () => {
   const dispatch = useDispatch();
   const isLogedIn = useSelector(IsLogedIn);
-  const theme = useTheme();
-  const classes = useStyles({ theme });
-  console.log(theme);
+  const classes = useStyles();
 
   useEffect(() => {
     const isLogedIn = !!localStorage.getItem('token');

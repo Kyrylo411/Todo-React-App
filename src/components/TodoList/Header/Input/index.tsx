@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { addItemRequest } from '../../../../redux/actions/actionCreators/todoListActionCreators';
@@ -9,20 +10,24 @@ const Input: FC = () => {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
   const theme = useTheme();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(e.target.value);
   };
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement },
-  ) => {
-    if (e.key === 'Enter') {
-      if (e.target.value.trim()) {
-        dispatch(addItemRequest(e.target.value));
-        setValue('');
+  const handleKeyDown = useCallback(
+    (
+      e: React.KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement },
+    ) => {
+      if (e.key === 'Enter') {
+        if (e.target.value.trim()) {
+          dispatch(addItemRequest(e.target.value));
+          setValue('');
+        }
       }
-    }
-  };
+    },
+    [],
+  );
 
   return (
     <input
