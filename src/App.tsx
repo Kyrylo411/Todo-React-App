@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { TodoListPage, AuthPage, LoginPage } from './pages';
 import PrivateRoute from './components/PrivateRoute';
 import NavBar from './components/NavBar';
@@ -45,6 +45,7 @@ export const App: FC = () => {
               component={TodoListPage}
               exact
             />
+            <Redirect to="/auth" />
           </Switch>
         </Box>
       </BrowserRouter>

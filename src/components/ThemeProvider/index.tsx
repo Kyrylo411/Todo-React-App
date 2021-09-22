@@ -5,19 +5,13 @@ import { createContext } from 'react';
 const ThemeContext = createContext(true);
 const ThemeUpdateContext = createContext(null);
 
-export const useTheme = (): boolean => {
-  return useContext(ThemeContext);
-};
+export const useTheme = (): boolean => useContext(ThemeContext);
 
-export const useUpdateTheme = () => {
-  return useContext(ThemeUpdateContext);
-};
+export const useUpdateTheme = () => useContext(ThemeUpdateContext);
 
 const ThemeProvider: FC = ({ children }) => {
   const [darkTheme, setDarkTheme] = useState(false);
-  const toggleTheme = () => {
-    setDarkTheme(!darkTheme);
-  };
+  const toggleTheme = () => setDarkTheme(!darkTheme);
 
   useEffect(() => {
     localStorage.getItem('darkTheme')

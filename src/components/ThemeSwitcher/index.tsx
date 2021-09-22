@@ -8,9 +8,7 @@ const ThemeSwitcher: FC = () => {
   const updateTheme = useUpdateTheme();
   const theme = useTheme();
 
-  const checkHandler = useCallback(() => {
-    updateTheme();
-  }, [updateTheme]);
+  const checkHandler = useCallback(() => updateTheme(), [updateTheme]);
 
   return (
     <div className="themeWrapper">

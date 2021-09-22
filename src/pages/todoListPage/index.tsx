@@ -18,7 +18,7 @@ const TodoList: FC = () => {
   const loading = useSelector(TodoListLoading);
   const theme = useTheme();
 
-  const changeActiveFilter = (textValue: FilterTypes): void => {
+  const changeActiveFilter = (textValue: FilterTypes) => {
     setActiveFilter(Filter[textValue]);
   };
 

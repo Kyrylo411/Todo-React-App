@@ -26,6 +26,7 @@ const List: FC<Props> = ({ activeFilter }) => {
       return filterMap[activeFilter];
     });
   }, [todoItemList, activeFilter]);
+
   return (
     <ul className="todoList">
       {listToRender.map((item: ITodoItem) => {

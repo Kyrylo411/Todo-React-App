@@ -31,6 +31,17 @@ const LoginPage: FC = () => {
     );
   }, []);
 
+  const validation = (values: IValues) => {
+    const errors: IErrors = {};
+    if (!values.login) {
+      errors.login = 'Required';
+    }
+    if (!values.password) {
+      errors.password = 'Required';
+    }
+    return errors;
+  };
+
   return (
     <Page>
       {loading ? (
@@ -38,16 +49,7 @@ const LoginPage: FC = () => {
       ) : (
         <Form
           onSubmit={handleLoginClick}
-          validate={(values: IValues) => {
-            const errors: IErrors = {};
-            if (!values.login) {
-              errors.login = 'Required';
-            }
-            if (!values.password) {
-              errors.password = 'Required';
-            }
-            return errors;
-          }}
+          validate={validation}
           render={({ handleSubmit }) => (
             <Paper className={classes.wrapper}>
               <form onSubmit={handleSubmit} className={classes.form}>

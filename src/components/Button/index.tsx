@@ -10,9 +10,7 @@ interface Props {
 }
 
 const Button: FC<Props> = ({ value, active, onClick }) => {
-  const handleClick = (): void => {
-    onClick();
-  };
+  const handleClick = () => onClick();
   return (
     <button
       className={classNames({

@@ -33,6 +33,26 @@ const AuthPage: FC = () => {
     );
   }, []);
 
+  const validation = (values: IValues) => {
+    const errors: IErrors = {};
+    if (!values.login) {
+      errors.login = 'Required';
+    }
+    if (!values.password) {
+      errors.password = 'Required';
+    } else if (values.password.length <= 3) {
+      errors.password = 'more than 3 symbols';
+    } else if (values.password.includes(' ')) {
+      errors.password = 'should not includes scapes!';
+    }
+    if (!values.confirm) {
+      errors.confirm = 'Required';
+    } else if (values.confirm !== values.password) {
+      errors.confirm = 'Must match';
+    }
+    return errors;
+  };
+
   return (
     <Page>
       {loading ? (
@@ -40,25 +60,7 @@ const AuthPage: FC = () => {
       ) : (
         <Form
           onSubmit={handleAuthClick}
-          validate={(values: IValues) => {
-            const errors: IErrors = {};
-            if (!values.login) {
-              errors.login = 'Required';
-            }
-            if (!values.password) {
-              errors.password = 'Required';
-            } else if (values.password.length <= 3) {
-              errors.password = 'more than 3 symbols';
-            } else if (values.password.includes(' ')) {
-              errors.password = 'should not includes scapes!';
-            }
-            if (!values.confirm) {
-              errors.confirm = 'Required';
-            } else if (values.confirm !== values.password) {
-              errors.confirm = 'Must match';
-            }
-            return errors;
-          }}
+          validate={validation}
           render={({ handleSubmit }) => (
             <Paper className={classes.wrapper}>
               <form onSubmit={handleSubmit} className={classes.form}>

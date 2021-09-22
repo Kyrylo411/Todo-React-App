@@ -14,14 +14,13 @@ interface Props {
 const CheckBox: FC<Props> = ({ id, isChecked }) => {
   const dispatch = useDispatch();
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
+  const handleClick = (e: React.MouseEvent) => e.stopPropagation();
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     dispatch(changeItemCheckRequest({ id, checked }));
   }, []);
+
   return (
     <label className="container">
       <input

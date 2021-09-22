@@ -9,9 +9,7 @@ interface Props {
 }
 
 const ButtonWrapper: FC<Props> = ({ item, active, onClick }) => {
-  const handleClick = (): void => {
-    onClick(item);
-  };
+  const handleClick = () => onClick(item);
   return (
     <div>
       <Button active={active} value={item} onClick={handleClick} />

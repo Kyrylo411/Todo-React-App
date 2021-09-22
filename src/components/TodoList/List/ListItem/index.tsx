@@ -42,7 +42,7 @@ const ListItem: FC<Props> = ({ item, id }) => {
     dispatch(changeItemValueRequest({ id: id, value: inputValue }));
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -58,9 +58,10 @@ const ListItem: FC<Props> = ({ item, id }) => {
   };
   const editTodoInput = handleDoubleClick();
 
-  const handleDeleteClick = useCallback(() => {
-    dispatch(deleteItemRequest(id));
-  }, []);
+  const handleDeleteClick = useCallback(
+    () => dispatch(deleteItemRequest(id)),
+    [],
+  );
 
   return (
     <li

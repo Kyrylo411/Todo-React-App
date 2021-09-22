@@ -11,9 +11,8 @@ const Input: FC = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value);
-  };
 
   const handleKeyDown = useCallback(
     (

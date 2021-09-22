@@ -18,9 +18,7 @@ const NavBar: FC = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const handleLogOutClick = useCallback(() => {
-    dispatch(logOutRequest());
-  }, []);
+  const handleLogOutClick = useCallback(() => dispatch(logOutRequest()), []);
   const classes = useStyles({ theme });
 
   const menuItems = isLogedIn
