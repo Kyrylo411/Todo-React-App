@@ -1,4 +1,5 @@
 import React, { FC, useContext, useState } from 'react';
+import { useEffect } from 'react';
 import { createContext } from 'react';
 
 const ThemeContext = createContext(true);
@@ -17,6 +18,16 @@ const ThemeProvider: FC = ({ children }) => {
   const toggleTheme = () => {
     setDarkTheme(!darkTheme);
   };
+
+  useEffect(() => {
+    localStorage.getItem('darkTheme')
+      ? setDarkTheme(JSON.parse(localStorage.getItem('darkTheme')))
+      : setDarkTheme(false);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
+  }, [darkTheme]);
 
   return (
     <ThemeContext.Provider value={darkTheme}>
