@@ -10,7 +10,6 @@ const Input: FC = () => {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
   const theme = useTheme();
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value);
 
