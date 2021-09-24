@@ -1,0 +1,41 @@
+.themeWrapper{
+    position: absolute;
+    right: 50px;
+}
+.checkbox{
+    display: none;
+}
+
+.label{
+    margin-top: 50px;
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+    background: linear-gradient(to right, hsl(27, 100%, 59%), hsl(0, 100%, 59%));
+    display: flex;
+    border-radius: 100px;
+    position: relative;
+  
+}
+.label:after{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(255, 241, 40);
+    border-radius: 50%; 
+    transition: all 0.5s;
+    transform: translateX(0px);
+}
+
+.checkbox:checked + .label{
+    background: linear-gradient(to right, hsl(239, 100%, 18%), hsl(221, 100%, 12%));
+}
+
+.checkbox:checked + .label:after{
+    transition: all 0.5s;
+    transform: translateX(40px);
+    background-color: rgb(25, 80, 180);
+}

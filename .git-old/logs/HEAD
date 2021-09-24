@@ -1,0 +1,60 @@
+0000000000000000000000000000000000000000 c0b5b98c0500c193083bda317ac8d72e3f3186db Kyrylo <kirillomelcenko411@gmail.com> 1629278030 +0300	commit (initial): todo_react
+c0b5b98c0500c193083bda317ac8d72e3f3186db 0000000000000000000000000000000000000000 Kyrylo <kirillomelcenko411@gmail.com> 1629278097 +0300	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 c0b5b98c0500c193083bda317ac8d72e3f3186db Kyrylo <kirillomelcenko411@gmail.com> 1629278097 +0300	Branch: renamed refs/heads/master to refs/heads/main
+c0b5b98c0500c193083bda317ac8d72e3f3186db 0cb51908f2e52f87b2c487af0c473710a6e2bcf2 Kyrylo <kirillomelcenko411@gmail.com> 1629297954 +0300	commit: as
+0cb51908f2e52f87b2c487af0c473710a6e2bcf2 636e55962cf229f13cde50bbe90d1c5d8a78da33 Kyrylo <kirillomelcenko411@gmail.com> 1629378201 +0300	commit: update
+636e55962cf229f13cde50bbe90d1c5d8a78da33 01a86bce66c5a693835d18cdc09ad84fb2c9a72d Kyrylo <kirillomelcenko411@gmail.com> 1629472782 +0300	commit: update
+01a86bce66c5a693835d18cdc09ad84fb2c9a72d 3c1b04cf6f7954a119a16ed79f1706cc7c062d15 Kyrylo <kirillomelcenko411@gmail.com> 1629817572 +0300	commit: update
+3c1b04cf6f7954a119a16ed79f1706cc7c062d15 dc6137c8b2d98881b7a19a8a4819c7ae030dec2b Kyrylo <kirillomelcenko411@gmail.com> 1629818075 +0300	pull https://github.com/Kyrylo411/Todo-React-App.git: Fast-forward
+dc6137c8b2d98881b7a19a8a4819c7ae030dec2b 27431bc1c8493ff499eccfd903c425b1f7c39a08 Kyrylo <kirillomelcenko411@gmail.com> 1629887810 +0300	commit: Add constants.js, Fixed styles, Fixed components
+27431bc1c8493ff499eccfd903c425b1f7c39a08 a90034770cd5a78b827c668a4c3f10af2a9c19da Kyrylo <kirillomelcenko411@gmail.com> 1629888011 +0300	commit: Fixed Button onClick
+a90034770cd5a78b827c668a4c3f10af2a9c19da fd8daabe4ed3f4d52605b540f61c9f96fecc85ea Kyrylo <kirillomelcenko411@gmail.com> 1629899276 +0300	commit: Fixed Button onClick
+fd8daabe4ed3f4d52605b540f61c9f96fecc85ea b17ddb82be2c0fb4cacd0d38c9b496439d20cc8a Kyrylo <kirillomelcenko411@gmail.com> 1629902823 +0300	commit: saving todoList in localStorage
+b17ddb82be2c0fb4cacd0d38c9b496439d20cc8a 3412985e76fce07727585c1884ccdd96b238c298 Kyrylo <kirillomelcenko411@gmail.com> 1630071449 +0300	commit: get data from server added
+3412985e76fce07727585c1884ccdd96b238c298 243c0235c8847c6854c673a7dbe5f3e33f601d54 Kyrylo <kirillomelcenko411@gmail.com> 1630071569 +0300	commit: post data to server added
+243c0235c8847c6854c673a7dbe5f3e33f601d54 0c4c02536be96fd32f374eb6733e17ac69fc4538 Kyrylo <kirillomelcenko411@gmail.com> 1630071631 +0300	commit: delete one item added
+0c4c02536be96fd32f374eb6733e17ac69fc4538 38d8da343051f6e89468b336cbae26feacab1295 Kyrylo <kirillomelcenko411@gmail.com> 1630071755 +0300	commit: update data by id added
+38d8da343051f6e89468b336cbae26feacab1295 4502dda6dcfa6dd333bfdbaff1f0e603cee880dd Kyrylo <kirillomelcenko411@gmail.com> 1630071840 +0300	commit: deleteMany addded
+4502dda6dcfa6dd333bfdbaff1f0e603cee880dd 3b454c842c4b49007ca240c5b6d8f95d49427b50 Kyrylo <kirillomelcenko411@gmail.com> 1630073616 +0300	commit: update data value added
+3b454c842c4b49007ca240c5b6d8f95d49427b50 5725985553e0bf432979a63f14e40941511ee5f7 Kyrylo <kirillomelcenko411@gmail.com> 1630073803 +0300	commit: update data value fixed
+5725985553e0bf432979a63f14e40941511ee5f7 ee4fec9f0c1cbe68d05f074fd59647696387119b Kyrylo <kirillomelcenko411@gmail.com> 1630077407 +0300	commit: update many added.not working correctly
+ee4fec9f0c1cbe68d05f074fd59647696387119b 7a4cfc52b1a24f1adda3b08ee964516bd92b0464 Kyrylo <kirillomelcenko411@gmail.com> 1630311368 +0300	commit: toggleAllItems modified
+7a4cfc52b1a24f1adda3b08ee964516bd92b0464 59c4965f8854887d043bbbb21448f3793f5079b1 Kyrylo <kirillomelcenko411@gmail.com> 1630312911 +0300	commit: changeItemCheck put request modified
+59c4965f8854887d043bbbb21448f3793f5079b1 1fa2672ae0df93850c5218d6fa0bd5a10ff145ab Kyrylo <kirillomelcenko411@gmail.com> 1630313941 +0300	commit: addListItem post request modified
+1fa2672ae0df93850c5218d6fa0bd5a10ff145ab a8a35ccfba40b51149e32bc3f33c3af4d1999d84 Kyrylo <kirillomelcenko411@gmail.com> 1630315345 +0300	commit: all requests fixed
+a8a35ccfba40b51149e32bc3f33c3af4d1999d84 dd3bd4533c64d06a880495de01ed5a20f2426ece Kyrylo <kirillomelcenko411@gmail.com> 1630319204 +0300	commit: then changed to async/await
+dd3bd4533c64d06a880495de01ed5a20f2426ece 0000000000000000000000000000000000000000 Kyrylo <kirillomelcenko411@gmail.com> 1630321724 +0300	Branch: renamed refs/heads/main to refs/heads/main
+dd3bd4533c64d06a880495de01ed5a20f2426ece dd3bd4533c64d06a880495de01ed5a20f2426ece Kyrylo <kirillomelcenko411@gmail.com> 1630321724 +0300	Branch: renamed refs/heads/main to refs/heads/main
+dd3bd4533c64d06a880495de01ed5a20f2426ece b2455c0f8ec15c65c1a531d3f9b4c0b11c8ba22f Kyrylo <kirillomelcenko411@gmail.com> 1630322344 +0300	commit: class Button changed to function
+b2455c0f8ec15c65c1a531d3f9b4c0b11c8ba22f 1c0c8ec1748ed76af2037b2bd47786afe655c5f4 Kyrylo <kirillomelcenko411@gmail.com> 1630323464 +0300	commit: Class Footer and its child components changed to function
+1c0c8ec1748ed76af2037b2bd47786afe655c5f4 778526b92338eaa6e59eff9b26eef8a8cd7bbcf5 Kyrylo <kirillomelcenko411@gmail.com> 1630324205 +0300	commit: Class Header and its child components changed to function
+778526b92338eaa6e59eff9b26eef8a8cd7bbcf5 3592b0c3502742888fe71c3d83a293c046f3bc5e Kyrylo <kirillomelcenko411@gmail.com> 1630325551 +0300	commit: Class List and its child components changed to function
+3592b0c3502742888fe71c3d83a293c046f3bc5e 977f170a57257448b19b518acfbdc4ab208daaa5 Kyrylo <kirillomelcenko411@gmail.com> 1630325686 +0300	commit: Class UnderLines changed to function
+977f170a57257448b19b518acfbdc4ab208daaa5 67a4131031fd0430c441beea796cc764237b105c Kyrylo <kirillomelcenko411@gmail.com> 1630326653 +0300	commit: Class TodoList changed to function
+67a4131031fd0430c441beea796cc764237b105c 9a0edf8438904bcf1dfb2a0160dc45f6a22aa3c6 Kyrylo <kirillomelcenko411@gmail.com> 1630327369 +0300	commit: Styles fuxed
+9a0edf8438904bcf1dfb2a0160dc45f6a22aa3c6 b91ad1e7c3b239191792299bf4ae0a89e5093151 Kyrylo <kirillomelcenko411@gmail.com> 1630402572 +0300	commit: typeScript added
+b91ad1e7c3b239191792299bf4ae0a89e5093151 cc7e24209f4ead00ebca608deb9a734939b0f6ca Kyrylo <kirillomelcenko411@gmail.com> 1630403327 +0300	commit: global types added
+cc7e24209f4ead00ebca608deb9a734939b0f6ca 6af354011d4b082243b75f6430316532585ba740 Kyrylo <kirillomelcenko411@gmail.com> 1630423975 +0300	commit: typeScript added
+6af354011d4b082243b75f6430316532585ba740 77344e2d36acc09080c225b567e068747dd1dd12 Kyrylo <kirillomelcenko411@gmail.com> 1630498025 +0300	commit: fix TypeScrtipt
+77344e2d36acc09080c225b567e068747dd1dd12 81f24d315acb5aca623bd109ce6b925a2f39017c Kyrylo <kirillomelcenko411@gmail.com> 1630498171 +0300	commit: webpack fixed
+81f24d315acb5aca623bd109ce6b925a2f39017c 7f92ec75bdb5681fae005bd5b7856d991c1a0a12 Kyrylo <kirillomelcenko411@gmail.com> 1631174479 +0300	commit: redux added
+7f92ec75bdb5681fae005bd5b7856d991c1a0a12 4d019716973cc38a6b737e078741d87172be22ad Kyrylo <kirillomelcenko411@gmail.com> 1631175187 +0300	commit: deleteCompletedAction added
+4d019716973cc38a6b737e078741d87172be22ad 28e98556aa531ceed43f0a44facf29d9b3cbc026 Kyrylo <kirillomelcenko411@gmail.com> 1631175541 +0300	commit: toggleAllItemsAction added
+28e98556aa531ceed43f0a44facf29d9b3cbc026 4faf06731f4234e22e8f797d0771e68eae7a43fa Kyrylo <kirillomelcenko411@gmail.com> 1631175874 +0300	commit: changeitemCheckAction added
+4faf06731f4234e22e8f797d0771e68eae7a43fa 121b2cbf243e9d7484088a98df34e958ac2fbf8a Kyrylo <kirillomelcenko411@gmail.com> 1631176229 +0300	commit: changeitemValueAction added
+121b2cbf243e9d7484088a98df34e958ac2fbf8a 7a0f3596f3715b5052c147e9d09c013070516251 Kyrylo <kirillomelcenko411@gmail.com> 1631177591 +0300	commit: conected with server
+7a0f3596f3715b5052c147e9d09c013070516251 3fff281dd5717c51730cc878dbccbad006ae99ab Kyrylo <kirillomelcenko411@gmail.com> 1631200910 +0300	commit: material added authPages added
+3fff281dd5717c51730cc878dbccbad006ae99ab 13508f1dc3768df3f1c850815f6fb8805ceb846b Kyrylo <kirillomelcenko411@gmail.com> 1631277419 +0300	commit: authorization added
+13508f1dc3768df3f1c850815f6fb8805ceb846b e12384130b1d9db78bf0ee4117987a7db20da2c7 Kyrylo <kirillomelcenko411@gmail.com> 1631543732 +0300	commit: authorization fixed
+e12384130b1d9db78bf0ee4117987a7db20da2c7 c2476aca45761fbef93c98121af9f00fb5804bbf Kyrylo <kirillomelcenko411@gmail.com> 1631544304 +0300	commit: menuItems updated
+c2476aca45761fbef93c98121af9f00fb5804bbf d3f1340615c3479919d75703510ac80abc7d8693 Kyrylo <kirillomelcenko411@gmail.com> 1631545783 +0300	commit: clean
+d3f1340615c3479919d75703510ac80abc7d8693 5dfdd763cbfed2a4fcb287b48ce485362ad190ed Kyrylo <kirillomelcenko411@gmail.com> 1631546283 +0300	commit: App clean
+5dfdd763cbfed2a4fcb287b48ce485362ad190ed 7628cf3a40312f14a5d5f7d5272593a1c9eea42b Kyrylo <kirillomelcenko411@gmail.com> 1631608391 +0300	commit: transform components using redux
+7628cf3a40312f14a5d5f7d5272593a1c9eea42b a0ed5a134ee07f6b2d62257c7685e6894d2d2cef Kyrylo <kirillomelcenko411@gmail.com> 1631612840 +0300	commit: redux fixed
+a0ed5a134ee07f6b2d62257c7685e6894d2d2cef 63f337677adc981ad15b127e8e25e2701a8aa613 Kyrylo <kirillomelcenko411@gmail.com> 1631613951 +0300	commit: interfaces replaced
+63f337677adc981ad15b127e8e25e2701a8aa613 2f1ac1ca21f75f1aa321dfb5843cf14d2600afff Kyrylo <kirillomelcenko411@gmail.com> 1631622723 +0300	commit: auth route changed to privateRoute
+2f1ac1ca21f75f1aa321dfb5843cf14d2600afff 368a7abb05cf62ddb425ce38277b509312b21242 Kyrylo <kirillomelcenko411@gmail.com> 1631631683 +0300	commit: queryes fixed
+368a7abb05cf62ddb425ce38277b509312b21242 584181f30690e63291b1ed4a9ecd5a3913407762 Kyrylo <kirillomelcenko411@gmail.com> 1631631824 +0300	commit (amend): requests fixed
+584181f30690e63291b1ed4a9ecd5a3913407762 7f8f8d23b5434c181b8aacb99bce385bacbdcadd Kyrylo <kirillomelcenko411@gmail.com> 1631632716 +0300	commit: redux saga added
+7f8f8d23b5434c181b8aacb99bce385bacbdcadd b15553c6949e005ec3bf19f5789721bcf8417f73 Kyrylo <kirillomelcenko411@gmail.com> 1631698818 +0300	commit: saga for fetching todoList added
+                                                                                                                                                                                                
